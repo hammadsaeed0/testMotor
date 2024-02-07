@@ -9,7 +9,7 @@ body{
 }
 
 .h1{
-    @apply   text-5xl  font-black text-white uppercase
+    @apply   lg:text-5xl md:text-4xl text-3xl  font-black text-white uppercase
 }
 
 .h2{
@@ -33,7 +33,18 @@ body{
     @apply text-lg font-semibold text-black
 }
 
+.main_title {
+    line-height: 70px ;
+}
 
+@media screen and (max-width:567px) {
+
+    .main_title {
+        line-height: 40px;
+    }
+     
+    
+}
 /* HorizontalScroll.css */
 .scroll-container {
     width: 100%;

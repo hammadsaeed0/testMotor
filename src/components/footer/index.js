@@ -14,8 +14,8 @@ const Footer = () => {
             <div>
                 <h2 className=' uppercase text-lg text-white '>to our newsletters</h2>
                 <div className=' flex pt-2 items-center   rounded-md rounded-s-none'>
-                  <input  className=' p-2.5    w-72 rounded-tl-lg  rounded-bl-lg' />
-                  <button  className='  rounded-tr-lg  rounded-br-lg  py-2.5 px-8 bg-primary text-white uppercase '>Subscribe</button>
+                  <input  className=' p-2.5    md:w-72 w-60 rounded-tl-lg  rounded-bl-lg' />
+                  <button  className='  rounded-tr-lg  rounded-br-lg  py-2.5 md:px-8 px-6 bg-primary text-white uppercase '>Subscribe</button>
                 </div>
             </div>
         </div>

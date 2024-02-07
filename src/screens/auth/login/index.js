@@ -13,90 +13,90 @@ const Login = () => {
   const [value, setValue] = useState({});
   const [loading, setLoader] = useState(false);
   console.log(value);
-  const handleClick = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Signed out successfully.");
+  // const handleClick = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       console.log("Signed out successfully.");
 
-        signInWithPopup(auth, provider)
-          .then((data) => {
-            setValue(data.user);
-            console.log(data.user.email);
-            console.log(data.user.uid);
-            const params = {
-              emailOrPhone: data.user.email,
-              password: data.user.uid,
-            };
+  //       signInWithPopup(auth, provider)
+  //         .then((data) => {
+  //           setValue(data.user);
+  //           console.log(data.user.email);
+  //           console.log(data.user.uid);
+  //           const params = {
+  //             emailOrPhone: data.user.email,
+  //             password: data.user.uid,
+  //           };
 
-            axios
-              .post(`${Base_url}/loginUser`, params)
-              .then((res) => {
-                console.log(res);
-                if (res.data.success === true) {
-                  localStorage.setItem("user_data", res?.data?.user?._id);
-                  toast.success(res?.data?.message);
-                  navigate("/");
-                } else {
-                  toast.error(res?.data?.message);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-                if (error.response.data.success === false) {
-                  setLoader(false);
-                  toast(error.response.data.message);
-                }
-              });
-          })
-          .catch((error) => {});
-      })
-      .catch((error) => {
-        console.error("Error signing out: ", error);
-      });
-  };
+  //           axios
+  //             .post(`${Base_url}/loginUser`, params)
+  //             .then((res) => {
+  //               console.log(res);
+  //               if (res.data.success === true) {
+  //                 localStorage.setItem("user_data", res?.data?.user?._id);
+  //                 toast.success(res?.data?.message);
+  //                 navigate("/");
+  //               } else {
+  //                 toast.error(res?.data?.message);
+  //               }
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //               if (error.response.data.success === false) {
+  //                 setLoader(false);
+  //                 toast(error.response.data.message);
+  //               }
+  //             });
+  //         })
+  //         .catch((error) => {});
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error signing out: ", error);
+  //     });
+  // };
 
-  const handleFacebook = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Signed out successfully.");
+  // const handleFacebook = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       console.log("Signed out successfully.");
 
-        signInWithPopup(auth, providerFacebook)
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => {
-            console.log(error.customData);
+  //       signInWithPopup(auth, providerFacebook)
+  //         .then((data) => {
+  //           console.log(data);
+  //         })
+  //         .catch((error) => {
+  //           console.log(error.customData);
 
-            const params = {
-              emailOrPhone: error.customData.email,
-              password: error.customData._tokenResponse.localId,
-            };
+  //           const params = {
+  //             emailOrPhone: error.customData.email,
+  //             password: error.customData._tokenResponse.localId,
+  //           };
 
-            axios
-              .post(`${Base_url}/loginUser`, params)
-              .then((res) => {
-                console.log(res);
-                if (res.data.success === true) {
-                  localStorage.setItem("user_data", res?.data?.user?._id);
-                  toast.success(res?.data?.message);
-                  navigate("/");
-                } else {
-                  toast.error(res?.data?.message);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-                if (error.response.data.success === false) {
-                  setLoader(false);
-                  toast(error.response.data.message);
-                }
-              });
-          });
-      })
-      .catch((error) => {
-        console.error("Error signing out: ", error);
-      });
-  };
+  //           axios
+  //             .post(`${Base_url}/loginUser`, params)
+  //             .then((res) => {
+  //               console.log(res);
+  //               if (res.data.success === true) {
+  //                 localStorage.setItem("user_data", res?.data?.user?._id);
+  //                 toast.success(res?.data?.message);
+  //                 navigate("/");
+  //               } else {
+  //                 toast.error(res?.data?.message);
+  //               }
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //               if (error.response.data.success === false) {
+  //                 setLoader(false);
+  //                 toast(error.response.data.message);
+  //               }
+  //             });
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error signing out: ", error);
+  //     });
+  // };
   const navigate = useNavigate();
   const [state, setState] = useState({
     email: "",
@@ -158,7 +158,7 @@ const Login = () => {
           <div className=" flex gap-2">
             <Button
               label={"Google"}
-              onClick={handleClick}
+              // onClick={handleClick}
               Icons={
                 <img
                   src={require("../../../assets/images/google.png")}
@@ -170,7 +170,7 @@ const Login = () => {
               }
             />
             <Button
-              onClick={handleFacebook}
+              // onClick={handleFacebook}
               label={"Facebook"}
               Icons={
                 <img

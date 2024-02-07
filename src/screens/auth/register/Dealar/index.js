@@ -17,90 +17,90 @@ export const Dealar = () => {
   const [selectedOption, setSelectedOption] = useState("dealer");
   const [loading, setLoader] = useState(false);
   console.log(value);
-  const handleClick = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Successfully signed out.");
+  // const handleClick = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       console.log("Successfully signed out.");
 
-        signInWithPopup(auth, provider)
-          .then((data) => {
-            setValue(data.user);
-            console.log(data.user.email);
-            console.log(data.user.uid);
-            const params = {
-              type: selectedOption,
-              username: data.user.displayName,
-              email: data.user.email,
-              phone: data.user.phoneNumber,
-              password: data.user.uid,
-            };
+  //       signInWithPopup(auth, provider)
+  //         .then((data) => {
+  //           setValue(data.user);
+  //           console.log(data.user.email);
+  //           console.log(data.user.uid);
+  //           const params = {
+  //             type: selectedOption,
+  //             username: data.user.displayName,
+  //             email: data.user.email,
+  //             phone: data.user.phoneNumber,
+  //             password: data.user.uid,
+  //           };
 
-            axios
-              .post(`${Base_url}/registerUser`, params)
-              .then((res) => {
-                console.log(res);
-                if (res.data.success === true) {
-                  localStorage.setItem("user_data", res?.data?.newUser?._id);
-                  toast.success(res?.data?.message);
-                  navigate("/");
-                } else {
-                  toast.error(res?.data?.message);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-                toast(error.response?.data.message || "An error occurred");
-              });
-          })
-          .catch((error) => {});
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error);
-      });
-  };
+  //           axios
+  //             .post(`${Base_url}/registerUser`, params)
+  //             .then((res) => {
+  //               console.log(res);
+  //               if (res.data.success === true) {
+  //                 localStorage.setItem("user_data", res?.data?.newUser?._id);
+  //                 toast.success(res?.data?.message);
+  //                 navigate("/");
+  //               } else {
+  //                 toast.error(res?.data?.message);
+  //               }
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //               toast(error.response?.data.message || "An error occurred");
+  //             });
+  //         })
+  //         .catch((error) => {});
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error signing out:", error);
+  //     });
+  // };
 
-  const handleFacebook = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Successfully signed out.");
+  // const handleFacebook = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       console.log("Successfully signed out.");
 
-        signInWithPopup(auth, providerFacebook)
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => {
-            console.log(error.customData);
+  //       signInWithPopup(auth, providerFacebook)
+  //         .then((data) => {
+  //           console.log(data);
+  //         })
+  //         .catch((error) => {
+  //           console.log(error.customData);
 
-            const params = {
-              type: selectedOption,
-              username: error.customData._tokenResponse.displayName,
-              email: error.customData.email,
-              phone: error.customData._tokenResponse.phoneNumber,
-              password: error.customData._tokenResponse.localId,
-            };
+  //           const params = {
+  //             type: selectedOption,
+  //             username: error.customData._tokenResponse.displayName,
+  //             email: error.customData.email,
+  //             phone: error.customData._tokenResponse.phoneNumber,
+  //             password: error.customData._tokenResponse.localId,
+  //           };
 
-            axios
-              .post(`${Base_url}/registerUser`, params)
-              .then((res) => {
-                console.log(res);
-                if (res.data.success === true) {
-                  localStorage.setItem("user_data", res?.data?.newUser?._id);
-                  toast.success(res?.data?.message);
-                  navigate("/");
-                } else {
-                  toast.error(res?.data?.message);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-                toast(error.response.data.message);
-              });
-          });
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error);
-      });
-  };
+  //           axios
+  //             .post(`${Base_url}/registerUser`, params)
+  //             .then((res) => {
+  //               console.log(res);
+  //               if (res.data.success === true) {
+  //                 localStorage.setItem("user_data", res?.data?.newUser?._id);
+  //                 toast.success(res?.data?.message);
+  //                 navigate("/");
+  //               } else {
+  //                 toast.error(res?.data?.message);
+  //               }
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //               toast(error.response.data.message);
+  //             });
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error signing out:", error);
+  //     });
+  // };
 
   const [state, setState] = useState({
     companyName: "",
@@ -197,7 +197,7 @@ export const Dealar = () => {
 
             <div className=" flex gap-2">
               <Button
-                onClick={handleClick}
+                // onClick={handleClick}
                 label={"Google"}
                 Icons={
                   <img
@@ -211,7 +211,7 @@ export const Dealar = () => {
               />
               <Button
                 label={"Facebook"}
-                onClick={handleFacebook}
+                // onClick={handleFacebook}
                 Icons={
                   <img
                     src={require("../../../../assets/images/facebook.png")}
