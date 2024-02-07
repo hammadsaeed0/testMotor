@@ -13,9 +13,6 @@ const CarPhotos = () => {
   const location = useLocation();
   const receivedData = location.state;
 
-
-  
-
   console.log(receivedData);
 
   const navigate = useNavigate();
@@ -69,60 +66,45 @@ const CarPhotos = () => {
     }
   };
 
+  const [multiple, setMultiple] = useState([]);
 
-     const [multiple,setMultiple] = useState([])
+  console.log(multiple);
 
-     console.log(multiple);
+  const uploadImages = async () => {
+    if (!selectedImage.length > 0) {
+      toast.success("Please upload your image");
+    } else {
+      let profilephoto = " ";
 
-    const uploadImages = async()=>{
+      try {
+        let param = new FormData();
+        selectedImage?.map((item) => {
+          param.append("avatars", item);
+        });
 
-      if(!selectedImage.length>0){
+        profilephoto = await axios.post(`${Base_url}/uploadImage`, param);
 
-        toast.success('Please upload your image')
+        console.log(profilephoto, "=====profile photo===");
 
-      }else{
-
-
-        let profilephoto = " ";
-
-        try {
-          let param = new FormData();
-          selectedImage?.map((item)=>{
-            param.append("avatars",item);
-          })
-       
-  
-          profilephoto = await axios.post(`${Base_url}/uploadImage`, param);
-  
-          console.log(profilephoto, "=====profile photo===");
-      
-          if(profilephoto.status===200){
-  
-            setMultiple(profilephoto.data)
-            navigate(`/contact_details`,{
-              state: {
-                receivedData: receivedData,
-                upload:profilephoto.data,    
-              }
-            })
-          }
-        } catch (error) {
-          console.log(error);
+        if (profilephoto.status === 200) {
+          setMultiple(profilephoto.data);
+          navigate(`/contact_details`, {
+            state: {
+              receivedData: receivedData,
+              upload: profilephoto.data,
+            },
+          });
         }
-
+      } catch (error) {
+        console.log(error);
       }
-     
-
-
     }
-
-
-
+  };
 
   return (
     <div>
       {" "}
-      <Header/>
+      <Header />
       <div className=" py-8 text-center">
         <h2 className=" h2  text-center">Sell Your Car</h2>
         <p className=" pt-2 text-gray-400">
@@ -234,17 +216,16 @@ const CarPhotos = () => {
           <LiaLongArrowAltLeftSolid />
           <span className=" text-textColor font-semibold">Back</span>
         </div>
-     
-          <Button
+
+        <Button
           onClick={uploadImages}
-            type={"submit"}
-            label={"Next"}
-            rIcons={<LiaLongArrowAltRightSolid />}
-            className={" bg-primary rounded-3xl text-white w-44 py-1.5"}
-          />
-       
+          type={"submit"}
+          label={"Next"}
+          rIcons={<LiaLongArrowAltRightSolid />}
+          className={" bg-primary rounded-3xl text-white w-44 py-1.5"}
+        />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

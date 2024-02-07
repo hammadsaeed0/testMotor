@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Input from "../../../../components/Input";
 import Button from "../../../../components/Button";
 import { FaRegEyeSlash } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Base_url } from "../../../../utils/Base_url";
 import { auth, provider, providerFacebook } from "../../../../utils/config";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Header from "../../../../components/header";
@@ -18,87 +18,87 @@ export const Dealar = () => {
   const [loading, setLoader] = useState(false);
   console.log(value);
   const handleClick = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user);
-      console.log(data.user.email);
-      console.log(data.user.uid);
-      const params = {
-        type: selectedOption,
-        username: data.user.displayName,
-        email: data.user.email,
-        phone: data.user.phoneNumber,
-        password: data.user.uid,
-      };
+    signOut(auth)
+      .then(() => {
+        console.log("Successfully signed out.");
 
-      axios
-        .post(`${Base_url}/registerUser`, params)
-        .then((res) => {
-          console.log(res);
-          if (res.data.success === true) {
-            localStorage.setItem("user_data", res?.data?.newUser?._id);
-            toast.success(res?.data?.message);
-            navigate("/");
-          } else {
-            toast.error(res?.data?.message);
-          }
-        })
-        .catch((error) => {
-          toast.error(error.response.data.message);
-        });
-    });
-  };
+        signInWithPopup(auth, provider)
+          .then((data) => {
+            setValue(data.user);
+            console.log(data.user.email);
+            console.log(data.user.uid);
+            const params = {
+              type: selectedOption,
+              username: data.user.displayName,
+              email: data.user.email,
+              phone: data.user.phoneNumber,
+              password: data.user.uid,
+            };
 
-
-  const handleFacebook = () => {
-    signInWithPopup(auth, providerFacebook)
-      .then((data) => {
-        // setValue(data.user);
-        // console.log(data.user.email);
-        // console.log(data.user.uid);
-        console.log(data);
+            axios
+              .post(`${Base_url}/registerUser`, params)
+              .then((res) => {
+                console.log(res);
+                if (res.data.success === true) {
+                  localStorage.setItem("user_data", res?.data?.newUser?._id);
+                  toast.success(res?.data?.message);
+                  navigate("/");
+                } else {
+                  toast.error(res?.data?.message);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                toast(error.response?.data.message || "An error occurred");
+              });
+          })
+          .catch((error) => {});
       })
       .catch((error) => {
-        console.log(error.customData);
-        if (error.code === "auth/account-exists-with-different-credential") {
-          // The email of the user's account used.
-          const email = error.customData.email;
-          const phoneNumber = error.customData.phoneNumber;
+        console.error("Error signing out:", error);
+      });
+  };
 
-          const params = {
-            type: selectedOption,
-            username: error.customData.
-            _tokenResponse.displayName,
-            email: error.customData.email,
-            phone: error.customData.
-            _tokenResponse.phoneNumber,
-            password: error.customData.
-            _tokenResponse.localId,
-          };
+  const handleFacebook = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Successfully signed out.");
 
-          axios
-            .post(`${Base_url}/registerUser`, params)
-            .then((res) => {
-              console.log(res);
-              if (res.data.success === true) {
-                localStorage.setItem("user_data", res?.data?.newUser?._id);
-                toast.success(res?.data?.message);
-                navigate("/");
-              } else {
-                toast.error(res?.data?.message);
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-              toast(error.response.data.message);
-            });
+        signInWithPopup(auth, providerFacebook)
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error.customData);
 
-          // Get the sign-in methods for this email.
+            const params = {
+              type: selectedOption,
+              username: error.customData._tokenResponse.displayName,
+              email: error.customData.email,
+              phone: error.customData._tokenResponse.phoneNumber,
+              password: error.customData._tokenResponse.localId,
+            };
 
-          console.log(email, phoneNumber);
-        } else {
-          // Handle other errors.
-          console.error(error);
-        }
+            axios
+              .post(`${Base_url}/registerUser`, params)
+              .then((res) => {
+                console.log(res);
+                if (res.data.success === true) {
+                  localStorage.setItem("user_data", res?.data?.newUser?._id);
+                  toast.success(res?.data?.message);
+                  navigate("/");
+                } else {
+                  toast.error(res?.data?.message);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                toast(error.response.data.message);
+              });
+          });
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
       });
   };
 
@@ -131,7 +131,7 @@ export const Dealar = () => {
         type: selectedOption,
         companyName: state.companyName,
         email: state.email,
-        username:state.firstName + state.lastName,
+        username: state.firstName + state.lastName,
         firstName: state.firstName,
         lastName: state.lastName,
         phone: state.phone,
@@ -369,17 +369,19 @@ export const Dealar = () => {
               <p className="   text-textColor mt-3 font-bold">
                 Terms, Conditions & Privacy Policy*
               </p>
-             
             </div>
             <div className=" flex  mt-2 items-center justify-between">
-                <div className=" gap-2 flex ">
-                  <Input type="checkbox" className={'accent-primary mt-1 w-4 h-4'} required={'required'} />
-                  <p className=" text-[#717070]">
-                    By sign up you agree to terms & Conditions and Privacy
-                    Policy{" "}
-                  </p>
-                </div>
+              <div className=" gap-2 flex ">
+                <Input
+                  type="checkbox"
+                  className={"accent-primary mt-1 w-4 h-4"}
+                  required={"required"}
+                />
+                <p className=" text-[#717070]">
+                  By sign up you agree to terms & Conditions and Privacy Policy{" "}
+                </p>
               </div>
+            </div>
             <div className=" pt-6">
               {loading === true ? (
                 <button

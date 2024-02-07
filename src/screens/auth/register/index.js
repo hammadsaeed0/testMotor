@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth, provider, providerFacebook } from "../../../utils/config";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { Base_url } from "../../../utils/Base_url";
 import Login from "../login";
 import Header from "../../../components/header";
@@ -25,92 +25,87 @@ const Register = () => {
 
   console.log(value);
   const handleClick = () => {
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        setValue(data.user);
-        console.log(data.user.email);
-        console.log(data.user.uid);
-        const params = {
-          type: selectedOption,
-          username: data.user.displayName,
-          email: data.user.email,
-          phone: data.user.phoneNumber,
-          password: data.user.uid,
-        };
+    signOut(auth)
+      .then(() => {
+        console.log("Successfully signed out.");
 
-        axios
-          .post(`${Base_url}/registerUser`, params)
-          .then((res) => {
-            console.log(res);
-            if (res.data.success === true) {
-              localStorage.setItem("user_data", res?.data?.newUser?._id);
-              toast.success(res?.data?.message);
-              navigate("/");
-            } else {
-              toast.error(res?.data?.message);
-            }
+        signInWithPopup(auth, provider)
+          .then((data) => {
+            setValue(data.user);
+            console.log(data.user.email);
+            console.log(data.user.uid);
+            const params = {
+              type: selectedOption,
+              username: data.user.displayName,
+              email: data.user.email,
+              phone: data.user.phoneNumber,
+              password: data.user.uid,
+            };
+
+            axios
+              .post(`${Base_url}/registerUser`, params)
+              .then((res) => {
+                console.log(res);
+                if (res.data.success === true) {
+                  localStorage.setItem("user_data", res?.data?.newUser?._id);
+                  toast.success(res?.data?.message);
+                  navigate("/");
+                } else {
+                  toast.error(res?.data?.message);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                toast(error.response?.data.message || "An error occurred");
+              });
           })
-          .catch((error) => {
-            console.log(error);
-            toast(error.response.data.message);
-          });
+          .catch((error) => {});
       })
       .catch((error) => {
-        if (error.code === "auth/popup-closed-by-user") {
-          console.log("Sign-in popup was closed by the user.");
-        } else {
-          console.error("An error occurred during sign-in:", error.message);
-        }
+        console.error("Error signing out:", error);
       });
   };
 
   const handleFacebook = () => {
-    signInWithPopup(auth, providerFacebook)
-      .then((data) => {
-        // setValue(data.user);
-        // console.log(data.user.email);
-        // console.log(data.user.uid);
-        console.log(data);
+    signOut(auth)
+      .then(() => {
+        console.log("Successfully signed out.");
+
+        signInWithPopup(auth, providerFacebook)
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error.customData);
+
+            const params = {
+              type: selectedOption,
+              username: error.customData._tokenResponse.displayName,
+              email: error.customData.email,
+              phone: error.customData._tokenResponse.phoneNumber,
+              password: error.customData._tokenResponse.localId,
+            };
+
+            axios
+              .post(`${Base_url}/registerUser`, params)
+              .then((res) => {
+                console.log(res);
+                if (res.data.success === true) {
+                  localStorage.setItem("user_data", res?.data?.newUser?._id);
+                  toast.success(res?.data?.message);
+                  navigate("/");
+                } else {
+                  toast.error(res?.data?.message);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                toast(error.response.data.message);
+              });
+          });
       })
       .catch((error) => {
-        console.log(error.customData);
-        if (error.code === "auth/account-exists-with-different-credential") {
-          // The email of the user's account used.
-          const email = error.customData.email;
-          const phoneNumber = error.customData.phoneNumber;
-
-          const params = {
-            type: selectedOption,
-            username:error.customData._tokenResponse.displayName,
-            email: error.customData.email,
-            phone:error.customData._tokenResponse.phoneNumber,
-            password: error.customData._tokenResponse.localId,
-          };
-
-          axios
-            .post(`${Base_url}/registerUser`, params)
-            .then((res) => {
-              console.log(res);
-              if (res.data.success === true) {
-                localStorage.setItem("user_data", res?.data?.newUser?._id);
-                toast.success(res?.data?.message);
-                navigate("/");
-              } else {
-                toast.error(res?.data?.message);
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-              toast(error.response.data.message);
-            });
-
-          // Get the sign-in methods for this email.
-
-          console.log(email, phoneNumber);
-        } else {
-          // Handle other errors.
-          console.error(error);
-        }
+        console.error("Error signing out:", error);
       });
   };
 
@@ -291,23 +286,22 @@ const Register = () => {
                 className={"border-2 w-full border-gray-200"}
               />
               <p className="  text-textColor mt-3 font-bold">
-                Terms, Conditions & Privacy Policy<span className=" text-primary">*</span>
+                Terms, Conditions & Privacy Policy
+                <span className=" text-primary">*</span>
               </p>
-             
             </div>
             <div className=" flex items-center justify-between">
-                <div className=" gap-2 mt-2 flex ">
-                  <Input
-                    type="checkbox"
-                    className={" w-4 mt-1 accent-primary border-gray-200 h-4"}
-                    required={"required"}
-                  />
-                  <p className=" text-[#717070]">
-                    By sign up you agree to terms & Conditions and Privacy
-                    Policy{" "}
-                  </p>
-                </div>
+              <div className=" gap-2 mt-2 flex ">
+                <Input
+                  type="checkbox"
+                  className={" w-4 mt-1 accent-primary border-gray-200 h-4"}
+                  required={"required"}
+                />
+                <p className=" text-[#717070]">
+                  By sign up you agree to terms & Conditions and Privacy Policy{" "}
+                </p>
               </div>
+            </div>
             {loading === true ? (
               <button
                 disabled

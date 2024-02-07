@@ -9,8 +9,7 @@ import { MdOutlineWatchLater } from "react-icons/md";
 import Input from '../../components/Input'
 import { Base_url } from '../../utils/Base_url'
 import axios from 'axios'
-import Header from '../../components/header'
-import Footer from '../../components/footer'
+import MapComponent from '../../components/Map'
 const CarDetailPage = ({
     children: slides,
     autoSlide = false,
@@ -28,9 +27,9 @@ const CarDetailPage = ({
 
     const [curr, setCurr] = useState(0);
     const prev = () =>
-      setCurr((curr) => (curr === 0 ? sliders.length - 1 : curr - 1));
+      setCurr((curr) => (curr === 0 ? newListings.car_images.length - 1 : curr - 1));
     const next = () =>
-      setCurr((curr) => (curr === sliders.length - 1 ? 0 : curr + 1));
+      setCurr((curr) => (curr === newListings.car_images.length - 1 ? 0 : curr + 1));
   
     useEffect(() => {
       if (!autoSlide) return;
@@ -60,11 +59,14 @@ const {id} = useParams()
     },[])
   
 
-  return (
+    const [selectedLocation, setSelectedLocation] = useState({
+      lat: 31.5204,
+      lng: 74.3587,
+    });
 
-    <>
-     <Header/>
-     <div className=' container py-12 mx-auto md:px-12 px-0'>
+
+  return (
+    <div className=' container py-12 mx-auto md:px-12 px-0'>
         <div className=' md:flex block   justify-between '>
             <div className=' md:w-[65%] w-[100%]'>
             <div className="overflow-hidden relative md:w-[90%] w-[100%]">
@@ -72,43 +74,20 @@ const {id} = useParams()
               className="flex  h-[75vh] transition-transform ease-out duration-500"
               style={{ transform: `translateX(-${curr * 100}%)` }}
             >
-              {/* {sliders?.map((s) => (
-          <> */}
+              {newListings?.car_images?.map((s) => (
+          <>
               <div className="  flex-none  w-full h-full">
                 <img
                
-                  src={require("../../assets/images/image 7.png")}
+                  src={s}
                   alt=""
                   className=" w-full cursor-pointer h-full  rounded-md  object-cover"
                 />
               </div>
-              <div className=" flex-none  w-full h-full ">
-                <img
-               
-                  src={require("../../assets/images/home.png")}
-                  alt=""
-                  className=" w-ful object-cover  rounded-md h-full"
-                />
-              </div>
-              <div className=" flex-none  w-full h-full ">
-                <img
-                
-                  src={require("../../assets/images/man-washing-his-car-garage 2.png")}
-                  alt=""
-                  className=" w-full h-full  object-contain"
-                />
-              </div>
-              <div className=" flex-none  w-full h-full ">
-                <img
-                 
-                  src={require("../../assets/images/man-washing-his-car-garage 2.png")}
-                  alt=""
-                  className=" w-full h-full  object-contain"
-                />
-              </div>
+              
 
-              {/* </>
-        ))} */}
+             </>
+        ))}
             </div>
             <div className="absolute inset-0 flex px-3 items-center justify-between">
             <button
@@ -127,7 +106,7 @@ const {id} = useParams()
           </div>
           <div className=" mt-2  md:block hidden">
             <div className="flex items-center justify-center gap-2">
-              {sliders.map((_, i) => (
+              {newListings?.car_images?.map((_, i) => (
                 <div
                   key={i}
                   onClick={() => goToSlide(i)}
@@ -226,11 +205,12 @@ const {id} = useParams()
 
           </div>
           <div className=' h-96'>
-            <img src={require('../../assets/images/location.png')}  className=' w-full h-full' alt=''  />
+            <MapComponent selectedLocation={selectedLocation} />
+            {/* <img src={require('../../assets/images/location.png')}  className=' w-full h-full' alt=''  /> */}
           </div>
             </div>
             <div className=' md:px-0 px-5'>
-              <h2 className=' text-textColor font-bold text-2xl'>BMW 8-serie 2 -door coupe grey</h2>
+              <h2 className=' text-textColor font-bold text-2xl'>{newListings.title}</h2>
                 <ul className=' flex gap-2 items-center py-2'>
                     <li>
                         <span className='text-gray-500'>2022</span>
@@ -251,7 +231,7 @@ const {id} = useParams()
               <hr/>
 
               <div className=' flex justify-between items-center py-2'>
-                <h1 className=' text-secondary font-bold text-3xl'>QR 62,000</h1>
+                <h1 className=' text-secondary font-bold text-3xl'>QR {newListings.price_QR}</h1>
                 <Button label={'Track Price'} className={' border-2 text-primary border-primary rounded-3xl py-1.5 font-semibold'} />
               </div>
 
@@ -995,9 +975,6 @@ const {id} = useParams()
          
         </div>
     </div>
-     <Footer/>
-    </>
-   
   )
 }
 

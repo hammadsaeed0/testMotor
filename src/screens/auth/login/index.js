@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, provider, providerFacebook } from "../../../utils/config";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { Base_url } from "../../../utils/Base_url";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -14,95 +14,89 @@ const Login = () => {
   const [loading, setLoader] = useState(false);
   console.log(value);
   const handleClick = () => {
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        setValue(data.user);
-        console.log(data.user.email);
-        console.log(data.user.uid);
-        const params = {
-          emailOrPhone: data.user.email,
-          password: data.user.uid,
-        };
+    signOut(auth)
+      .then(() => {
+        console.log("Signed out successfully.");
 
-        axios
-          .post(`${Base_url}/loginUser`, params)
-          .then((res) => {
-            console.log(res);
-            if (res.data.success === true) {
-              localStorage.setItem("user_data", res?.data?.user?._id);
-              toast.success(res?.data?.message);
-              navigate("/");
-            } else {
-              toast.error(res?.data?.message);
-            }
+        signInWithPopup(auth, provider)
+          .then((data) => {
+            setValue(data.user);
+            console.log(data.user.email);
+            console.log(data.user.uid);
+            const params = {
+              emailOrPhone: data.user.email,
+              password: data.user.uid,
+            };
+
+            axios
+              .post(`${Base_url}/loginUser`, params)
+              .then((res) => {
+                console.log(res);
+                if (res.data.success === true) {
+                  localStorage.setItem("user_data", res?.data?.user?._id);
+                  toast.success(res?.data?.message);
+                  navigate("/");
+                } else {
+                  toast.error(res?.data?.message);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                if (error.response.data.success === false) {
+                  setLoader(false);
+                  toast(error.response.data.message);
+                }
+              });
           })
-          .catch((error) => {
-            console.log(error);
-            if (error.response.data.success === false) {
-              setLoader(false);
-              toast(error.response.data.message);
-            }
-          });
+          .catch((error) => {});
       })
       .catch((error) => {
-        if (error.code === "auth/popup-closed-by-user") {
-          console.log("Sign-in popup was closed by the user.");
-        } else {
-          console.error("An error occurred during sign-in:", error.message);
-        }
+        console.error("Error signing out: ", error);
       });
   };
 
   const handleFacebook = () => {
-    signInWithPopup(auth, providerFacebook)
-      .then((data) => {
-        // setValue(data.user);
-        // console.log(data.user.email);
-        // console.log(data.user.uid);
-        console.log(data);
+    signOut(auth)
+      .then(() => {
+        console.log("Signed out successfully.");
+
+        signInWithPopup(auth, providerFacebook)
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error.customData);
+
+            const params = {
+              emailOrPhone: error.customData.email,
+              password: error.customData._tokenResponse.localId,
+            };
+
+            axios
+              .post(`${Base_url}/loginUser`, params)
+              .then((res) => {
+                console.log(res);
+                if (res.data.success === true) {
+                  localStorage.setItem("user_data", res?.data?.user?._id);
+                  toast.success(res?.data?.message);
+                  navigate("/");
+                } else {
+                  toast.error(res?.data?.message);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                if (error.response.data.success === false) {
+                  setLoader(false);
+                  toast(error.response.data.message);
+                }
+              });
+          });
       })
       .catch((error) => {
-        console.log(error.customData);
-        if (error.code === "auth/account-exists-with-different-credential") {
-          // The email of the user's account used.
-          const email = error.customData.email;
-          const phoneNumber = error.customData.phoneNumber;
-
-          const params = {
-            emailOrPhone: error.customData.email,
-            password: error.customData._tokenResponse.localId,
-          };
-
-          axios
-            .post(`${Base_url}/loginUser`, params)
-            .then((res) => {
-              console.log(res);
-              if (res.data.success === true) {
-                localStorage.setItem("user_data", res?.data?.user?._id);
-                toast.success(res?.data?.message);
-                navigate("/");
-              } else {
-                toast.error(res?.data?.message);
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-              if (error.response.data.success === false) {
-                setLoader(false);
-                toast(error.response.data.message);
-              }
-            });
-
-          // Get the sign-in methods for this email.
-
-          console.log(email, phoneNumber);
-        } else {
-          // Handle other errors.
-          console.error(error);
-        }
+        console.error("Error signing out: ", error);
       });
   };
-
   const navigate = useNavigate();
   const [state, setState] = useState({
     email: "",
@@ -231,16 +225,17 @@ const Login = () => {
             />
             <div className=" flex items-center justify-between">
               <div className=" gap-2 flex items-center">
-                <Input type="checkbox" className={' w-5 h-5 rounded-lg accent-primary'} required={"required"} />
+                <Input
+                  type="checkbox"
+                  className={" w-5 h-5 rounded-lg accent-primary"}
+                  required={"required"}
+                />
                 <p className="text-gray-400  font-semibold">Reminder</p>
               </div>
               <div className="">
-                <a
-                  href=""
-                  className="text-gray-400   border-b border-gray-400"
-                >
+                <Link to="" className="text-gray-400   border-b border-gray-400">
                   Forgotten password?
-                </a>
+                </Link>
               </div>
             </div>
           </div>
