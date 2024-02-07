@@ -13,7 +13,7 @@ body{
 }
 
 .h2{
-    @apply text-4xl font-bold  text-black
+    @apply md:text-4xl text-3xl font-bold  text-black
 }
 .h3{
     @apply text-3xl font-bold  text-black

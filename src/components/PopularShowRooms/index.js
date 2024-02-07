@@ -23,19 +23,19 @@ const PopularShowRooms = ({ items }) => {
         ref={scrollContainerRef}
         className="scroll-container   productOverflow  overflow-x-auto whitespace-nowrap"
       >
-        <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
+        <div className=" scroll-item inline-block m-2 md:w-72    w-48 bg-white rounded">
           <img src={require("../../assets/images/b1.png")} alt="" />
         </div>
-        <div className="  scroll-item inline-block m-2 w-72 bg-white rounded">
+        <div className="  scroll-item inline-block m-2 md:w-72 w-48 bg-white rounded">
           <img src={require("../../assets/images/b2.png")} alt="" />
         </div>
-        <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
+        <div className=" scroll-item inline-block m-2  md:w-72 w-48 bg-white rounded">
           <img src={require("../../assets/images/b3.png")} alt="" />
         </div>
-        <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
+        <div className=" scroll-item inline-block m-2  md:w-72  w-48 bg-white rounded">
           <img src={require("../../assets/images/b4.png")} alt="" />
         </div>
-        <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
+        <div className=" scroll-item inline-block m-2  md:w-72  w-48 bg-white rounded">
           <img src={require("../../assets/images/b4.png")} alt="" />
         </div>
       </div>
@@ -50,14 +50,22 @@ const PopularShowRooms = ({ items }) => {
             color="white"
             className=" font-extrabold"
           /> */}
-           <img src={require('../../assets/images/leftarrow.png')} className=" w-6" alt="" />
+          <img
+            src={require("../../assets/images/leftarrow.png")}
+            className=" w-6"
+            alt=""
+          />
         </button>
         <button
           className="arrow arrow-right absolute -right-4  flex justify-center pl-1 items-center  top-20 rounded-full  bg-secondary w-16 h-16"
           onClick={scrollRight}
         >
           {/* <LiaAngleRightSolid size={35} color="white" /> */}
-          <img src={require('../../assets/images/rightarrow.png')} className=" w-6" alt="" />
+          <img
+            src={require("../../assets/images/rightarrow.png")}
+            className=" w-6"
+            alt=""
+          />
         </button>
       </div>
     </div>

@@ -104,7 +104,7 @@ const Home = () => {
 
       <SearchForCar />
 
-      <div className=" mt-28 mb-9  container mx-auto">
+      <div className=" mt-28 mb-9  md:px-0 px-5  container mx-auto">
         <h2 className=" h2  text-center">Featured cars in Qatar:</h2>
 
         <hr className=" m-0 border-b-2 w-64 border-primary mt-2 mx-auto" />
@@ -129,7 +129,8 @@ const Home = () => {
           />
         </div>
 
-        <FeaturedCars
+      <div className=" md:mx-0 mx-2">
+      <FeaturedCars
           items={
             <>
               <div className=" w-full scroll-item inline-block">
@@ -190,7 +191,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="  grid  grid-cols-2 md:mt-0 mt-9  md:w-[60%] w-[100%] gap-5">
-                    <div className="border-4   md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+                    <div className="border-4   md:block hidden md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
                       <div className="   h-44">
                         <img
                           src={require("../../assets/images/image 7.png")}
@@ -245,7 +246,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="border-4   md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+                    <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
                       <div className="   h-44">
                         <img
                           src={require("../../assets/images/image 7.png")}
@@ -300,7 +301,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="border-4   md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+                    <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
                       <div className="   h-44">
                         <img
                           src={require("../../assets/images/image 7.png")}
@@ -355,7 +356,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="border-4   md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+                    <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
                       <div className="   h-44">
                         <img
                           src={require("../../assets/images/image 7.png")}
@@ -472,7 +473,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="  grid  grid-cols-2 md:mt-0 mt-9  md:w-[60%] w-[100%] gap-5">
-                    <div className="border-4   w-80 border-primary  rounded-2xl overflow-hidden">
+                  <div className="border-4   md:block hidden md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
                       <div className="   h-44">
                         <img
                           src={require("../../assets/images/image 7.png")}
@@ -481,43 +482,43 @@ const Home = () => {
                         />
                       </div>
                       <div className=" p-2">
-                        <h5 className=" text-secondary font-bold uppercase">
+                        <h5 className=" text-secondary  md:text-base text-xs font-bold uppercase">
                           Chevrolet Camaro 2-door{" "}
                         </h5>
-                        <div className="  mt-3 flex justify-between items-center">
-                          <div className=" flex gap-2 items-center">
+                        <div className="  md:mt-3 mt-0 md:flex block justify-between items-center">
+                          <div className=" flex gap-2 justify-between items-center">
                             <img
                               src={require("../../assets/images/can.png")}
                               className=" w-4"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               2021
                             </span>
                           </div>
-                          <div className="flex gap-2 items-center">
+                          <div className="flex  justify-between gap-2 items-center">
                             <img
                               src={require("../../assets/images/cal.png")}
                               className=" w-6"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               4 Cylinder
                             </span>
                           </div>
-                          <div className="flex gap-2 items-center">
+                          <div className="flex justify-between gap-2 items-center">
                             <img
                               src={require("../../assets/images/road.png")}
                               className=" w-4"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               44, 882 KM
                             </span>
                           </div>
                         </div>
 
-                        <div className=" flex justify-between items-center mt-3">
+                        <div className=" md:flex block justify-between items-center mt-3">
                           <h5 className=" text-green text-sm font-bold ">
                             QR. 15,233 / Month{" "}
                           </h5>
@@ -527,7 +528,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="border-4  w-80 border-primary  rounded-2xl overflow-hidden">
+                    <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
                       <div className="   h-44">
                         <img
                           src={require("../../assets/images/image 7.png")}
@@ -536,43 +537,43 @@ const Home = () => {
                         />
                       </div>
                       <div className=" p-2">
-                        <h5 className=" text-secondary font-bold uppercase">
+                        <h5 className=" text-secondary  md:text-base text-xs font-bold uppercase">
                           Chevrolet Camaro 2-door{" "}
                         </h5>
-                        <div className="  mt-3 flex justify-between items-center">
-                          <div className=" flex gap-2 items-center">
+                        <div className="  md:mt-3 mt-0 md:flex block justify-between items-center">
+                          <div className=" flex gap-2 justify-between items-center">
                             <img
                               src={require("../../assets/images/can.png")}
                               className=" w-4"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               2021
                             </span>
                           </div>
-                          <div className="flex gap-2 items-center">
+                          <div className="flex  justify-between gap-2 items-center">
                             <img
                               src={require("../../assets/images/cal.png")}
                               className=" w-6"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               4 Cylinder
                             </span>
                           </div>
-                          <div className="flex gap-2 items-center">
+                          <div className="flex justify-between gap-2 items-center">
                             <img
                               src={require("../../assets/images/road.png")}
                               className=" w-4"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               44, 882 KM
                             </span>
                           </div>
                         </div>
 
-                        <div className=" flex justify-between items-center mt-3">
+                        <div className=" md:flex block justify-between items-center mt-3">
                           <h5 className=" text-green text-sm font-bold ">
                             QR. 15,233 / Month{" "}
                           </h5>
@@ -582,7 +583,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="border-4 w-80  border-primary  rounded-2xl overflow-hidden">
+                    <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
                       <div className="   h-44">
                         <img
                           src={require("../../assets/images/image 7.png")}
@@ -591,43 +592,43 @@ const Home = () => {
                         />
                       </div>
                       <div className=" p-2">
-                        <h5 className=" text-secondary font-bold uppercase">
+                        <h5 className=" text-secondary  md:text-base text-xs font-bold uppercase">
                           Chevrolet Camaro 2-door{" "}
                         </h5>
-                        <div className="  mt-3 flex justify-between items-center">
-                          <div className=" flex gap-2 items-center">
+                        <div className="  md:mt-3 mt-0 md:flex block justify-between items-center">
+                          <div className=" flex gap-2 justify-between items-center">
                             <img
                               src={require("../../assets/images/can.png")}
                               className=" w-4"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               2021
                             </span>
                           </div>
-                          <div className="flex gap-2 items-center">
+                          <div className="flex  justify-between gap-2 items-center">
                             <img
                               src={require("../../assets/images/cal.png")}
                               className=" w-6"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               4 Cylinder
                             </span>
                           </div>
-                          <div className="flex gap-2 items-center">
+                          <div className="flex justify-between gap-2 items-center">
                             <img
                               src={require("../../assets/images/road.png")}
                               className=" w-4"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               44, 882 KM
                             </span>
                           </div>
                         </div>
 
-                        <div className=" flex justify-between items-center mt-3">
+                        <div className=" md:flex block justify-between items-center mt-3">
                           <h5 className=" text-green text-sm font-bold ">
                             QR. 15,233 / Month{" "}
                           </h5>
@@ -637,7 +638,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="border-4 w-80  border-primary  rounded-2xl overflow-hidden">
+                    <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
                       <div className="   h-44">
                         <img
                           src={require("../../assets/images/image 7.png")}
@@ -646,43 +647,43 @@ const Home = () => {
                         />
                       </div>
                       <div className=" p-2">
-                        <h5 className=" text-secondary font-bold uppercase">
+                        <h5 className=" text-secondary  md:text-base text-xs font-bold uppercase">
                           Chevrolet Camaro 2-door{" "}
                         </h5>
-                        <div className="  mt-3 flex justify-between items-center">
-                          <div className=" flex gap-2 items-center">
+                        <div className="  md:mt-3 mt-0 md:flex block justify-between items-center">
+                          <div className=" flex gap-2 justify-between items-center">
                             <img
                               src={require("../../assets/images/can.png")}
                               className=" w-4"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               2021
                             </span>
                           </div>
-                          <div className="flex gap-2 items-center">
+                          <div className="flex  justify-between gap-2 items-center">
                             <img
                               src={require("../../assets/images/cal.png")}
                               className=" w-6"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               4 Cylinder
                             </span>
                           </div>
-                          <div className="flex gap-2 items-center">
+                          <div className="flex justify-between gap-2 items-center">
                             <img
                               src={require("../../assets/images/road.png")}
                               className=" w-4"
                               alt=""
                             />
-                            <span className=" text-textColor font-bold">
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
                               44, 882 KM
                             </span>
                           </div>
                         </div>
 
-                        <div className=" flex justify-between items-center mt-3">
+                        <div className=" md:flex block justify-between items-center mt-3">
                           <h5 className=" text-green text-sm font-bold ">
                             QR. 15,233 / Month{" "}
                           </h5>
@@ -692,12 +693,14 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
+                    
                   </div>
                 </div>
               </div>
             </>
           }
         />
+      </div>
       </div>
 
       <div className=" mt-28 mb-9 px-10">
@@ -716,7 +719,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className=" mx-auto container  py-14  px-10 ">
+      <div className=" mx-auto container  py-14  md:px-10 px-6 ">
         <h1 className=" pb-10 text-center  font-bold  text-4xl">FAQs</h1>
         {accordions.map((accordion) => (
           <Accordion

@@ -26,16 +26,16 @@ const FeaturedCars = ({ items }) => {
         {items}
       </div>
 
-      <div className=" md:block hidden">
+      <div className="">
         <button
-          className="arrow arrow-left absolute -left-4  flex  pr-1   justify-center  items-center  top-80 rounded-full  bg-secondary w-16 h-16"
+          className="arrow arrow-left absolute md:-left-4 left-12  flex  pr-1   justify-center  items-center  md:top-80  -bottom-12 rounded-full  bg-secondary w-16 h-16"
           onClick={scrollLeft}
         >
           {/* <LiaAngleLeftSolid size={35} color="white" className=" font-extrabold" /> */}
           <img src={require('../../assets/images/leftarrow.png')} className=" w-6" alt="" />
         </button>
         <button
-          className="arrow arrow-right absolute -right-4  flex justify-center pl-1 items-center   top-80 rounded-full  bg-secondary w-16 h-16"
+          className="arrow arrow-right absolute md:-right-4 right-12  flex justify-center pl-1 items-center   md:top-80   -bottom-12 rounded-full  bg-secondary w-16 h-16"
           onClick={scrollRight}
         >
           {/* <LiaAngleRightSolid size={35} color="white" /> */}
