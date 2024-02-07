@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
-import SearchComponents from "../../components/SearchComponents";
 import Button from "../../components/Button";
 import { FaWhatsapp } from "react-icons/fa6";
-import { IoCall, IoSearch } from "react-icons/io5";
+import { IoCall } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 import { TfiLayoutGrid2Alt } from "react-icons/tfi";
 import { FaSortAmountUpAlt } from "react-icons/fa";
 import { FaList } from "react-icons/fa";
-import Input from "../../components/Input";
 import Option from "../../components/Option";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Base_url } from "../../utils/Base_url";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 const NewLists = () => {
   const options = ["select Make", "Gently Used"];
   const Model = ["select Model", "Gently Used"];
   const Year = ["select Year", "Gently Used"];
   const VehicleSelect = ["select Vehicle", "Gently Used"];
   const selectSeller = ["select Seller Type", "Gently Used"];
-  const fuel = ["select Fuel Type", "Gently Used"];
-
   const handleSelect = (selectedOptions) => {
     console.log("Selected options:", selectedOptions);
     // You can perform any other actions with the selected options
@@ -44,7 +42,9 @@ const NewLists = () => {
   },[])
 
   return (
-    <div className=" container mx-auto">
+    <>
+     <Header/>
+     <div className=" container mx-auto">
       <div className=" py-12">
         <div className="bg-[#ECECEC] py-9 rounded-2xl  border border-primary">
           <div className=" w-[80%] mx-auto text-center">
@@ -736,6 +736,8 @@ const NewLists = () => {
         </div>
       )}
     </div>
+     <Footer/>
+    </>
   );
 };
 

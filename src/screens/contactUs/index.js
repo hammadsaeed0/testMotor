@@ -4,6 +4,8 @@ import Button from "../../components/Button";
 import { Base_url } from "../../utils/Base_url";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 
 const ContactUs = () => {
   const [state, setState] = useState({
@@ -50,7 +52,9 @@ const ContactUs = () => {
 
 
   return (
-    <section className=" py-10  px-4 container mx-auto justify-between md:flex block">
+    <>
+     <Header/>
+     <section className=" py-10  px-4 container mx-auto justify-between md:flex block">
       {/*  left */}
       <div className=" md:w-[46%] w-[100%]">
         <div>
@@ -157,6 +161,9 @@ const ContactUs = () => {
         </form>
       </div>
     </section>
+     <Footer/>
+    </>
+    
   );
 };
 

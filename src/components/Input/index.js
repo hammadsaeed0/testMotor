@@ -31,7 +31,7 @@ const Input = ({
         required={required}
         className={`  outline-none bg-lightGray  p-1.5  text-textColor placeholder:text-gray-500 rounded-md  ${className}`}
       />
-      <div className=" absolute right-3 top-8">
+      <div className=" absolute right-3 top-3">
         <i>{Icon}</i>
       </div>
     </div>

@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
+body{
+    font-family: 'Poppins', sans-serif;
+}
 
 .h1{
     @apply   text-5xl  font-black text-white uppercase
@@ -30,3 +34,17 @@
 }
 
 
+/* HorizontalScroll.css */
+.scroll-container {
+    width: 100%;
+    white-space: nowrap;
+  }
+  
+  .scroll-item {
+    min-width: 200px; /* Adjust as needed */
+    box-sizing: border-box;
+  }
+
+  .productOverflow::-webkit-scrollbar {
+    display: none;
+}

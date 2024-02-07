@@ -1,11 +1,13 @@
 import React from 'react'
 import Button from '../../components/Button'
+import Header from '../../components/header'
+import Footer from '../../components/footer'
 
 const News = () => {
   return (
-    <div className=' container mx-auto py-12 px-10'>
-
-
+  <>
+   <Header/>
+   <div className=' container mx-auto py-12 px-10'>
         <div className=' flex-wrap flex gap-8 justify-center'>
             <div className=' w-80 shadow-lg'>
                 <div className=' relative  w-80 h-44'>
@@ -84,6 +86,8 @@ const News = () => {
         </div>
         
     </div>
+   <Footer/>
+  </>
   )
 }
 

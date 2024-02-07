@@ -18,28 +18,48 @@ const PopularShowRooms = ({ items }) => {
   };
 
   return (
-    <div className="relative container md:px-4 px-0 mx-auto">
+    <div className="relative w-full container md:px-4 px-0 mx-auto">
       <div
         ref={scrollContainerRef}
-        className="scroll-container  flex items-center  productOverflow  overflow-x-auto whitespace-nowrap"
+        className="scroll-container   productOverflow  overflow-x-auto whitespace-nowrap"
       >
-        {items}        
+        <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
+          <img src={require("../../assets/images/b1.png")} alt="" />
+        </div>
+        <div className="  scroll-item inline-block m-2 w-72 bg-white rounded">
+          <img src={require("../../assets/images/b2.png")} alt="" />
+        </div>
+        <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
+          <img src={require("../../assets/images/b3.png")} alt="" />
+        </div>
+        <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
+          <img src={require("../../assets/images/b4.png")} alt="" />
+        </div>
+        <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
+          <img src={require("../../assets/images/b4.png")} alt="" />
+        </div>
       </div>
 
-     <div className=" md:block hidden">
-     <button
-        className="arrow arrow-left absolute -left-4  flex  pr-1   justify-center  items-center  top-28 rounded-full  bg-secondary w-14 h-14"
-        onClick={scrollLeft}
-      >
-        <LiaAngleLeftSolid  size={35}  color="white" />
-      </button>
-      <button
-        className="arrow arrow-right absolute -right-4  flex justify-start pl-1 items-center  top-28 rounded-full  bg-secondary w-14 h-14"
-        onClick={scrollRight}
-      >
-           <LiaAngleRightSolid size={35}  color="white"  />
-      </button>
-     </div>
+      <div className=" md:block hidden">
+        <button
+          className="arrow arrow-left absolute -left-4  flex  pr-1   justify-center  items-center  top-20 rounded-full  bg-secondary w-16 h-16"
+          onClick={scrollLeft}
+        >
+          {/* <LiaAngleLeftSolid
+            size={35}
+            color="white"
+            className=" font-extrabold"
+          /> */}
+           <img src={require('../../assets/images/leftarrow.png')} className=" w-6" alt="" />
+        </button>
+        <button
+          className="arrow arrow-right absolute -right-4  flex justify-center pl-1 items-center  top-20 rounded-full  bg-secondary w-16 h-16"
+          onClick={scrollRight}
+        >
+          {/* <LiaAngleRightSolid size={35} color="white" /> */}
+          <img src={require('../../assets/images/rightarrow.png')} className=" w-6" alt="" />
+        </button>
+      </div>
     </div>
   );
 };

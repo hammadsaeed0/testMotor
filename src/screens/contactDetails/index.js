@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { FaAngleRight, FaLocationDot } from "react-icons/fa6";
+import { FaAngleRight} from "react-icons/fa6";
 import Input from "../../components/Input";
-import Option from "../../components/Option";
-import { FaCalendarAlt } from "react-icons/fa";
 import {
   LiaLongArrowAltLeftSolid,
-  LiaLongArrowAltRightSolid,
 } from "react-icons/lia";
 import Button from "../../components/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Base_url } from "../../utils/Base_url";
 import axios from "axios";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 const ContactDetails = () => {
   const location = useLocation();
   const { receivedData, upload } = location.state || {};
@@ -110,6 +109,8 @@ const ContactDetails = () => {
   };
 
   return (
+    <>
+    <Header/>
     <form onSubmit={handlerSubmit}>
       <div className=" py-8 text-center">
         <h2 className=" h2  text-center">Sell Your Car</h2>
@@ -238,6 +239,8 @@ const ContactDetails = () => {
         </div>
       </div>
     </form>
+    <Footer/>
+    </>
   );
 };
 

@@ -4,14 +4,18 @@ import Button from "../../../../components/Button";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { Base_url } from "../../../../utils/Base_url";
-import { auth, provider } from "../../../../utils/config";
+import { auth, provider, providerFacebook } from "../../../../utils/config";
 import { signInWithPopup } from "firebase/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Header from "../../../../components/header";
+import Footer from "../../../../components/footer";
+import { FaRegEye } from "react-icons/fa";
 export const Dealar = () => {
   const [value, setValue] = useState({});
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("dealer");
+  const [loading, setLoader] = useState(false);
   console.log(value);
   const handleClick = () => {
     signInWithPopup(auth, provider).then((data) => {
@@ -22,7 +26,7 @@ export const Dealar = () => {
         type: selectedOption,
         username: data.user.displayName,
         email: data.user.email,
-        // phone: "0903450343",
+        phone: data.user.phoneNumber,
         password: data.user.uid,
       };
 
@@ -42,6 +46,60 @@ export const Dealar = () => {
           toast.error(error.response.data.message);
         });
     });
+  };
+
+
+  const handleFacebook = () => {
+    signInWithPopup(auth, providerFacebook)
+      .then((data) => {
+        // setValue(data.user);
+        // console.log(data.user.email);
+        // console.log(data.user.uid);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error.customData);
+        if (error.code === "auth/account-exists-with-different-credential") {
+          // The email of the user's account used.
+          const email = error.customData.email;
+          const phoneNumber = error.customData.phoneNumber;
+
+          const params = {
+            type: selectedOption,
+            username: error.customData.
+            _tokenResponse.displayName,
+            email: error.customData.email,
+            phone: error.customData.
+            _tokenResponse.phoneNumber,
+            password: error.customData.
+            _tokenResponse.localId,
+          };
+
+          axios
+            .post(`${Base_url}/registerUser`, params)
+            .then((res) => {
+              console.log(res);
+              if (res.data.success === true) {
+                localStorage.setItem("user_data", res?.data?.newUser?._id);
+                toast.success(res?.data?.message);
+                navigate("/");
+              } else {
+                toast.error(res?.data?.message);
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+              toast(error.response.data.message);
+            });
+
+          // Get the sign-in methods for this email.
+
+          console.log(email, phoneNumber);
+        } else {
+          // Handle other errors.
+          console.error(error);
+        }
+      });
   };
 
   const [state, setState] = useState({
@@ -64,6 +122,7 @@ export const Dealar = () => {
   const handleSubmit = (e) => {
     console.log(e);
     e.preventDefault();
+    setLoader(true);
 
     if (state.password !== state.confirm_password) {
       toast.error("Password and Confirm password must be same!");
@@ -72,6 +131,7 @@ export const Dealar = () => {
         type: selectedOption,
         companyName: state.companyName,
         email: state.email,
+        username:state.firstName + state.lastName,
         firstName: state.firstName,
         lastName: state.lastName,
         phone: state.phone,
@@ -85,31 +145,44 @@ export const Dealar = () => {
           console.log(res);
 
           if (res.data.success === true) {
-            localStorage.setItem("user_data", res?.data?.newUser?._id);
+            setLoader(false);
+            // localStorage.setItem("user_data", res?.data?.newUser?._id);
             toast.success(res?.data?.message);
-            navigate("/");
+            navigate("/register");
           } else {
             toast.error(res?.data?.message);
           }
         })
         .catch((error) => {
-          toast.error(error.response.data.message);
-          console.log(error.response.data.message);
+          console.log(error);
+
+          setLoader(false);
+          toast(error.response.data.message);
         });
     }
   };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    if (event.target.value === "dealer") {
+    if (event.target.value === "seller") {
       navigate("/register");
     } else {
       navigate("/dealar");
     }
   };
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  const [isPasswordVisiblec, setIsPasswordVisiblec] = useState(false);
+  const togglePasswordVisibilityc = () => {
+    setIsPasswordVisiblec(!isPasswordVisiblec);
+  };
   return (
     <div>
+      <Header />
       <section className=" block md:flex  pb-20">
         {/* login section */}
 
@@ -117,10 +190,11 @@ export const Dealar = () => {
           <h3 className="   pb-3 font-bold  text-black  text-3xl">
             Register to sell your Vehicle
           </h3>
-          <p>Create new account today.</p>
+          <p className=" text-textColor">Create new account today.</p>
 
           <div className=" pt-10 gap-6 md:flex block items-center">
-            <h6> Continue with:</h6>
+            <h6 className=" text-black font-medium"> Continue with:</h6>
+
             <div className=" flex gap-2">
               <Button
                 onClick={handleClick}
@@ -132,19 +206,21 @@ export const Dealar = () => {
                   />
                 }
                 className={
-                  " bg-white border-gray-200 border-2  py-2 px-14 rounded-md  text-black"
+                  " bg-white border-gray-200  font-semibold border-2 justify-between rounded-lg text-lg py-2.5   w-40 text-black"
                 }
               />
               <Button
                 label={"Facebook"}
+                onClick={handleFacebook}
                 Icons={
                   <img
                     src={require("../../../../assets/images/facebook.png")}
                     alt=""
+                    className=" w-7"
                   />
                 }
                 className={
-                  "bg-white border-gray-200 border-2  rounded-md py-2  px-14  text-black"
+                  " bg-white border-gray-200  font-semibold border-2 justify-between rounded-lg text-lg py-2.5   w-40 text-black"
                 }
               />
             </div>
@@ -155,6 +231,7 @@ export const Dealar = () => {
               <input
                 type="radio"
                 name="gender"
+                className="accent-primary"
                 value="seller"
                 checked={selectedOption === "seller"}
                 onChange={handleOptionChange}
@@ -165,6 +242,7 @@ export const Dealar = () => {
               <input
                 type="radio"
                 name="gender"
+                className="accent-primary"
                 value="dealer"
                 checked={selectedOption === "dealer"}
                 onChange={handleOptionChange}
@@ -242,51 +320,106 @@ export const Dealar = () => {
               />
               <Input
                 star={"*"}
-                type="text"
+                type={isPasswordVisible ? "text" : "password"}
                 onChange={handleInputs}
                 value={state.password}
                 name={"password"}
-                Icon={<FaRegEyeSlash className=" text-gray-500" />}
+                Icon={
+                  isPasswordVisible ? (
+                    <FaRegEye
+                      onClick={togglePasswordVisibility}
+                      className=" text-gray-500  mt-5"
+                    />
+                  ) : (
+                    <FaRegEyeSlash
+                      onClick={togglePasswordVisibility}
+                      className=" text-gray-500  mt-5"
+                    />
+                  )
+                }
                 label={"Password"}
                 placeholder={"Enter Password"}
                 className={"border-2 w-full border-gray-200"}
-                required
               />
 
               <Input
                 star={"*"}
-                type="text"
+                type={isPasswordVisiblec ? "text" : "password"}
                 onChange={handleInputs}
                 value={state.confirm_password}
                 name={"confirm_password"}
-                Icon={<FaRegEyeSlash className=" text-gray-500" />}
+                Icon={
+                  isPasswordVisiblec ? (
+                    <FaRegEye
+                      onClick={togglePasswordVisibilityc}
+                      className=" text-gray-500  mt-5"
+                    />
+                  ) : (
+                    <FaRegEyeSlash
+                      onClick={togglePasswordVisibilityc}
+                      className=" text-gray-500  mt-5"
+                    />
+                  )
+                }
                 label={"Confirm Password"}
                 placeholder={"Enter Confirm Password"}
                 className={"border-2 w-full border-gray-200"}
                 required
               />
-              <p className="  text-gray-400 font-bold">
+              <p className="   text-textColor mt-3 font-bold">
                 Terms, Conditions & Privacy Policy*
               </p>
-              <div className=" flex items-center justify-between">
-                <div className=" gap-2 flex items-center">
-                  <Input type="checkbox" />
-                  <p className=" text-gray-400  font-semibold">
+             
+            </div>
+            <div className=" flex  mt-2 items-center justify-between">
+                <div className=" gap-2 flex ">
+                  <Input type="checkbox" className={'accent-primary mt-1 w-4 h-4'} required={'required'} />
+                  <p className=" text-[#717070]">
                     By sign up you agree to terms & Conditions and Privacy
                     Policy{" "}
                   </p>
                 </div>
               </div>
-            </div>
-            <div className=" pt-12">
-              <Button
-                label={"Register"}
-                className={" bg-orange-600 rounded-md  px-8  py-2 text-white"}
-              />
+            <div className=" pt-6">
+              {loading === true ? (
+                <button
+                  disabled
+                  type="button"
+                  class="text-white mt-8 bg-primary hover:bg-primary focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary inline-flex items-center"
+                >
+                  <svg
+                    aria-hidden="true"
+                    role="status"
+                    class="inline w-4 h-4 me-3 text-white animate-spin"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                      fill="#E5E7EB"
+                    />
+                    <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  Loading...
+                </button>
+              ) : (
+                <Button
+                  label={"Register"}
+                  type={"submit"}
+                  className={
+                    " bg-primary rounded-md  mt-8 py-2.5 px-8  text-white"
+                  }
+                />
+              )}
             </div>
           </form>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

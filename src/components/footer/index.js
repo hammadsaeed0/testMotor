@@ -12,10 +12,10 @@ const Footer = () => {
                 <img className=' w-44' src={require('../../assets/images/white_logo.png')} alt='' />
             </div>
             <div>
-                <h2 className=' uppercase text-white font-semibold'>to our newsletters</h2>
+                <h2 className=' uppercase text-lg text-white '>to our newsletters</h2>
                 <div className=' flex pt-2 items-center   rounded-md rounded-s-none'>
-                  <input  className=' p-2   w-64 rounded-tl-lg  rounded-bl-lg' />
-                  <button  className='  rounded-tr-lg  rounded-br-lg  py-2 px-6 bg-orange-600 text-white uppercase font-semibold'>Subscribe</button>
+                  <input  className=' p-2.5    w-72 rounded-tl-lg  rounded-bl-lg' />
+                  <button  className='  rounded-tr-lg  rounded-br-lg  py-2.5 px-8 bg-primary text-white uppercase '>Subscribe</button>
                 </div>
             </div>
         </div>
@@ -65,45 +65,45 @@ const Footer = () => {
            <div  className=''>
                 <h1 className=' uppercase text-white  font-semibold text-xl'>quick links</h1>
 
-                <ul className=' mt-5'>
+                <ul className=' mt-5  leading-7'>
                     <li>
-                        <Link  className='uppercase text-white font-semibold' to='/home'>home</Link>
+                        <Link  className='uppercase text-white   font-medium' to='/home'>home</Link>
                     </li>
                     <li>
-                        <Link  className='uppercase text-white font-semibold' to='/car_inspection'>about us</Link>
+                        <Link  className='uppercase text-white  font-medium' to='/car_inspection'>about us</Link>
                     </li>
                     <li>
-                        <Link  className='uppercase text-white font-semibold' to='/news'>news</Link>
+                        <Link  className='uppercase text-white  font-medium' to='/news'>news</Link>
                     </li>
                 </ul>
             </div>
             <div  className=''>
-                <h1 className=' uppercase text-white  font-semibold text-xl'>features</h1>
+                <h1 className=' uppercase text-white font-semibold text-xl'>features</h1>
 
-                <ul className=' mt-5'>
+                <ul className=' mt-5 leading-7'>
                     <li>
-                        <Link  className='uppercase text-white font-semibold' to='/choose_plane'>features</Link>
+                        <Link  className='uppercase text-white font-medium' to='/choose_plane'>features</Link>
                     </li>
                     <li>
-                        <Link  className='uppercase text-white font-semibold' to='/garage_booking_confirmation'>faq</Link>
+                        <Link  className='uppercase text-white font-medium' to='/garage_booking_confirmation'>faq</Link>
                     </li>
                     <li>
-                        <Link  className='uppercase text-white font-semibold' to=''>english</Link>
+                        <Link  className='uppercase text-white font-medium' to=''>english</Link>
                     </li>
                 </ul>
             </div>
             <div className=''>
-                <h1 className=' uppercase text-white  font-semibold text-xl'>blogs</h1>
+                <h1 className=' uppercase text-white   font-semibold text-xl'>blogs</h1>
 
-                <ul className=' mt-5'>
+                <ul className=' mt-5 leading-7'>
                     <li>
-                        <Link  className=' uppercase text-white font-semibold' to=''>terms & conditions</Link>
+                        <Link  className=' uppercase text-white font-medium' to=''>terms & conditions</Link>
                     </li>
                     <li>
-                        <Link  className='uppercase text-white font-semibold' to=''>privacy policy</Link>
+                        <Link  className='uppercase text-white font-medium' to=''>privacy policy</Link>
                     </li>
                     <li>
-                        <Link className='uppercase text-white font-semibold' to='/contactus'>contact us</Link>
+                        <Link className='uppercase text-white font-medium' to='/contactus'>contact us</Link>
                     </li>
                 </ul>
             </div>

@@ -5,6 +5,11 @@ import Accordion from "../../components/Accordion/Accordion";
 import Button from "../../components/Button";
 import SearchForCar from "../../components/SearchForCar";
 import PopularShowRooms from "../../components/PopularShowRooms";
+import transition from "../../transition";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
+import FeaturedCars from "../../components/FeaturedCars";
+import WithMotorqeComponent from "../../components/WithMotorqeComponent";
 
 const Home = () => {
   const [accordions, setAccordion] = useState([
@@ -85,79 +90,16 @@ const Home = () => {
 
   return (
     <div>
+      <Header />
       <HomeBanner />
       <div className=" -translate-y-[75px]">
         <div className=" w-[90%]  mx-auto">
           <SearchComponents />
         </div>
       </div>
+
       <div className=" container  mx-auto px-10">
-        <h2 className=" h2  text-center">With Motorqe :</h2>
-
-        <hr className=" m-0 border-b-2 w-64 border-primary mt-2 mx-auto" />
-
-        <div className=" md:flex block   gap-7 mt-10 items-center">
-          <div className=" text-center">
-            <div className=" ">
-              <img
-                src={require("../../assets/images/time.png")}
-                className=" mx-auto"
-                alt=""
-              />
-            </div>
-            <div className=" pt-6">
-              <h5 className="h5">Selling Process</h5>
-              <p>80% of our Customers sell their car with in 2 weeks </p>
-            </div>
-          </div>
-          <div className=" text-center">
-            <img
-              src={require("../../assets/images/setting.png")}
-              className=" mx-auto"
-              alt=""
-            />
-            <div className="pt-6">
-              <h5 className="h5">Free Listing</h5>
-              <p>
-                List your Car for 30 days for free then sit back & we will find
-                you a potential buyer{" "}
-              </p>
-            </div>
-          </div>
-          <div className=" text-center">
-            <img
-              src={require("../../assets/images/compare.png")}
-              className=" mx-auto"
-              alt=""
-            />
-            <div className=" pt-6">
-              <h5 className="h5">Compare cars</h5>
-              <p>
-                Choosing your favourite Car is now easier with the new
-                comparison feature{" "}
-              </p>
-            </div>
-          </div>
-          <div className=" text-center">
-            <img
-              src={require("../../assets/images/find.png")}
-              className=" mx-auto"
-              alt=""
-            />
-            <div className=" text-center pt-6">
-              <h5 className="h5">Find a Garage </h5>
-              <p>
-                Looking to fix or service your Car? find your ideal garage now
-                hassle free.{" "}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <Button
-          label={"Sell your car now"}
-          className={" bg-primary  text-white rounded-3xl py-1.5 mt-10 mx-auto"}
-        />
+        <WithMotorqeComponent />
       </div>
 
       <SearchForCar />
@@ -187,73 +129,302 @@ const Home = () => {
           />
         </div>
 
-        <PopularShowRooms
+        <FeaturedCars
           items={
             <>
-              <div className=" mt-14 flex gap-6">
-                <div className="border-4  w-[48%] border-primary  rounded-2xl overflow-hidden">
-                  <div className="   h-4/4">
-                    <img
-                      src={require("../../assets/images/image 7.png")}
-                      className=" w-full h-full object-cover object-center"
-                      alt=""
-                    />
-                  </div>
-                  <div className=" p-4">
-                    <h5 className=" text-secondary font-bold uppercase">
-                      Chevrolet Camaro 2-door{" "}
-                    </h5>
-                    <div className="  mt-3 flex justify-between items-center">
-                      <div className=" flex gap-2 items-center">
-                        <img
-                          src={require("../../assets/images/can.png")}
-                          className=" w-4"
-                          alt=""
-                        />
-                        <span className=" text-textColor font-bold">2021</span>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <img
-                          src={require("../../assets/images/cal.png")}
-                          className=" w-6"
-                          alt=""
-                        />
-                        <span className=" text-textColor font-bold">
-                          4 Cylinder
-                        </span>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <img
-                          src={require("../../assets/images/road.png")}
-                          className=" w-4"
-                          alt=""
-                        />
-                        <span className=" text-textColor font-bold">
-                          44, 882 KM
-                        </span>
-                      </div>
+              <div className=" w-full scroll-item inline-block">
+                <div className="mt-14 md:flex block gap-6">
+                  <div className="border-4  md:w-[48%] w-[100%] border-primary  rounded-2xl overflow-hidden">
+                    <div className="   h-4/4">
+                      <img
+                        src={require("../../assets/images/image 7.png")}
+                        className=" w-full h-full object-cover object-center"
+                        alt=""
+                      />
                     </div>
-
-                    <div className=" flex justify-between items-center mt-3">
-                      <h5 className=" text-green text-sm font-bold ">
-                        QR. 15,233 / Month{" "}
-                      </h5>
+                    <div className=" p-4">
                       <h5 className=" text-secondary font-bold uppercase">
-                        qr. 433,000{" "}
+                        Chevrolet Camaro 2-door{" "}
                       </h5>
+                      <div className="  mt-3 flex justify-between items-center">
+                        <div className=" flex gap-2 items-center">
+                          <img
+                            src={require("../../assets/images/can.png")}
+                            className=" w-4"
+                            alt=""
+                          />
+                          <span className=" text-textColor font-bold">
+                            2021
+                          </span>
+                        </div>
+                        <div className="flex gap-2 items-center">
+                          <img
+                            src={require("../../assets/images/cal.png")}
+                            className=" w-6"
+                            alt=""
+                          />
+                          <span className=" text-textColor font-bold">
+                            4 Cylinder
+                          </span>
+                        </div>
+                        <div className="flex gap-2 items-center">
+                          <img
+                            src={require("../../assets/images/road.png")}
+                            className=" w-4"
+                            alt=""
+                          />
+                          <span className=" text-textColor font-bold">
+                            44, 882 KM
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className=" flex justify-between items-center mt-3">
+                        <h5 className=" text-green text-sm font-bold ">
+                          QR. 15,233 / Month{" "}
+                        </h5>
+                        <h5 className=" text-secondary font-bold uppercase">
+                          qr. 433,000{" "}
+                        </h5>
+                      </div>
                     </div>
+                  </div>
+                  <div className="  grid  grid-cols-2 md:mt-0 mt-9  md:w-[60%] w-[100%] gap-5">
+                    <div className="border-4   md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+                      <div className="   h-44">
+                        <img
+                          src={require("../../assets/images/image 7.png")}
+                          className=" w-full h-full object-cover object-center"
+                          alt=""
+                        />
+                      </div>
+                      <div className=" p-2">
+                        <h5 className=" text-secondary  md:text-base text-xs font-bold uppercase">
+                          Chevrolet Camaro 2-door{" "}
+                        </h5>
+                        <div className="  md:mt-3 mt-0 md:flex block justify-between items-center">
+                          <div className=" flex gap-2 justify-between items-center">
+                            <img
+                              src={require("../../assets/images/can.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              2021
+                            </span>
+                          </div>
+                          <div className="flex  justify-between gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/cal.png")}
+                              className=" w-6"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              4 Cylinder
+                            </span>
+                          </div>
+                          <div className="flex justify-between gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/road.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              44, 882 KM
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className=" md:flex block justify-between items-center mt-3">
+                          <h5 className=" text-green text-sm font-bold ">
+                            QR. 15,233 / Month{" "}
+                          </h5>
+                          <h5 className=" text-secondary font-bold uppercase">
+                            qr. 433,000{" "}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border-4   md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+                      <div className="   h-44">
+                        <img
+                          src={require("../../assets/images/image 7.png")}
+                          className=" w-full h-full object-cover object-center"
+                          alt=""
+                        />
+                      </div>
+                      <div className=" p-2">
+                        <h5 className=" text-secondary  md:text-base text-xs font-bold uppercase">
+                          Chevrolet Camaro 2-door{" "}
+                        </h5>
+                        <div className="  md:mt-3 mt-0 md:flex block justify-between items-center">
+                          <div className=" flex gap-2 justify-between items-center">
+                            <img
+                              src={require("../../assets/images/can.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              2021
+                            </span>
+                          </div>
+                          <div className="flex  justify-between gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/cal.png")}
+                              className=" w-6"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              4 Cylinder
+                            </span>
+                          </div>
+                          <div className="flex justify-between gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/road.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              44, 882 KM
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className=" md:flex block justify-between items-center mt-3">
+                          <h5 className=" text-green text-sm font-bold ">
+                            QR. 15,233 / Month{" "}
+                          </h5>
+                          <h5 className=" text-secondary font-bold uppercase">
+                            qr. 433,000{" "}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border-4   md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+                      <div className="   h-44">
+                        <img
+                          src={require("../../assets/images/image 7.png")}
+                          className=" w-full h-full object-cover object-center"
+                          alt=""
+                        />
+                      </div>
+                      <div className=" p-2">
+                        <h5 className=" text-secondary  md:text-base text-xs font-bold uppercase">
+                          Chevrolet Camaro 2-door{" "}
+                        </h5>
+                        <div className="  md:mt-3 mt-0 md:flex block justify-between items-center">
+                          <div className=" flex gap-2 justify-between items-center">
+                            <img
+                              src={require("../../assets/images/can.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              2021
+                            </span>
+                          </div>
+                          <div className="flex  justify-between gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/cal.png")}
+                              className=" w-6"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              4 Cylinder
+                            </span>
+                          </div>
+                          <div className="flex justify-between gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/road.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              44, 882 KM
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className=" md:flex block justify-between items-center mt-3">
+                          <h5 className=" text-green text-sm font-bold ">
+                            QR. 15,233 / Month{" "}
+                          </h5>
+                          <h5 className=" text-secondary font-bold uppercase">
+                            qr. 433,000{" "}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border-4   md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+                      <div className="   h-44">
+                        <img
+                          src={require("../../assets/images/image 7.png")}
+                          className=" w-full h-full object-cover object-center"
+                          alt=""
+                        />
+                      </div>
+                      <div className=" p-2">
+                        <h5 className=" text-secondary  md:text-base text-xs font-bold uppercase">
+                          Chevrolet Camaro 2-door{" "}
+                        </h5>
+                        <div className="  md:mt-3 mt-0 md:flex block justify-between items-center">
+                          <div className=" flex gap-2 justify-between items-center">
+                            <img
+                              src={require("../../assets/images/can.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              2021
+                            </span>
+                          </div>
+                          <div className="flex  justify-between gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/cal.png")}
+                              className=" w-6"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              4 Cylinder
+                            </span>
+                          </div>
+                          <div className="flex justify-between gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/road.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor md:text-sm text-xs font-bold">
+                              44, 882 KM
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className=" md:flex block justify-between items-center mt-3">
+                          <h5 className=" text-green text-sm font-bold ">
+                            QR. 15,233 / Month{" "}
+                          </h5>
+                          <h5 className=" text-secondary font-bold uppercase">
+                            qr. 433,000{" "}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
-                <div className=" flex flex-wrap w-[60%] gap-5">
-                  <div className="border-4   w-80 border-primary  rounded-2xl overflow-hidden">
-                    <div className="   h-44">
+              </div>
+              <div className=" w-full scroll-item inline-block">
+                <div className="mt-14 md:flex block gap-6">
+                  <div className="border-4  md:w-[48%] w-[100%] border-primary  rounded-2xl overflow-hidden">
+                    <div className="   h-4/4">
                       <img
                         src={require("../../assets/images/image 7.png")}
                         className=" w-full h-full object-cover object-center"
                         alt=""
                       />
                     </div>
-                    <div className=" p-2">
+                    <div className=" p-4">
                       <h5 className=" text-secondary font-bold uppercase">
                         Chevrolet Camaro 2-door{" "}
                       </h5>
@@ -300,168 +471,225 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="border-4  w-80 border-primary  rounded-2xl overflow-hidden">
-                    <div className="   h-44">
-                      <img
-                        src={require("../../assets/images/image 7.png")}
-                        className=" w-full h-full object-cover object-center"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" p-2">
-                      <h5 className=" text-secondary font-bold uppercase">
-                        Chevrolet Camaro 2-door{" "}
-                      </h5>
-                      <div className="  mt-3 flex justify-between items-center">
-                        <div className=" flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/can.png")}
-                            className=" w-4"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            2021
-                          </span>
-                        </div>
-                        <div className="flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/cal.png")}
-                            className=" w-6"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            4 Cylinder
-                          </span>
-                        </div>
-                        <div className="flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/road.png")}
-                            className=" w-4"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            44, 882 KM
-                          </span>
-                        </div>
+                  <div className="  grid  grid-cols-2 md:mt-0 mt-9  md:w-[60%] w-[100%] gap-5">
+                    <div className="border-4   w-80 border-primary  rounded-2xl overflow-hidden">
+                      <div className="   h-44">
+                        <img
+                          src={require("../../assets/images/image 7.png")}
+                          className=" w-full h-full object-cover object-center"
+                          alt=""
+                        />
                       </div>
-
-                      <div className=" flex justify-between items-center mt-3">
-                        <h5 className=" text-green text-sm font-bold ">
-                          QR. 15,233 / Month{" "}
-                        </h5>
+                      <div className=" p-2">
                         <h5 className=" text-secondary font-bold uppercase">
-                          qr. 433,000{" "}
+                          Chevrolet Camaro 2-door{" "}
                         </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="border-4 w-80  border-primary  rounded-2xl overflow-hidden">
-                    <div className="   h-44">
-                      <img
-                        src={require("../../assets/images/image 7.png")}
-                        className=" w-full h-full object-cover object-center"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" p-2">
-                      <h5 className=" text-secondary font-bold uppercase">
-                        Chevrolet Camaro 2-door{" "}
-                      </h5>
-                      <div className="  mt-3 flex justify-between items-center">
-                        <div className=" flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/can.png")}
-                            className=" w-4"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            2021
-                          </span>
+                        <div className="  mt-3 flex justify-between items-center">
+                          <div className=" flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/can.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              2021
+                            </span>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/cal.png")}
+                              className=" w-6"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              4 Cylinder
+                            </span>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/road.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              44, 882 KM
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/cal.png")}
-                            className=" w-6"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            4 Cylinder
-                          </span>
-                        </div>
-                        <div className="flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/road.png")}
-                            className=" w-4"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            44, 882 KM
-                          </span>
-                        </div>
-                      </div>
 
-                      <div className=" flex justify-between items-center mt-3">
-                        <h5 className=" text-green text-sm font-bold ">
-                          QR. 15,233 / Month{" "}
-                        </h5>
+                        <div className=" flex justify-between items-center mt-3">
+                          <h5 className=" text-green text-sm font-bold ">
+                            QR. 15,233 / Month{" "}
+                          </h5>
+                          <h5 className=" text-secondary font-bold uppercase">
+                            qr. 433,000{" "}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border-4  w-80 border-primary  rounded-2xl overflow-hidden">
+                      <div className="   h-44">
+                        <img
+                          src={require("../../assets/images/image 7.png")}
+                          className=" w-full h-full object-cover object-center"
+                          alt=""
+                        />
+                      </div>
+                      <div className=" p-2">
                         <h5 className=" text-secondary font-bold uppercase">
-                          qr. 433,000{" "}
+                          Chevrolet Camaro 2-door{" "}
                         </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="border-4 w-80  border-primary  rounded-2xl overflow-hidden">
-                    <div className="   h-44">
-                      <img
-                        src={require("../../assets/images/image 7.png")}
-                        className=" w-full h-full object-cover object-center"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" p-2">
-                      <h5 className=" text-secondary font-bold uppercase">
-                        Chevrolet Camaro 2-door{" "}
-                      </h5>
-                      <div className="  mt-3 flex justify-between items-center">
-                        <div className=" flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/can.png")}
-                            className=" w-4"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            2021
-                          </span>
+                        <div className="  mt-3 flex justify-between items-center">
+                          <div className=" flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/can.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              2021
+                            </span>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/cal.png")}
+                              className=" w-6"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              4 Cylinder
+                            </span>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/road.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              44, 882 KM
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/cal.png")}
-                            className=" w-6"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            4 Cylinder
-                          </span>
-                        </div>
-                        <div className="flex gap-2 items-center">
-                          <img
-                            src={require("../../assets/images/road.png")}
-                            className=" w-4"
-                            alt=""
-                          />
-                          <span className=" text-textColor font-bold">
-                            44, 882 KM
-                          </span>
-                        </div>
-                      </div>
 
-                      <div className=" flex justify-between items-center mt-3">
-                        <h5 className=" text-green text-sm font-bold ">
-                          QR. 15,233 / Month{" "}
-                        </h5>
+                        <div className=" flex justify-between items-center mt-3">
+                          <h5 className=" text-green text-sm font-bold ">
+                            QR. 15,233 / Month{" "}
+                          </h5>
+                          <h5 className=" text-secondary font-bold uppercase">
+                            qr. 433,000{" "}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border-4 w-80  border-primary  rounded-2xl overflow-hidden">
+                      <div className="   h-44">
+                        <img
+                          src={require("../../assets/images/image 7.png")}
+                          className=" w-full h-full object-cover object-center"
+                          alt=""
+                        />
+                      </div>
+                      <div className=" p-2">
                         <h5 className=" text-secondary font-bold uppercase">
-                          qr. 433,000{" "}
+                          Chevrolet Camaro 2-door{" "}
                         </h5>
+                        <div className="  mt-3 flex justify-between items-center">
+                          <div className=" flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/can.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              2021
+                            </span>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/cal.png")}
+                              className=" w-6"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              4 Cylinder
+                            </span>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/road.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              44, 882 KM
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className=" flex justify-between items-center mt-3">
+                          <h5 className=" text-green text-sm font-bold ">
+                            QR. 15,233 / Month{" "}
+                          </h5>
+                          <h5 className=" text-secondary font-bold uppercase">
+                            qr. 433,000{" "}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border-4 w-80  border-primary  rounded-2xl overflow-hidden">
+                      <div className="   h-44">
+                        <img
+                          src={require("../../assets/images/image 7.png")}
+                          className=" w-full h-full object-cover object-center"
+                          alt=""
+                        />
+                      </div>
+                      <div className=" p-2">
+                        <h5 className=" text-secondary font-bold uppercase">
+                          Chevrolet Camaro 2-door{" "}
+                        </h5>
+                        <div className="  mt-3 flex justify-between items-center">
+                          <div className=" flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/can.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              2021
+                            </span>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/cal.png")}
+                              className=" w-6"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              4 Cylinder
+                            </span>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <img
+                              src={require("../../assets/images/road.png")}
+                              className=" w-4"
+                              alt=""
+                            />
+                            <span className=" text-textColor font-bold">
+                              44, 882 KM
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className=" flex justify-between items-center mt-3">
+                          <h5 className=" text-green text-sm font-bold ">
+                            QR. 15,233 / Month{" "}
+                          </h5>
+                          <h5 className=" text-secondary font-bold uppercase">
+                            qr. 433,000{" "}
+                          </h5>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -476,24 +704,7 @@ const Home = () => {
         <h2 className=" h2  text-center">Popular Showrooms & Dealers:</h2>
 
         <hr className=" m-0 border-b-2 w-64 border-primary mt-2 mx-auto" />
-        <PopularShowRooms
-          items={
-            <>
-              <div className=" w-72">
-                <img src={require("../../assets/images/b1.png")} alt="" />
-              </div>
-              <div className=" w-72">
-                <img src={require("../../assets/images/b2.png")} alt="" />
-              </div>
-              <div className=" w-72">
-                <img src={require("../../assets/images/b3.png")} alt="" />
-              </div>
-              <div className=" w-72">
-                <img src={require("../../assets/images/b4.png")} alt="" />
-              </div>
-            </>
-          }
-        />
+        <PopularShowRooms />
 
         <div className=" mt-12">
           <Button
@@ -517,8 +728,9 @@ const Home = () => {
           />
         ))}
       </div>
+      <Footer />
     </div>
   );
 };
 
-export default Home;
+export default transition(Home);
