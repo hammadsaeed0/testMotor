@@ -14,6 +14,8 @@ import MapComponent from "../../components/Map";
 import { Base_url } from "../../utils/Base_url";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 const CarDetails = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -125,6 +127,7 @@ const [report,setReport] = useState("")
 
   return (
     <div>
+      <Header/>
       <div className=" py-8 text-center">
         <h2 className=" h2  text-center">Sell Your Car</h2>
         <p className=" pt-2 text-gray-400">
@@ -859,6 +862,7 @@ const [report,setReport] = useState("")
           />
         </div>
       </form>
+      <Footer/>
     </div>
   );
 };

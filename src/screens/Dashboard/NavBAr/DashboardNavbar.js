@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Header from "../../../components/header";
+import Footer from "../../../components/footer";
 
 const DashboardNavbar = () => {
   const [menuItems] = useState([
@@ -15,7 +17,9 @@ const DashboardNavbar = () => {
   const location = useLocation();
 
   return (
-    <header className="bg-white sticky z-40 top-0 ">
+    <>
+     <Header/>
+     <header className="bg-white sticky z-40 top-0 ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Menu items */}
         <div className="w-full h-[105px] top-[187px] px-[40px] pb-[40px] border-t border-solid  justify-between border-b-4 border-[#F3EDED]">
@@ -36,6 +40,8 @@ const DashboardNavbar = () => {
         </div>
       </div>
     </header>
+     <Footer/>
+    </>
   );
 };
 

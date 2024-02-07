@@ -7,6 +7,8 @@ import announcement from '../../../../assets/images/announcement.png'
 import group  from  '../../../../assets/images/group.png';
 import Pagination from '../../../../components/Pagination/pagination';
 import {cardcar,uparrow,stats,refresh, edit, remove, feature,sold} from '../.././../../assets/images/images'
+import Header from '../../../../components/header';
+import Footer from '../../../../components/footer';
 // import CarDetails from '../../../../carDetails';
 
 
@@ -77,6 +79,8 @@ const ProductData=[
 
 const MyGarage = () => {
   return (
+    <>
+    <Header/>
     <div className="flex flex-col items-center  mb-4">
       <div className="mt-16 flex items-center justify-between w-[90%]">
         <h1 className="font-inter text-3xl font-semibold leading-10 tracking-normal text-left">
@@ -238,6 +242,8 @@ const MyGarage = () => {
    
     
     </div>
+    <Footer/>
+    </>
   );
 };
 

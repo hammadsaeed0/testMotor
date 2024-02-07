@@ -7,6 +7,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Base_url } from "../../utils/Base_url";
 import { toast } from "react-toastify";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 const CarPhotos = () => {
   const location = useLocation();
   const receivedData = location.state;
@@ -120,6 +122,7 @@ const CarPhotos = () => {
   return (
     <div>
       {" "}
+      <Header/>
       <div className=" py-8 text-center">
         <h2 className=" h2  text-center">Sell Your Car</h2>
         <p className=" pt-2 text-gray-400">
@@ -241,6 +244,7 @@ const CarPhotos = () => {
           />
        
       </div>
+      <Footer/>
     </div>
   );
 };

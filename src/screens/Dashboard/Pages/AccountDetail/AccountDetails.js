@@ -4,9 +4,13 @@ import { FaGithub } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import Header from "../../../../components/header";
+import Footer from "../../../../components/footer";
 
 function AccountDetails({ name, title, social: { github, youtube, twitter, linkedin } }) {
   return (
+  <>
+    <Header/>
     <div className="w-full">
       <div className="flex flex-col justify-center max-w-xs mx-auto bg-white shadow-xl rounded-xl p-5">
         <div className="">
@@ -56,6 +60,8 @@ function AccountDetails({ name, title, social: { github, youtube, twitter, linke
         </div>
       </div>
     </div>
+    <Footer/>
+  </>
   );
 }
 

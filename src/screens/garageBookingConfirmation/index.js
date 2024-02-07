@@ -7,6 +7,8 @@ import { FaLocationCrosshairs } from "react-icons/fa6";
 import { LiaLongArrowAltLeftSolid, LiaLongArrowAltRightSolid } from "react-icons/lia";
 import Button from "../../components/Button";
 import { IoCall, IoClose } from "react-icons/io5";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 const GarageBookingConfirmation = () => {
   const options = ["select Type", "Gently Used"];
   const fuel = ["select Fuel Type", "Gently Used"];
@@ -18,6 +20,7 @@ const GarageBookingConfirmation = () => {
   };
   return (
     <div>
+      <Header/>
       <div className=" py-8 text-center">
         <h2 className=" h2  text-center">Car Service Booking </h2>
         <p className=" pt-2 text-gray-400">
@@ -137,6 +140,7 @@ Please note that  terms & conditions & policies apply.
            <Button label={'Submit'}  className={' bg-primary font-bold rounded-3xl text-white w-44 py-1.5'} />
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

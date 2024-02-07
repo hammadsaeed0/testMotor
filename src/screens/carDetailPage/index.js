@@ -9,6 +9,8 @@ import { MdOutlineWatchLater } from "react-icons/md";
 import Input from '../../components/Input'
 import { Base_url } from '../../utils/Base_url'
 import axios from 'axios'
+import Header from '../../components/header'
+import Footer from '../../components/footer'
 const CarDetailPage = ({
     children: slides,
     autoSlide = false,
@@ -59,7 +61,10 @@ const {id} = useParams()
   
 
   return (
-    <div className=' container py-12 mx-auto md:px-12 px-0'>
+
+    <>
+     <Header/>
+     <div className=' container py-12 mx-auto md:px-12 px-0'>
         <div className=' md:flex block   justify-between '>
             <div className=' md:w-[65%] w-[100%]'>
             <div className="overflow-hidden relative md:w-[90%] w-[100%]">
@@ -990,6 +995,9 @@ const {id} = useParams()
          
         </div>
     </div>
+     <Footer/>
+    </>
+   
   )
 }
 
