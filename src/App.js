@@ -24,6 +24,8 @@ import PrivateRoute from "./routes/PrivateRoute";
 import { AnimatePresence } from "framer-motion";
 import PublicRoute from "./routes/PublicRoute";
 import { useEffect } from "react";
+import ForgottenEmail from "./screens/auth/Forgotten/ForgottenEmail";
+import ForgottenPassword from "./screens/auth/Forgotten/ForgottenPassword";
 function App() {
   const location = useLocation();
 
@@ -36,18 +38,33 @@ function App() {
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/choose_plane" element={<ChoosePlane />} />
           <Route
             path="/register"
             element={
               <PublicRoute>
-              
                 <Register />
               </PublicRoute>
             }
           />
+          <Route
+            path="/forgotten_email"
+            element={
+              <PublicRoute>
+                <ForgottenEmail />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/forgotten_password"
+            element={
+             
+                <ForgottenPassword />
+             
+            }
+          />
           <Route element={<PrivateRoute />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/choose_plane" element={<ChoosePlane />} />
             <Route path="/new_lists" element={<NewLists />} />
 
             <Route path="/car_photos" element={<CarPhotos />} />

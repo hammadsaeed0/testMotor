@@ -134,8 +134,8 @@ const [report,setReport] = useState("")
           Sell your car in seconds with just a few clicks
         </p>
       </div>
-      <div className=" py-8">
-        <ul className=" flex gap-8 justify-center items-center">
+      <div className=" py-8 md:px-12 px-6">
+        <ul className=" flex flex-wrap gap-8 justify-center items-center">
           <li className=" flex items-center gap-2">
             <div className=" w-8 h-8 bg-secondary items-center  rounded-full flex justify-center">
               <p className=" text-white">1</p>
@@ -159,12 +159,12 @@ const [report,setReport] = useState("")
             <FaAngleRight className=" text-gray-500" />
           </li>
           <li className=" flex items-center gap-2">
-            <Link
-              to={"/car_photos"}
+            <span
+            
               className=" w-8 h-8 bg-white border-textColor border items-center  rounded-full flex justify-center"
             >
               <p className=" text-textColor">3</p>
-            </Link>
+            </span>
             <div>
               <span className=" text-textColor font-semibold">Photo</span>
             </div>
@@ -187,7 +187,7 @@ const [report,setReport] = useState("")
 
       <form
         onSubmit={handlerSubmit}
-        className=" shadow-md rounded-xl mt-8 py-5 px-12 mx-auto  w-[80%]"
+        className=" shadow-md rounded-xl mt-8 py-5 md:px-12 px-6 mx-auto  md:w-[80%] w-[90%]"
       >
         <div className="">
           <h2 className=" h4  text-center">Car Details</h2>
@@ -651,7 +651,7 @@ const [report,setReport] = useState("")
 
         <h2 className=" h4  text-center mt-10 pb-7"> Spare Parts</h2>
         <div className=" flex flex-wrap gap-6">
-          <div className=" w-[48%]">
+          <div className=" md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -663,7 +663,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -675,7 +675,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="  md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -687,7 +687,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="  md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -699,7 +699,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -711,7 +711,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -723,7 +723,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -735,7 +735,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -747,7 +747,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -759,7 +759,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -771,7 +771,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -783,7 +783,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -799,7 +799,7 @@ const [report,setReport] = useState("")
 
         <h2 className=" h4  text-center mt-10 pb-7"> Tyres</h2>
         <div className=" flex flex-wrap gap-6">
-          <div className=" w-[48%]">
+          <div className="  md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -811,7 +811,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"number"}
               onChange={handleInputs}
@@ -823,7 +823,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="  md:w-[48%] w-[100%]">
             <Input
               type={"text"}
               onChange={handleInputs}
@@ -835,7 +835,7 @@ const [report,setReport] = useState("")
               required="required"
             />
           </div>
-          <div className="  w-[48%]">
+          <div className="   md:w-[48%] w-[100%]">
             <Input
               type={"number"}
               onChange={handleInputs}

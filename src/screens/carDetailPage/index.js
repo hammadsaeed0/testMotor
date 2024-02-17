@@ -10,6 +10,8 @@ import Input from '../../components/Input'
 import { Base_url } from '../../utils/Base_url'
 import axios from 'axios'
 import MapComponent from '../../components/Map'
+import Header from '../../components/header'
+import Footer from '../../components/footer'
 const CarDetailPage = ({
     children: slides,
     autoSlide = false,
@@ -66,6 +68,8 @@ const {id} = useParams()
 
 
   return (
+   <>
+    <Header/>
     <div className=' container py-12 mx-auto md:px-12 px-0'>
         <div className=' md:flex block   justify-between '>
             <div className=' md:w-[65%] w-[100%]'>
@@ -149,7 +153,7 @@ const {id} = useParams()
               />
           </div>
           <div className=' py-10'>
-             <ul className='  w-[69%]   mx-auto flex items-center border  rounded-3xl overflow-hidden'>
+             <ul className='  w-[72%]   mx-auto flex items-center justify-between border  rounded-3xl overflow-hidden'>
                 <li>
                   <Button  label={'Car Details'} className={'  text-white font-semibold bg-primary py-3.5 border-r'}  />
                 </li>
@@ -165,7 +169,7 @@ const {id} = useParams()
              </ul>
           </div>
 
-          <div>
+          <div className=' md:px-0 px-6'>
             <h1 className=' h2 pb-8'>Description:</h1>
             <p  className=' text-textColor'>How the adventure ended will be seen anon. Aouda was anxious, though she said nothing. As for Passepartout, he thought Mr. Fogg’s manoeuvre simply glorious. The captain had said “between eleven and twelve knots,” and the Henrietta confirmed his prediction.</p>
             <p className=' text-textColor pt-4'>If, then—for there were “ifs” still—the sea did not become too boisterous, if the wind did not veer round to the east, if no accident happened to the boat or its machinery, the Henrietta might cross the three…</p>
@@ -468,7 +472,7 @@ const {id} = useParams()
         </div>
 
 
-       <div className=' md:flex block py-6'>
+       <div className=' md:flex block py-6 md:px-0 px-6'>
         <div className=' md:w-[45%] w-[100%]'>
           <h4 className=' h3'>Features</h4>
 
@@ -515,7 +519,7 @@ const {id} = useParams()
         </div>
        </div>
         
-        <div className=' py-12'>
+        <div className=' py-12 md:px-0 px-6'>
         <h1 className=' h3 text-center'>CAR LOAN CALCULATOR</h1>
 
         <div className=' md:flex block  justify-between pt-8 '>
@@ -787,7 +791,7 @@ const {id} = useParams()
                       </>
                     </div>
           </div>
-        <div className=' bg-[#E6E6E6] py-8 rounded-2xl  text-center     w-80 h-96'>
+        <div className=' bg-[#E6E6E6] py-8 rounded-2xl  text-center     md:w-80 w-full  md:my-0 my-6 h-96'>
           <img src={require('../../assets/images/carD.png')} className=' mx-auto' alt='' />
          <p className=' text-gray-700 text-lg font-semibold pt-3'>Monthly Payments</p>
         <h1 className=' text-secondary font-bold text-3xl py-4'>QR 62,000</h1>
@@ -822,7 +826,8 @@ const {id} = useParams()
         <p className=' text-textColor pt-3'>The Car Loan calculator results illustrated on Motorqe.com  are only intended as a guide. To obtain accurate figures do contact your bank or loan provider before applying. Rates are subject to change at any time & also based on your credit score. You must seek an advice from a trained professional before applying for a loan. Your vehicle may be repossessed if you do not keep up repayments on your car loan.</p>
         </div>
 
-   <h1 className=' h2 mt-7'>Similar Cars </h1>
+     <div className=' md:px-0 px-6 '>
+     <h1 className=' h2 mt-7'>Similar Cars </h1>
         <div className=' mt-4 flex flex-wrap gap-6'>
           <div className='  rounded-xl overflow-hidden'>
 
@@ -974,7 +979,10 @@ const {id} = useParams()
           </div>
          
         </div>
+     </div>
     </div>
+    <Footer/>
+   </>
   )
 }
 

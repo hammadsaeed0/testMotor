@@ -233,7 +233,7 @@ const Login = () => {
                 <p className="text-gray-400  font-semibold">Reminder</p>
               </div>
               <div className="">
-                <Link to="" className="text-gray-400   border-b border-gray-400">
+                <Link to="/forgotten_email" className="text-gray-400   border-b border-gray-400">
                   Forgotten password?
                 </Link>
               </div>
