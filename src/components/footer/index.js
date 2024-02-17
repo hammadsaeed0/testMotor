@@ -30,9 +30,9 @@ const Footer = () => {
         <div className='w-full py-5 px-4 container mx-auto grid  grid-cols-1  xl:grid-cols-4 md:grid-cols-2 gap-5 md:gap-12'>
             <div className=' item1 col-span-2'>
                 <h1 className=' uppercase  text-white   font-semibold'>Download our app</h1>
-                <div  className=' flex gap-4'>
-                    <img className='   w-36 h-12' src={require('../../assets/images/App Store.png')} alt='' />
-                    <img  className='   w-36 h-12' src={require('../../assets/images/Google Play.png')} alt='' />
+                <div  className=' sm:flex block gap-4'>
+                    <img className='   sm:w-36 w-48 h-12' src={require('../../assets/images/App Store.png')} alt='' />
+                    <img  className='   sm:w-36 w-48 h-12' src={require('../../assets/images/Google Play.png')} alt='' />
                 </div>
                 <ul className=' flex gap-4 pt-5'>
                     <li className=' w-12 flex justify-center items-center h-12 bg-white rounded-full'>
@@ -116,7 +116,7 @@ const Footer = () => {
         </div>
         <hr/>
         {/*bottom footer */}
-        <div className=' justify-center flex'>
+        <div className=' justify-center px-5 flex'>
            <h4 className=' text-white py-3 font-normal'>© - 2023 All Rights Reserved by MOTORQE</h4>
         </div>
     </footer>

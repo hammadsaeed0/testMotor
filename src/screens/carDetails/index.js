@@ -850,8 +850,7 @@ const [report,setReport] = useState("")
         </div>
         <div className=" container flex justify-between items-center mx-auto mt-10 mb-20">
           <div className="  flex items-center gap-3">
-            <LiaLongArrowAltLeftSolid />
-            <span className=" text-textColor font-semibold">Back</span>
+          
           </div>
 
           <Button

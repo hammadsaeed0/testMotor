@@ -186,7 +186,7 @@ export const Dealar = () => {
       <section className=" block md:flex  pb-20">
         {/* login section */}
 
-        <div className="  w-[100%] px-8 md:w-[55%] pt-12">
+        <div className="  w-[100%] sm:px-12 px-6 md:w-[55%] pt-12">
           <h3 className="   pb-3 font-bold  text-black  text-3xl">
             Register to sell your Vehicle
           </h3>
@@ -203,6 +203,7 @@ export const Dealar = () => {
                   <img
                     src={require("../../../../assets/images/google.png")}
                     alt=""
+                    className=" sm:w-7 w-5"
                   />
                 }
                 className={
@@ -216,7 +217,7 @@ export const Dealar = () => {
                   <img
                     src={require("../../../../assets/images/facebook.png")}
                     alt=""
-                    className=" w-7"
+                    className=" sm:w-7 w-5"
                   />
                 }
                 className={

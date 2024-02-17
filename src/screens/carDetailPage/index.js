@@ -23,15 +23,14 @@ const CarDetailPage = ({
     const sliders = [
         require("../../assets/images/image 7.png"),
         require("../../assets/images/home.png"),
-        require("../../assets/images/man-washing-his-car-garage 2.png"),
-        require("../../assets/images/man-washing-his-car-garage 2.png"),
+      
       ];
 
     const [curr, setCurr] = useState(0);
     const prev = () =>
-      setCurr((curr) => (curr === 0 ? newListings.car_images.length - 1 : curr - 1));
+      setCurr((curr) => (curr === 0 ? sliders.length - 1 : curr - 1));
     const next = () =>
-      setCurr((curr) => (curr === newListings.car_images.length - 1 ? 0 : curr + 1));
+      setCurr((curr) => (curr === sliders.length - 1 ? 0 : curr + 1));
   
     useEffect(() => {
       if (!autoSlide) return;
@@ -73,25 +72,49 @@ const {id} = useParams()
     <div className=' container py-12 mx-auto md:px-12 px-0'>
         <div className=' md:flex block   justify-between '>
             <div className=' md:w-[65%] w-[100%]'>
-            <div className="overflow-hidden relative md:w-[90%] w-[100%]">
+            <div className="overflow-hidden relative border   rounded-2xl md:w-[90%] w-[100%]">
+              <div className=' py-3 px-12 '>
+                <ul className=' flex justify-between items-center'>
+                  <li>
+                    <span className=' text-primary text-xl font-bold border-b-4 border-primary'>360 Tour</span>
+                  </li>
+                  <li>
+                    <span className=' text-secondary  text-xl font-bold'>Exterior</span>
+                  </li>
+                  <li>
+                    <span className='  text-secondary text-xl font-bold '> Interior</span>
+                  </li>
+                </ul>
+              </div>
             <div
               className="flex  h-[75vh] transition-transform ease-out duration-500"
               style={{ transform: `translateX(-${curr * 100}%)` }}
             >
-              {newListings?.car_images?.map((s) => (
+              {/* {newListings?.car_images?.map((s) => ( */}
           <>
-              <div className="  flex-none  w-full h-full">
+
+              <div className="    flex-none   w-full h-full">
+               
                 <img
                
-                  src={s}
+                  src={require('../../assets/images/image 7.png')}
                   alt=""
                   className=" w-full cursor-pointer h-full  rounded-md  object-cover"
                 />
               </div>
+              <div className="    flex-none   w-full h-full">
+               
+               <img
+              
+                 src={require('../../assets/images/home.png')}
+                 alt=""
+                 className=" w-full cursor-pointer h-full  rounded-md  object-cover"
+               />
+             </div>
               
 
              </>
-        ))}
+        {/* ))} */}
             </div>
             <div className="absolute inset-0 flex px-3 items-center justify-between">
             <button
@@ -110,7 +133,7 @@ const {id} = useParams()
           </div>
           <div className=" mt-2  md:block hidden">
             <div className="flex items-center justify-center gap-2">
-              {newListings?.car_images?.map((_, i) => (
+              {sliders?.map((_, i) => (
                 <div
                   key={i}
                   onClick={() => goToSlide(i)}
@@ -153,7 +176,7 @@ const {id} = useParams()
               />
           </div>
           <div className=' py-10'>
-             <ul className='  w-[72%]   mx-auto flex items-center justify-between border  rounded-3xl overflow-hidden'>
+             <ul className='  w-[75%]   mx-auto flex items-center justify-between border   rounded-full overflow-hidden'>
                 <li>
                   <Button  label={'Car Details'} className={'  text-white font-semibold bg-primary py-3.5 border-r'}  />
                 </li>
@@ -200,7 +223,7 @@ const {id} = useParams()
             <div className=' md:flex block items-center gap-10'>
                 <div>
                     <h2 className=' h5 mt-3'>Inspection Report</h2>
-                    <Button label={'Download report '} className={' border-2 mt-5  rounded-md py-2 text-primary font-semibold  border-primary '} />
+                    <Button label={'Download report '} className={' border-2 mt-5   w-48 rounded-md py-2.5 text-primary font-semibold  border-primary '} />
                 </div>
                 <div>
                     <p className=' pt-8'>Before you decide to buy a car, read its <Link to={''} className=' text-primary'>Inspection report</Link> for free.</p>
@@ -214,7 +237,8 @@ const {id} = useParams()
           </div>
             </div>
             <div className=' md:px-0 px-5'>
-              <h2 className=' text-textColor font-bold text-2xl'>{newListings.title}</h2>
+              {/* <h2 className=' text-textColor font-bold text-2xl'>{newListings.title}</h2> */}
+              <h2 className=' text-textColor font-bold text-2xl'>BMW 8-serie 2 -door coupe greye</h2>
                 <ul className=' flex gap-2 items-center py-2'>
                     <li>
                         <span className='text-gray-500'>2022</span>
@@ -234,7 +258,7 @@ const {id} = useParams()
                 </ul>
               <hr/>
 
-              <div className=' flex justify-between items-center py-2'>
+              <div className=' flex justify-between mt-4 items-center py-2'>
                 <h1 className=' text-secondary font-bold text-3xl'>QR {newListings.price_QR}</h1>
                 <Button label={'Track Price'} className={' border-2 text-primary border-primary rounded-3xl py-1.5 font-semibold'} />
               </div>
@@ -317,7 +341,7 @@ const {id} = useParams()
                     <span className=' text-textColor font-bold text-xl'>19-07-2023</span>
                 </li>
               </ul>
-              <div>
+              <div className=' mt-6'>
               <Button
                 Icons={<IoCall size={25} />}
                 label={"Call 123-456-7890"}
@@ -345,11 +369,11 @@ const {id} = useParams()
               </div>
               <h5 className=' h4 pt-6'>Posted by:</h5>
 
-              <img src={require('../../assets/images/image 50.png')} className=' py-4 mx-auto' alt='' />
+              <img src={require('../../assets/images/image 50.png')} className=' mt-3 py-4 mx-auto' alt='' />
 
               <div>
                 <h6 className=' text-center text-secondary font-semibold'>See All Cars Listed from ELITE MOTORS</h6>
-                <div className=' gap-4 flex justify-between items-center py-5'>
+                <div className=' gap-4 sm:flex block  justify-center items-center py-5'>
 
                 <Button
                 Icons={

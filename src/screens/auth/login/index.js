@@ -163,6 +163,7 @@ const Login = () => {
                 <img
                   src={require("../../../assets/images/google.png")}
                   alt=""
+                  className=" sm:w-7 w-5"
                 />
               }
               className={
@@ -176,7 +177,7 @@ const Login = () => {
                 <img
                   src={require("../../../assets/images/facebook.png")}
                   alt=""
-                  className=" w-7"
+                  className=" sm:w-7 w-5"
                 />
               }
               className={

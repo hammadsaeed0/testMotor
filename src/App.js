@@ -57,6 +57,7 @@ function App() {
             }
           />
           <Route path="/forgotten_password" element={<ForgottenPassword />} />
+          <Route path="/car_details_page/:id" element={<CarDetailPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="/new_lists" element={<NewLists />} />
 
@@ -67,7 +68,7 @@ function App() {
               path="/garage_booking_confirmation"
               element={<GarageBookingConfirmation />}
             />
-            <Route path="/car_details_page/:id" element={<CarDetailPage />} />
+         
             <Route path="/news" element={<News />} />
           </Route>
 

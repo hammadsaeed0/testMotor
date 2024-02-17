@@ -182,9 +182,10 @@ const Register = () => {
                 // onClick={handleClick}
                 Icons={
                   <img
-                    src={require("../../../assets/images/google.png")}
-                    alt=""
-                  />
+                  src={require("../../../assets/images/google.png")}
+                  alt=""
+                  className=" sm:w-7 w-5"
+                />
                 }
                 className={
                   "  bg-white border-gray-200  font-semibold border-2 justify-between rounded-lg text-lg py-2.5   w-40 text-black"
@@ -197,7 +198,7 @@ const Register = () => {
                   <img
                     src={require("../../../assets/images/facebook.png")}
                     alt=""
-                    className=" w-7"
+                    className=" sm:w-7 w-5"
                   />
                 }
                 className={

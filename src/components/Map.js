@@ -17,7 +17,7 @@ const MapComponent = ({ selectedLocation }) => {
     <div style={{ marginTop: "30px" }}>
       <GoogleMap
         mapContainerStyle={{
-          height: "700px",
+          height: "550px",
         }}
         center={selectedLocation}
         zoom={13}
