@@ -147,7 +147,7 @@ const Login = () => {
 
   return (
     <>
-      <div className=" bg-[#f2f5fb] py-12  px-12 w-[100%] md:w-[50%]">
+      <div className=" bg-[#f2f5fb] py-12 sm:px-12 px-6 w-[100%] lg:w-[50%]">
         <h3 className="  font-bold  pb-3  text-black  text-2xl">
           Log in to your account
         </h3>
@@ -223,7 +223,7 @@ const Login = () => {
               className={"border-2 w-full border-gray-200"}
               required={"required"}
             />
-            <div className=" flex items-center justify-between">
+            <div className="   sm:flex block items-center justify-between">
               <div className=" gap-2 flex items-center">
                 <Input
                   type="checkbox"

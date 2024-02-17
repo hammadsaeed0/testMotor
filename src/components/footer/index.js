@@ -13,9 +13,14 @@ const Footer = () => {
             </div>
             <div>
                 <h2 className=' uppercase text-lg text-white '>to our newsletters</h2>
-                <div className=' flex pt-2 items-center   rounded-md rounded-s-none'>
+                <div className=' sm:flex hidden pt-2 items-center   rounded-md rounded-s-none'>
                   <input  className=' p-2.5    md:w-72 w-60 rounded-tl-lg  rounded-bl-lg' />
                   <button  className='  rounded-tr-lg  rounded-br-lg  py-2.5 md:px-8 px-6 bg-primary text-white uppercase '>Subscribe</button>
+                </div>
+
+                <div className=' pt-2  w-64 items-center justify-center  flex sm:hidden flex-col   rounded-md rounded-s-none'>
+                  <input  className=' p-2.5    w-full rounded-lg' />
+                  <button  className='  rounded-lg mt-2 w-full  py-2.5  bg-primary text-white uppercase '>Subscribe</button>
                 </div>
             </div>
         </div>

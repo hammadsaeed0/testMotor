@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <nav className="bg-white sticky z-40 top-0">
-      <div className="flex items-center font-medium md:h-24 h-20 px-4 container mx-auto  justify-between">
+      <div className="flex items-center font-medium md:h-24 h-20  px-4 container mx-auto  justify-between">
         <div className="z-50  flex items-center justify-between">
           <div className=" flex justify-between gap-10 items-center">
             <img
@@ -24,7 +24,7 @@ const Header = () => {
               className="object-contain md:w-[191px] w-[120px]"
               alt=""
             />
-            <div className=" sm:block hidden">
+            <div className=" xl:block hidden">
             <Input
               Icon={<IoSearch size={20} className="  text-textColor" />}
               placeholder={"Search cars..."}
@@ -35,12 +35,12 @@ const Header = () => {
           </div>
         </div>
         <div
-          className="text-3xl md:hidden  pt-2 z-50"
+          className="text-3xl lg:hidden  pt-2 z-50"
           onClick={() => setOpen(!open)}
         >
           <ion-icon name={`${open ? "close" : "menu"}`}></ion-icon>
         </div>
-        <ul className="md:flex hidden uppercase items-center gap-8 font-[Poppins]">
+        <ul className="lg:flex hidden uppercase items-center gap-8 font-[Poppins]">
           <li>
             <Link className="uppercase " to={"/"}>
               Home
@@ -144,7 +144,7 @@ const Header = () => {
         {/* Mobile nav */}
         <ul
           className={`
-      md:hidden bg-white fixed w-full top-0 overflow-y-auto bottom-0  leading-10  py-24 pl-4
+      lg:hidden bg-white fixed w-full top-0 overflow-y-auto bottom-0  leading-10  py-24 pl-4
       duration-500 ${open ? "left-0" : "left-[-100%]"}
       `}
         >

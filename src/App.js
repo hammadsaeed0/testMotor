@@ -56,14 +56,7 @@ function App() {
               </PublicRoute>
             }
           />
-          <Route
-            path="/forgotten_password"
-            element={
-             
-                <ForgottenPassword />
-             
-            }
-          />
+          <Route path="/forgotten_password" element={<ForgottenPassword />} />
           <Route element={<PrivateRoute />}>
             <Route path="/new_lists" element={<NewLists />} />
 

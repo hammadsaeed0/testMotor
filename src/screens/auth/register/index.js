@@ -167,16 +167,16 @@ const Register = () => {
   return (
     <div>
       <Header />
-      <section className=" block md:flex  pb-20">
+      <section className=" block lg:flex  pb-20">
         {/* login section */}
         <Login />
-        <div className="  w-[100%] px-8 md:w-[50%] pt-12">
+        <div className="  w-[100%] sm:px-12 px-6 lg:w-[50%] pt-12">
           <h3 className="   pb-3 font-bold  text-black  text-2xl">Register</h3>
           <p className=" text-textColor">Create new account today.</p>
 
           <div className=" pt-10 gap-6 md:flex block items-center">
             <h6 className=" text-black font-medium"> Continue with:</h6>
-            <div className=" flex gap-2">
+            <div className="  flex gap-2">
               <Button
                 label={"Google"}
                 // onClick={handleClick}
@@ -201,7 +201,7 @@ const Register = () => {
                   />
                 }
                 className={
-                  " bg-white border-gray-200  font-semibold border-2 justify-between rounded-lg text-lg py-2.5   w-40 text-black"
+                  " bg-white border-gray-200  xs:mt-2 mt-0 font-semibold border-2 justify-between rounded-lg text-lg py-2.5   w-40 text-black"
                 }
               />
             </div>
