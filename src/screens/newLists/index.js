@@ -48,32 +48,32 @@ const NewLists = () => {
       <div className=" py-12">
         <div className="bg-[#ECECEC] py-9 rounded-2xl  border border-primary">
           <div className=" w-[80%] mx-auto text-center">
-            <div className=" flex justify-center w-full gap-3">
-              <div className="  w-60">
+            <div className=" lg:flex block justify-center w-full gap-3">
+              <div className="  lg:w-60 w-full">
                 <Option
                   options={options}
                   onSelect={handleSelect}
                   label={"Make"}
                 />
               </div>
-              <div className="  w-60">
+              <div className=" lg:w-60 w-full">
                 <Option
                   options={Model}
                   onSelect={handleSelect}
                   label={"Model"}
                 />
               </div>
-              <div className="  w-60">
+              <div className="  lg:w-60 w-full">
                 <Option options={Year} onSelect={handleSelect} label={"Year"} />
               </div>
-              <div className="  w-60">
+              <div className=" lg:w-60 w-full">
                 <Option
                   options={VehicleSelect}
                   onSelect={handleSelect}
                   label={"Vehicle Condition"}
                 />
               </div>
-              <div className="  w-60">
+              <div className="  lg:w-60 w-full">
                 <Option
                   options={selectSeller}
                   onSelect={handleSelect}
@@ -110,6 +110,8 @@ const NewLists = () => {
           </span>
         </div>
         <div className=" flex gap-5 md:pt-0 pt-4">
+          <div className=" sm:block hidden">
+          <div  className=" flex gap-4">
           <TfiLayoutGrid2Alt
             onClick={() => setNewLists("grid")}
             size={35}
@@ -120,6 +122,8 @@ const NewLists = () => {
             size={35}
             className=" text-[#C1C1C1]"
           />
+          </div>
+          </div>
 
           <div className=" border rounded-md flex items-center justify-between p-1 w-56">
             <span className=" text-textColor font-semibold">
@@ -133,17 +137,17 @@ const NewLists = () => {
       {newLists === "grid" ? (
         <div className=" flex flex-wrap justify-center  my-12 gap-6">
 
-          {newListings?.map((item,index)=>{
+          {/* {newListings?.map((item,index)=>{
             return (
-              <>
+              <> */}
                 <Link
-            to={`/car_details_page/${item._id}`}
+            // to={`/car_details_page/${item._id}`}
             className="border-4   w-[400px] border-primary  rounded-2xl overflow-hidden"
           >
             <div className="">
               <div className="relative   h-60">
                 <img
-                  src={item.car_images[0]}
+                  src={require('../../assets/images/image 7.png')}
                   className=" w-full h-full object-cover"
                   alt=""
                 />
@@ -201,7 +205,7 @@ const NewLists = () => {
                       className=" w-4"
                       alt=""
                     />
-                    <span className=" text-textColor font-bold">2021</span>
+                    <span className=" text-textColor font-bold sm:text-base text-sm">2021</span>
                   </div>
                   <div className="flex gap-2 items-center">
                     <img
@@ -209,8 +213,8 @@ const NewLists = () => {
                       className=" w-6"
                       alt=""
                     />
-                    <span className=" text-textColor font-bold">
-                      {item?.cylinder} Cylinder
+                    <span className=" text-textColor  sm:text-base text-sm font-bold">
+                      4 Cylinder
                     </span>
                   </div>
                   <div className="flex gap-2 items-center">
@@ -219,7 +223,7 @@ const NewLists = () => {
                       className=" w-4"
                       alt=""
                     />
-                    <span className=" text-textColor font-bold">
+                    <span className=" text-textColor sm:text-base text-sm font-bold">
                       44, 882 KM
                     </span>
                   </div>
@@ -245,12 +249,12 @@ const NewLists = () => {
                 </div>
               </div>
 
-              <div className=" flex justify-between items-center">
+              <div className=" sm:flex block justify-between items-center">
                 <Button
                   Icons={<IoCall size={20} />}
                   label={"Call"}
                   className={
-                    " py-1.5 text-sm mt-3  bg-secondary text-white  rounded-3xl"
+                    " py-1.5 text-sm mt-3  w-full  bg-secondary text-white  rounded-3xl"
                   }
                 />
                 <Button
@@ -259,22 +263,294 @@ const NewLists = () => {
                   }
                   label={"Chat"}
                   className={
-                    " py-1.5 text-sm bg-primary font-bold  mt-3 text-white  rounded-3xl"
+                    " py-1.5 text-sm bg-primary w-full  font-bold  mt-3 text-white  rounded-3xl"
                   }
                 />
                 <Button
                   label={"Whatsapp"}
                   Icons={<FaWhatsapp size={20} />}
                   className={
-                    " py-1.5 text-sm bg-green  mt-3 text-white  rounded-3xl"
+                    " py-1.5 text-sm bg-green w-full   mt-3 text-white  rounded-3xl"
                   }
                 />
               </div>
             </div>
           </Link>
-              </>
+          <Link
+            // to={`/car_details_page/${item._id}`}
+            className="border-4   w-[400px] border-primary  rounded-2xl overflow-hidden"
+          >
+            <div className="">
+              <div className="relative   h-60">
+                <img
+                  src={require('../../assets/images/image 7.png')}
+                  className=" w-full h-full object-cover"
+                  alt=""
+                />
+
+                <div className=" absolute top-2 right-2">
+                  <Button
+                    label={"featured"}
+                    className={
+                      " uppercase py-1 bg-lightBlue  text-sm  text-white font-semibold rounded-3xl"
+                    }
+                  />
+                </div>
+
+                <div className=" absolute bottom-0 flex justify-between w-full items-center px-2">
+                  <div>
+                    <img
+                      src={require("../../assets/images/speed.png")}
+                      alt=""
+                    />
+                  </div>
+                  <div className=" w-8 h-8 flex justify-center items-center rounded-full bg-white">
+                    <CiHeart size={20} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className=" justify-between p-4">
+              <div>
+                <div className=" flex justify-between items-center">
+                  <h5 className=" text-textColor text-lg font-bold uppercase">
+                    Chevrolet Camaro For Sale{" "}
+                  </h5>
+                  <div className="  float-right">
+                    <img
+                      src={require("../../assets/images/brands.png")}
+                      className=" text-right  w-12"
+                      alt=""
+                    />
+                  </div>
+                </div>
+
+                <div className=" flex justify-between  items-center">
+                  <h5 className=" pt-3 text-secondary text-lg font-bold uppercase">
+                    qr 15,000
+                  </h5>
+                  <h5 className=" text-green text-lg font-bold uppercase">
+                    QR 16,00/month
+                  </h5>
+                </div>
+
+                <div className="  mt-3 flex justify-between items-center">
+                  <div className=" flex gap-2 items-center">
+                    <img
+                      src={require("../../assets/images/can.png")}
+                      className=" w-4"
+                      alt=""
+                    />
+                    <span className=" text-textColor font-bold sm:text-base text-sm">2021</span>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <img
+                      src={require("../../assets/images/cal.png")}
+                      className=" w-6"
+                      alt=""
+                    />
+                    <span className=" text-textColor  sm:text-base text-sm font-bold">
+                      4 Cylinder
+                    </span>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <img
+                      src={require("../../assets/images/road.png")}
+                      className=" w-4"
+                      alt=""
+                    />
+                    <span className=" text-textColor sm:text-base text-sm font-bold">
+                      44, 882 KM
+                    </span>
+                  </div>
+                </div>
+                <div className=" flex  justify-between items-center">
+                  <div>
+                    <h2 className="   text-secondary font-bold">Compare</h2>
+                  </div>
+                  <div className=" flex gap-1 my-2">
+                    <img
+                      src={require("../../assets/images/security.png")}
+                      alt=""
+                    />
+
+                    <img
+                      src={require("../../assets/images/Frame.png")}
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <h5 className=" font-bold text-textColor">2 Hours Ago</h5>
+                  </div>
+                </div>
+              </div>
+
+              <div className=" sm:flex block justify-between items-center">
+                <Button
+                  Icons={<IoCall size={20} />}
+                  label={"Call"}
+                  className={
+                    " py-1.5 text-sm mt-3  w-full  bg-secondary text-white  rounded-3xl"
+                  }
+                />
+                <Button
+                  Icons={
+                    <img src={require("../../assets/images/chat.png")} alt="" />
+                  }
+                  label={"Chat"}
+                  className={
+                    " py-1.5 text-sm bg-primary w-full  font-bold  mt-3 text-white  rounded-3xl"
+                  }
+                />
+                <Button
+                  label={"Whatsapp"}
+                  Icons={<FaWhatsapp size={20} />}
+                  className={
+                    " py-1.5 text-sm bg-green w-full   mt-3 text-white  rounded-3xl"
+                  }
+                />
+              </div>
+            </div>
+          </Link>
+          <Link
+            // to={`/car_details_page/${item._id}`}
+            className="border-4   w-[400px] border-primary  rounded-2xl overflow-hidden"
+          >
+            <div className="">
+              <div className="relative   h-60">
+                <img
+                  src={require('../../assets/images/image 7.png')}
+                  className=" w-full h-full object-cover"
+                  alt=""
+                />
+
+                <div className=" absolute top-2 right-2">
+                  <Button
+                    label={"featured"}
+                    className={
+                      " uppercase py-1 bg-lightBlue  text-sm  text-white font-semibold rounded-3xl"
+                    }
+                  />
+                </div>
+
+                <div className=" absolute bottom-0 flex justify-between w-full items-center px-2">
+                  <div>
+                    <img
+                      src={require("../../assets/images/speed.png")}
+                      alt=""
+                    />
+                  </div>
+                  <div className=" w-8 h-8 flex justify-center items-center rounded-full bg-white">
+                    <CiHeart size={20} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className=" justify-between p-4">
+              <div>
+                <div className=" flex justify-between items-center">
+                  <h5 className=" text-textColor text-lg font-bold uppercase">
+                    Chevrolet Camaro For Sale{" "}
+                  </h5>
+                  <div className="  float-right">
+                    <img
+                      src={require("../../assets/images/brands.png")}
+                      className=" text-right  w-12"
+                      alt=""
+                    />
+                  </div>
+                </div>
+
+                <div className=" flex justify-between  items-center">
+                  <h5 className=" pt-3 text-secondary text-lg font-bold uppercase">
+                    qr 15,000
+                  </h5>
+                  <h5 className=" text-green text-lg font-bold uppercase">
+                    QR 16,00/month
+                  </h5>
+                </div>
+
+                <div className="  mt-3 flex justify-between items-center">
+                  <div className=" flex gap-2 items-center">
+                    <img
+                      src={require("../../assets/images/can.png")}
+                      className=" w-4"
+                      alt=""
+                    />
+                    <span className=" text-textColor font-bold sm:text-base text-sm">2021</span>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <img
+                      src={require("../../assets/images/cal.png")}
+                      className=" w-6"
+                      alt=""
+                    />
+                    <span className=" text-textColor  sm:text-base text-sm font-bold">
+                      4 Cylinder
+                    </span>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <img
+                      src={require("../../assets/images/road.png")}
+                      className=" w-4"
+                      alt=""
+                    />
+                    <span className=" text-textColor sm:text-base text-sm font-bold">
+                      44, 882 KM
+                    </span>
+                  </div>
+                </div>
+                <div className=" flex  justify-between items-center">
+                  <div>
+                    <h2 className="   text-secondary font-bold">Compare</h2>
+                  </div>
+                  <div className=" flex gap-1 my-2">
+                    <img
+                      src={require("../../assets/images/security.png")}
+                      alt=""
+                    />
+
+                    <img
+                      src={require("../../assets/images/Frame.png")}
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <h5 className=" font-bold text-textColor">2 Hours Ago</h5>
+                  </div>
+                </div>
+              </div>
+
+              <div className=" sm:flex block justify-between items-center">
+                <Button
+                  Icons={<IoCall size={20} />}
+                  label={"Call"}
+                  className={
+                    " py-1.5 text-sm mt-3  w-full  bg-secondary text-white  rounded-3xl"
+                  }
+                />
+                <Button
+                  Icons={
+                    <img src={require("../../assets/images/chat.png")} alt="" />
+                  }
+                  label={"Chat"}
+                  className={
+                    " py-1.5 text-sm bg-primary w-full  font-bold  mt-3 text-white  rounded-3xl"
+                  }
+                />
+                <Button
+                  label={"Whatsapp"}
+                  Icons={<FaWhatsapp size={20} />}
+                  className={
+                    " py-1.5 text-sm bg-green w-full   mt-3 text-white  rounded-3xl"
+                  }
+                />
+              </div>
+            </div>
+          </Link>
+              {/* </>
             )
-          })}
+          })} */}
         
           
         </div>
@@ -288,7 +564,7 @@ const NewLists = () => {
               <div className=" h-60 relative">
                 <img
                   src={require("../../assets/images/image 7.png")}
-                  className=" w-full object-cover"
+                  className=" w-full  object-cover"
                   alt=""
                 />
 
@@ -433,13 +709,13 @@ const NewLists = () => {
           </Link>
           <Link
             to={"/car_details_page"}
-            className="border-4 flex   border-primary  rounded-2xl overflow-hidden"
+            className="border-4 md:flex block   border-primary  rounded-2xl overflow-hidden"
           >
-            <div className=" w-[30%]">
+            <div className=" md:w-[30%]">
               <div className=" h-60 relative">
                 <img
                   src={require("../../assets/images/image 7.png")}
-                  className=" w-full object-cover"
+                  className=" w-full  object-cover"
                   alt=""
                 />
 
@@ -584,13 +860,13 @@ const NewLists = () => {
           </Link>
           <Link
             to={"/car_details_page"}
-            className="border-4 flex   border-primary  rounded-2xl overflow-hidden"
+            className="border-4 md:flex block   border-primary  rounded-2xl overflow-hidden"
           >
-            <div className=" w-[30%]">
+            <div className=" md:w-[30%]">
               <div className=" h-60 relative">
                 <img
                   src={require("../../assets/images/image 7.png")}
-                  className=" w-full object-cover"
+                  className=" w-full  object-cover"
                   alt=""
                 />
 
@@ -733,6 +1009,7 @@ const NewLists = () => {
               </div>
             </div>
           </Link>
+          
         </div>
       )}
     </div>

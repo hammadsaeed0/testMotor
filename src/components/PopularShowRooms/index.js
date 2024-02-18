@@ -1,7 +1,5 @@
-// ProductSlider.js
+
 import React, { useRef } from "react";
-// import "./ProductSlider.css";
-import { LiaAngleLeftSolid, LiaAngleRightSolid } from "react-icons/lia";
 const PopularShowRooms = ({ items }) => {
   const scrollContainerRef = useRef(null);
 
@@ -21,7 +19,7 @@ const PopularShowRooms = ({ items }) => {
     <div className="relative w-full container md:px-4 px-0 mx-auto">
       <div
         ref={scrollContainerRef}
-        className="scroll-container   productOverflow  overflow-x-auto whitespace-nowrap"
+        className="scroll-container transition-transform ease-out duration-500  productOverflow  overflow-x-auto whitespace-nowrap"
       >
         <div className=" scroll-item inline-block m-2 md:w-72    w-48 bg-white rounded">
           <img src={require("../../assets/images/b1.png")} alt="" />
@@ -45,11 +43,7 @@ const PopularShowRooms = ({ items }) => {
           className="arrow arrow-left absolute -left-4  flex  pr-1   justify-center  items-center  top-20 rounded-full  bg-secondary w-16 h-16"
           onClick={scrollLeft}
         >
-          {/* <LiaAngleLeftSolid
-            size={35}
-            color="white"
-            className=" font-extrabold"
-          /> */}
+      
           <img
             src={require("../../assets/images/leftarrow.png")}
             className=" w-6"
@@ -60,7 +54,7 @@ const PopularShowRooms = ({ items }) => {
           className="arrow arrow-right absolute -right-4  flex justify-center pl-1 items-center  top-20 rounded-full  bg-secondary w-16 h-16"
           onClick={scrollRight}
         >
-          {/* <LiaAngleRightSolid size={35} color="white" /> */}
+         
           <img
             src={require("../../assets/images/rightarrow.png")}
             className=" w-6"

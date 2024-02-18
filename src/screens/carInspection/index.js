@@ -163,7 +163,7 @@ const CarInspection = () => {
 
           <img
             src={require("../../assets/images/ins.png")}
-            className="  h-full absolute top-0 right-0"
+            className=" sm:block hidden  h-full absolute top-0 right-0"
             alt=""
           />
         </div>

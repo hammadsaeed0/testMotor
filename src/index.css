@@ -6,17 +6,18 @@
 
 body{
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
 }
 
 .h1{
-    @apply   lg:text-5xl md:text-4xl text-3xl  font-black text-white uppercase
+    @apply   lg:text-5xl md:text-4xl sm:text-3xl text-2xl  font-black text-white uppercase
 }
 
 .h2{
-    @apply md:text-4xl text-3xl font-bold  text-black
+    @apply md:text-4xl sm:text-3xl text-2xl font-bold  text-black
 }
 .h3{
-    @apply text-3xl font-bold  text-black
+    @apply md:text-3xl sm:text-2xl text-xl font-bold  text-black
 }
 
 .h4{
@@ -26,7 +27,7 @@ body{
 
 
 .h5{
-    @apply text-xl font-semibold text-black
+    @apply md:text-xl text-lg font-semibold text-black
 }
 
 .h6{

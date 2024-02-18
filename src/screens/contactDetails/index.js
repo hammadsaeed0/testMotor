@@ -119,7 +119,7 @@ const ContactDetails = () => {
         </p>
       </div>
       <div className=" py-8">
-        <ul className=" flex gap-8 justify-center items-center">
+        <ul className=" flex flex-wrap gap-8 justify-center items-center">
           <li className=" flex items-center gap-2">
             <div className=" w-8 h-8 bg-secondary items-center  rounded-full flex justify-center">
               <p className=" text-white">1</p>
@@ -135,7 +135,7 @@ const ContactDetails = () => {
             <div className=" w-8 h-8 bg-white border-textColor border items-center  rounded-full flex justify-center">
               <p className=" text-textColor">2</p>
             </div>
-            <Link to={"/car_details"}>
+            <Link >
               <span className=" text-textColor font-semibold ">
                 Car Details
               </span>
@@ -159,14 +159,14 @@ const ContactDetails = () => {
             <div className="w-8 h-8 bg-primary items-center  rounded-full flex justify-center">
               <p className=" text-white">4</p>
             </div>
-            <Link to={"/contact_details"}>
+            <Link >
               <span className=" text-primary font-bold">Contact Details</span>
             </Link>
           </li>
         </ul>
       </div>
 
-      <div className=" pb-12 shadow-md rounded-xl mt-8 py-5 px-12 mx-auto  w-[80%]">
+      <div className=" pb-12 shadow-md rounded-xl mt-8 py-5 sm:px-12 px-6 mx-auto  w-[80%]">
         <div className="">
           <h2 className=" h3  text-center">Contact Details</h2>
         </div>
@@ -223,7 +223,7 @@ const ContactDetails = () => {
         </div>
       </div>
 
-      <div className=" container flex justify-between items-center mx-auto mt-10 mb-20">
+      <div className=" container flex justify-between items-center mx-auto mt-10 mb-20  w-[80%]">
         <div className="  flex items-center gap-3">
           <LiaLongArrowAltLeftSolid />
           <span className=" text-textColor font-semibold">Back</span>

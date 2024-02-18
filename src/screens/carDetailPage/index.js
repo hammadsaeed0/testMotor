@@ -69,12 +69,12 @@ const {id} = useParams()
   return (
    <>
     <Header/>
-    <div className=' container py-12 mx-auto md:px-12 px-0'>
-        <div className=' md:flex block   justify-between '>
-            <div className=' md:w-[65%] w-[100%]'>
+    <div className=' container md:py-12 py-0 mx-auto md:px-12 px-0'>
+        <div className=' lg:flex block   justify-between '>
+            <div className=' lg:w-[65%] w-[100%]'>
             <div className="overflow-hidden relative border   rounded-2xl md:w-[90%] w-[100%]">
-              <div className=' py-3 px-12 '>
-                <ul className=' flex justify-between items-center'>
+              <div className=' py-3 px-12  md:block hidden'>
+                <ul className=' flex   justify-between items-center'>
                   <li>
                     <span className=' text-primary text-xl font-bold border-b-4 border-primary'>360 Tour</span>
                   </li>
@@ -87,7 +87,7 @@ const {id} = useParams()
                 </ul>
               </div>
             <div
-              className="flex  h-[75vh] transition-transform ease-out duration-500"
+              className="flex  sm:h-[75vh] h-[50vh] transition-transform ease-out duration-500"
               style={{ transform: `translateX(-${curr * 100}%)` }}
             >
               {/* {newListings?.car_images?.map((s) => ( */}
@@ -152,7 +152,7 @@ const {id} = useParams()
             </div>
           </div>
 
-          <div className=' py-12 flex-wrap flex justify-center items-center gap-10'>
+          <div className=' md:py-12 py-4 flex-wrap flex justify-center items-center md:gap-10 gap-6'>
           <Button
                 Icons={<FaShareAlt size={20} />}
                 label={"Share"}
@@ -175,8 +175,8 @@ const {id} = useParams()
                 }
               />
           </div>
-          <div className=' py-10'>
-             <ul className='  w-[75%]   mx-auto flex items-center justify-between border   rounded-full overflow-hidden'>
+          <div className=' py-10 scroll-container   productOverflow  overflow-x-auto whitespace-nowrap'>
+             <ul className='  lg:w-[75%] w-[90%]   mx-auto flex items-center justify-between border   rounded-full md:overflow-hidden overflow-visible'>
                 <li>
                   <Button  label={'Car Details'} className={'  text-white font-semibold bg-primary py-3.5 border-r'}  />
                 </li>
@@ -231,14 +231,14 @@ const {id} = useParams()
             </div>
 
           </div>
-          <div className=' h-96'>
+          <div className='relative px-2'>
             <MapComponent selectedLocation={selectedLocation} />
             {/* <img src={require('../../assets/images/location.png')}  className=' w-full h-full' alt=''  /> */}
           </div>
             </div>
             <div className=' md:px-0 px-5'>
               {/* <h2 className=' text-textColor font-bold text-2xl'>{newListings.title}</h2> */}
-              <h2 className=' text-textColor font-bold text-2xl'>BMW 8-serie 2 -door coupe greye</h2>
+              <h2 className=' text-textColor font-bold md:text-2xl sm:text-xl text-lg'>BMW 8-serie 2 -door coupe greye</h2>
                 <ul className=' flex gap-2 items-center py-2'>
                     <li>
                         <span className='text-gray-500'>2022</span>
@@ -266,79 +266,79 @@ const {id} = useParams()
               <ul className=' flex flex-col gap-4'>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Type of Ad:</h4>
-                    <span className=' text-textColor font-bold text-xl'>For Sale</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>For Sale</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Make:</h4>
-                    <span className=' text-textColor font-bold text-xl'>{newListings?.make}</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>{newListings?.make}</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Model:</h4>
-                    <span className=' text-textColor font-bold text-xl'>{newListings?.model}</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>{newListings?.model}</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Year:</h4>
-                    <span className=' text-textColor font-bold text-xl'>{newListings?.year}</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>{newListings?.year}</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Car Type:</h4>
-                    <span className=' text-textColor font-bold text-xl'>Coupe</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>Coupe</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Mileage:</h4>
-                    <span className=' text-textColor font-bold text-xl'>{newListings?.mileage}Kms</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>{newListings?.mileage}Kms</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Condition:</h4>
-                    <span className=' text-textColor font-bold text-xl'>Used</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>Used</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Engine Size:</h4>
-                    <span className=' text-textColor font-bold text-xl'>5.0+</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>5.0+</span>
                 </li>   
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Cylinders:</h4>
-                    <span className=' text-textColor font-bold text-xl'>V8</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>V8</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Transmission:</h4>
-                    <span className=' text-textColor font-bold text-xl'>Automatic</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>Automatic</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Exterior Colour:</h4>
-                    <span className=' text-textColor font-bold text-xl'>{newListings?.exterior_colour}</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>{newListings?.exterior_colour}</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Interior Colour:</h4>
-                    <span className=' text-textColor font-bold text-xl'>{newListings?.interior_colour}</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>{newListings?.interior_colour}</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Fuel Type:</h4>
-                    <span className=' text-textColor font-bold text-xl'>{newListings?.fuel_type}</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>{newListings?.fuel_type}</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Warranty Date:</h4>
-                    <span className=' text-textColor font-bold text-xl'>25-06-2026</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>25-06-2026</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Insurance Type:</h4>
-                    <span className=' text-textColor font-bold text-xl'>Fully Insured</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>Fully Insured</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Specifications:</h4>
-                    <span className=' text-textColor font-bold text-xl'>GCC</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>GCC</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Tinted:</h4>
-                    <span className=' text-textColor font-bold text-xl'>Yes</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>Yes</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Ownwer:</h4>
-                    <span className=' text-textColor font-bold text-xl'>1st Ownwer</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>1st Ownwer</span>
                 </li>
                 <li className=' flex justify-between items-center'>
                     <h4 className='h5'>Date Posted:</h4>
-                    <span className=' text-textColor font-bold text-xl'>19-07-2023</span>
+                    <span className=' text-textColor font-bold md:text-xl text-lg'>19-07-2023</span>
                 </li>
               </ul>
               <div className=' mt-6'>
@@ -852,7 +852,7 @@ const {id} = useParams()
 
      <div className=' md:px-0 px-6 '>
      <h1 className=' h2 mt-7'>Similar Cars </h1>
-        <div className=' mt-4 flex flex-wrap gap-6'>
+        <div className=' my-4 flex flex-wrap gap-6'>
           <div className='  rounded-xl overflow-hidden'>
 
             <div className=' h-40 relative'>
