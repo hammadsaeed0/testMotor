@@ -48,7 +48,7 @@ const SearchComponents = () => {
           </div>
           {filter === "all" ? (
             <>
-              <div className="grid md:grid-cols-5  w-full grid-cols-2 mt-9 gap-5">
+              <div className="grid xl:grid-cols-5  w-full lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-9 gap-5">
                 <div className="  md:w-48 w-full">
                   <label className="block text-sm text-left  font-semibold  text-textColor">
                     Make
@@ -336,7 +336,7 @@ const SearchComponents = () => {
             </>
           ) : filter === "scraped" ? (
             <>
-              <div className=" md:flex block mt-6 justify-center w-full gap-3">
+              <div className=" md:flex  block mt-6 justify-center w-full gap-3">
                 <div className="  md:w-60 w-full">
                   <label className="block text-sm text-left  font-semibold  text-textColor">
                     Make
@@ -397,7 +397,7 @@ const SearchComponents = () => {
           ) : filter === "new" ? (
             <>
               <>
-                <div className="grid md:grid-cols-5  w-full grid-cols-2 mt-9 gap-5">
+                <div className="grid xl:grid-cols-5  lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1  w-full mt-9 gap-5">
                   <div className="  md:w-48 w-full">
                     <label className="block text-sm text-left  font-semibold  text-textColor">
                       Make

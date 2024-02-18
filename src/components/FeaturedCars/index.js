@@ -31,12 +31,12 @@ const FeaturedCars = ({
     <div className="relative   w-full ">
       <div
         ref={scrollContainerRef}
-        className=" flex      transition-transform ease-out duration-500"
+        className=" flex     transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
         <div className="  flex-none    w-full h-full">
           <div className="mt-14 md:flex mx-auto w-[90%] block gap-6">
-            <div className="border-4  md:w-[48%] w-[100%] border-primary  rounded-2xl overflow-hidden">
+            <div className="border-4   md:w-[48%] w-[100%] border-primary  rounded-2xl overflow-hidden">
               <div className="   h-4/4">
                 <img
                   src={require("../../assets/images/image 7.png")}

@@ -14,6 +14,10 @@ const Header = () => {
 
   const [language, setLanguage] = useState(false);
 
+  const openLanguage = ()=>{
+    setLanguage(!language)
+  }
+
   return (
     <nav className="bg-white sticky z-40 top-0">
       <div className="flex items-center font-medium md:h-24 h-20  px-4 container mx-auto  justify-between">
@@ -72,9 +76,7 @@ const Header = () => {
           </li>
           <li className=" relative">
             <button
-              onClick={() => {
-                setLanguage(true);
-              }}
+              onClick={openLanguage}
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
               class="text-black bg-white  focus:ring-4 focus:outline-none focus:ring-[#0C53AB] font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center"

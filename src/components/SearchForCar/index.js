@@ -360,7 +360,7 @@ const SearchForCar = () => {
         <Button
           label={"View Less"}
           className={
-            " border-2 md:ml-auto mx-auto rounded-3xl border-primary w-48 text-secondary font-bold py-1.5"
+            " border-2 md:float-end float-none mx-auto rounded-3xl border-primary w-48 text-secondary font-bold py-1.5"
           }
         />
       </div>
