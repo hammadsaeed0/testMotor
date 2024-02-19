@@ -17,7 +17,8 @@ module.exports = {
         Hero:"url('assets/images/home.png')",
         Inspection:"url('assets/images/man-washing-his-car-garage 2.png')",
       
-      }
+      },
+      
     },
   },
   plugins: [],

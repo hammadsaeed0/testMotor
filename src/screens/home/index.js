@@ -135,7 +135,7 @@ const Home = () => {
       </div>
 
 
-      <div className=" mt-20 mb-9 px-10">
+      <div className=" md:mt-28  mt-0 mb-9 px-10">
         <h2 className=" h2  text-center">Popular Showrooms & Dealers:</h2>
 
         <hr className=" m-0 border-b-2 w-64 border-primary mt-2 mx-auto" />

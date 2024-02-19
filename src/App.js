@@ -68,7 +68,7 @@ function App() {
               path="/garage_booking_confirmation"
               element={<GarageBookingConfirmation />}
             />
-         
+
             <Route path="/news" element={<News />} />
           </Route>
 

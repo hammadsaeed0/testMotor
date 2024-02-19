@@ -37,7 +37,7 @@ const FeaturedCars = ({
         
         <div className="flex-none   w-full h-full">
           <div className="mt-14 w-[90%]  mx-auto md:flex block gap-6">
-            <div className="border-4  md:w-[48%]   bg-cards  sm:block md:hidden lg:block xl:block w-[100%] border-primary  rounded-2xl overflow-hidden">
+            <div className="border-4   md:w-[48%]   bg-cards  sm:block md:hidden  xl:block w-[100%] border-primary  rounded-2xl overflow-hidden">
               <div className="   md:h-[500px] h-64">
                 <img
                   src={require("../../assets/images/image 7.png")}
@@ -90,8 +90,8 @@ const FeaturedCars = ({
                 </div>
               </div>
             </div>
-            <div className="  grid  grid-cols-2 md:mt-0 mt-9  lg:w-[60%] w-[100%] gap-5">
-              <div className="border-4   md:block hidden lg:w-80  w-80 border-primary  rounded-2xl overflow-hidden">
+            <div className="  grid  grid-cols-2 md:mt-0 mt-9  xl:w-[60%] w-[100%] gap-5">
+              <div className="border-4   md:block hidden  border-primary  rounded-2xl overflow-hidden">
                 <div className="   h-44">
                   <img
                     src={require("../../assets/images/image 7.png")}
@@ -146,7 +146,7 @@ const FeaturedCars = ({
                   </div>
                 </div>
               </div>
-              <div className="border-4  md:block hidden  lg:w-80  w-80 border-primary  rounded-2xl overflow-hidden">
+              <div className="border-4  md:block hidden   border-primary  rounded-2xl overflow-hidden">
                 <div className="   h-44">
                   <img
                     src={require("../../assets/images/image 7.png")}
@@ -201,7 +201,7 @@ const FeaturedCars = ({
                   </div>
                 </div>
               </div>
-              <div className="border-4  md:block hidden  lg:w-80  w-80 border-primary  rounded-2xl overflow-hidden">
+              <div className="border-4  md:block hidden  border-primary  rounded-2xl overflow-hidden">
                 <div className="   h-44">
                   <img
                     src={require("../../assets/images/image 7.png")}
@@ -256,7 +256,7 @@ const FeaturedCars = ({
                   </div>
                 </div>
               </div>
-              <div className="border-4  md:block hidden  lg:w-80  w-80 border-primary  rounded-2xl overflow-hidden">
+              <div className="border-4  md:block hidden   border-primary  rounded-2xl overflow-hidden">
                 <div className="   h-44">
                   <img
                     src={require("../../assets/images/image 7.png")}
@@ -316,8 +316,8 @@ const FeaturedCars = ({
         </div>
         <div className="flex-none   w-full h-full">
           <div className="mt-14 w-[90%]  mx-auto md:flex block gap-6">
-            <div className="border-4  md:w-[48%] w-[100%] border-primary  rounded-2xl overflow-hidden">
-              <div className="   h-4/4">
+            <div className="border-4   md:w-[48%]   bg-cards  sm:block md:hidden  xl:block w-[100%] border-primary  rounded-2xl overflow-hidden">
+              <div className="   md:h-[500px] h-64">
                 <img
                   src={require("../../assets/images/image 7.png")}
                   className=" w-full h-full object-cover object-center"
@@ -328,32 +328,32 @@ const FeaturedCars = ({
                 <h5 className=" text-secondary font-bold uppercase">
                   Chevrolet Camaro 2-door{" "}
                 </h5>
-                <div className="  mt-3 flex justify-between items-center">
-                  <div className=" flex gap-2 items-center">
+                <div className="  mt-3 sm:flex block justify-between items-center">
+                  <div className=" flex justify-between gap-2 items-center">
                     <img
                       src={require("../../assets/images/can.png")}
                       className=" w-4"
                       alt=""
                     />
-                    <span className=" text-textColor font-bold">2021</span>
+                    <span className=" text-textColor font-bold sm:text-base text-sm">2021</span>
                   </div>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex justify-between gap-2 items-center">
                     <img
                       src={require("../../assets/images/cal.png")}
                       className=" w-6"
                       alt=""
                     />
-                    <span className=" text-textColor font-bold">
+                    <span className=" text-textColor font-bold sm:text-base text-sm">
                       4 Cylinder
                     </span>
                   </div>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex justify-between gap-2 items-center">
                     <img
                       src={require("../../assets/images/road.png")}
                       className=" w-4"
                       alt=""
                     />
-                    <span className=" text-textColor font-bold">
+                    <span className=" text-textColor font-bold sm:text-base text-sm">
                       44, 882 KM
                     </span>
                   </div>
@@ -369,8 +369,8 @@ const FeaturedCars = ({
                 </div>
               </div>
             </div>
-            <div className="  grid  grid-cols-2 md:mt-0 mt-9  md:w-[60%] w-[100%] gap-5">
-              <div className="border-4   md:block hidden md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+            <div className="  grid  grid-cols-2 md:mt-0 mt-9  xl:w-[60%] w-[100%] gap-5">
+              <div className="border-4   md:block hidden  border-primary  rounded-2xl overflow-hidden">
                 <div className="   h-44">
                   <img
                     src={require("../../assets/images/image 7.png")}
@@ -425,7 +425,7 @@ const FeaturedCars = ({
                   </div>
                 </div>
               </div>
-              <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+              <div className="border-4  md:block hidden   border-primary  rounded-2xl overflow-hidden">
                 <div className="   h-44">
                   <img
                     src={require("../../assets/images/image 7.png")}
@@ -480,7 +480,7 @@ const FeaturedCars = ({
                   </div>
                 </div>
               </div>
-              <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+              <div className="border-4  md:block hidden  border-primary  rounded-2xl overflow-hidden">
                 <div className="   h-44">
                   <img
                     src={require("../../assets/images/image 7.png")}
@@ -535,7 +535,7 @@ const FeaturedCars = ({
                   </div>
                 </div>
               </div>
-              <div className="border-4  md:block hidden  md:w-80  w-56 border-primary  rounded-2xl overflow-hidden">
+              <div className="border-4  md:block hidden   border-primary  rounded-2xl overflow-hidden">
                 <div className="   h-44">
                   <img
                     src={require("../../assets/images/image 7.png")}
@@ -593,6 +593,7 @@ const FeaturedCars = ({
             </div>
           </div>
         </div>
+        
       </div>
 
       <div className="">
