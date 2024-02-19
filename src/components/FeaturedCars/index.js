@@ -28,7 +28,7 @@ const FeaturedCars = ({
   const isAtEnd = curr === sliders.length - 1;
 
   return (
-    <div className="relative   w-full ">
+    <div className="relative  overflow-x-hidden  w-full ">
       <div
         ref={scrollContainerRef}
         className=" flex     transition-transform ease-out duration-500"
