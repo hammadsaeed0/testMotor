@@ -16,7 +16,7 @@ const SearchForCar = () => {
             allFilter === "body_type"
               ? "bg-secondary text-white"
               : "bg-white text-secondary"
-          }   font-bold rounded-lg w-44`}
+          }   font-bold rounded-lg w-44 sm:text-base text-sm`}
         />
         <Button
           label={"Brands"}
@@ -25,14 +25,14 @@ const SearchForCar = () => {
             allFilter === "brands"
               ? " bg-secondary text-white"
               : " text-secondary"
-          } rounded-lg font-bold  w-44`}
+          } rounded-lg font-bold  w-44 sm:text-base text-sm`}
         />
         <Button
           label={"Budget"}
           onClick={() => setFilter("budget")}
           className={` border-2 py-2.5 border-primary font-bold ${
             allFilter === "budget" ? "bg-secondary text-white " : "bg-white "
-          } text-secondary rounded-lg w-44`}
+          } text-secondary rounded-lg w-44 sm:text-base text-sm`}
         />
         <Button
           label={"Year"}
@@ -41,7 +41,7 @@ const SearchForCar = () => {
             allFilter === "year"
               ? " bg-secondary text-white"
               : " text-secondary"
-          } rounded-lg font-bold  w-44`}
+          } rounded-lg font-bold  w-44 sm:text-base text-sm`}
         />
         <Button
           label={"Engine Size"}
@@ -50,7 +50,7 @@ const SearchForCar = () => {
             allFilter === "engine"
               ? " bg-secondary text-white"
               : " text-secondary"
-          } rounded-lg font-bold  w-44`}
+          } rounded-lg font-bold  w-44 sm:text-base text-sm`}
         />
       </div>
 
@@ -293,21 +293,21 @@ const SearchForCar = () => {
         </>
       ) : allFilter === "brands" ? (
         <>
-          <div className="grid md:grid-cols-5  grid-cols-2 mt-14 gap-3">
-            <div className="  m-2 w-72 bg-white rounded">
-              <img src={require("../../assets/images/b1.png")} alt="" />
+          <div className=" flex flex-wrap justify-center items-center mt-14 gap-3">
+            <div className="  m-2  bg-white w-64  rounded">
+              <img src={require("../../assets/images/b1.png")} alt=""  className=" w-full  h-full object-cover" />
             </div>
-            <div className="  scroll-item inline-block m-2 w-72 bg-white rounded">
-              <img src={require("../../assets/images/b2.png")} alt="" />
+            <div className="  scroll-item inline-block :w-64  p-2 bg-white rounded">
+              <img src={require("../../assets/images/b2.png")} alt=""   className=" w-full h-full object-cover" />
             </div>
-            <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
-              <img src={require("../../assets/images/b3.png")} alt="" />
+            <div className=" scroll-item inline-block p-2 w-64  bg-white rounded">
+              <img src={require("../../assets/images/b3.png")} alt=""  className=" w-full  h-full object-cover"   />
             </div>
-            <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
-              <img src={require("../../assets/images/b4.png")} alt="" />
+            <div className=" scroll-item inline-block p-2 w-64   bg-white rounded">
+              <img src={require("../../assets/images/b4.png")} alt=""  className=" w-full  h-full object-cover" />
             </div>
-            <div className=" scroll-item inline-block m-2 w-72 bg-white rounded">
-              <img src={require("../../assets/images/b4.png")} alt="" />
+            <div className=" scroll-item inline-block p-2 w-64  bg-white rounded">
+              <img src={require("../../assets/images/b4.png")} alt="" className=" w-full  h-full object-cover"    />
             </div>
           </div>
         </>

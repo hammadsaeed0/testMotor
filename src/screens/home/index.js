@@ -104,7 +104,7 @@ const Home = () => {
 
       <SearchForCar />
 
-      <div className=" mt-28 mb-9">
+      <div className=" mt-28 mb-9 ">
        <div className="md:px-12 px-6">
        <h2 className=" h2  text-center">Featured cars in Qatar:</h2>
 
@@ -119,13 +119,13 @@ const Home = () => {
   <Button
     label={"Featured Cars"}
     className={
-      "border-2 bg-secondary py-2 text-white border-primary rounded-lg font-semibold w-48"
+      "border-2 bg-secondary py-2 sm:text-base text-sm text-white border-primary rounded-lg font-semibold w-48"
     }
   />
   <Button
     label={"Recently Added Cars"}
     className={
-      "border-2 bg-white py-2  text-secondary border-primary rounded-lg font-bold"
+      "border-2 bg-white py-2  text-secondary sm:text-base text-sm border-primary rounded-lg font-bold"
     }
   />
 </div>
@@ -135,7 +135,7 @@ const Home = () => {
       </div>
 
 
-      <div className=" mt-28 mb-9 px-10">
+      <div className=" mt-20 mb-9 px-10">
         <h2 className=" h2  text-center">Popular Showrooms & Dealers:</h2>
 
         <hr className=" m-0 border-b-2 w-64 border-primary mt-2 mx-auto" />
