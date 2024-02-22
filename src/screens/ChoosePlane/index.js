@@ -12,20 +12,19 @@ const ChoosePlane = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data, isFetching } = useFetchPlanQuery();
- 
-  const userId = useSelector((state) => state.authReducer);
+
+  const userId = localStorage.getItem("userToken");
   console.log(userId);
   const selectPackage = (item) => {
-    if (userId!==null) {
+    if (!userId) {
+      toast.error("Please register an account first.");
+      navigate("/register");
+    } else {
       dispatch(setUserPlan(item));
       toast.success("Plan added successfully");
       navigate("/car_details");
-    } else {
-      toast.error("Please register an account first.");
-      navigate("/register");
     }
   };
-
 
   return (
     <>
@@ -35,7 +34,7 @@ const ChoosePlane = () => {
           Choose a Plan
         </h2>
         <div className=" flex gap-4 justify-center">
-          {data?.plans?.map((item, index) => {
+          {  data?.plans?.map((item, index) => {
             return (
               <>
                 <div className=" rounded-3xl relative  w-96 h-[650px] py-8 bg-gray-100">

@@ -143,28 +143,27 @@ const Login = () => {
       });
   };
 
-  const [login, response] = useAuthLoginMutation();
-  console.log("my response", response);
-  const errors = response?.error?.data?.errors
-    ? response?.error?.data?.errors
-    : [];
-  const adminLoginFunction = (e) => {
-    e.preventDefault();
-    login(state);
-    setLoader(true);
-  };
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (response.isSuccess) {
-      localStorage.setItem("userToken", response?.data?.userId);
-      dispatch(setUserToken(response?.data?.userId));
-      navigate("/");
-       toast.success('User login Successfully!')
+  // const [login, response] = useAuthLoginMutation();
+  // console.log("my response", response);
+  // const errors = response?.error?.data?.errors
+  //   ? response?.error?.data?.errors
+  //   : [];
+  // const adminLoginFunction = (e) => {
+  //   e.preventDefault();
+  //   login(state);
+  //   setLoader(true);
+  // };
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (response.isSuccess) {
+  //     localStorage.setItem("userToken", response?.data?.userId);
+  //     dispatch(setUserToken(response?.data?.userId));
+  //     navigate("/");
+  //     toast.success("User login Successfully!");
 
-       setLoader(false)
-      
-    }
-  }, [response.isSuccess]);
+  //     setLoader(false);
+  //   }
+  // }, [response.isSuccess]);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
@@ -214,7 +213,7 @@ const Login = () => {
         </div>
         <h3 className="   font-semibold  text-black  py-7 text-xl">OR</h3>
 
-        <form onSubmit={adminLoginFunction}>
+        <form onSubmit={handlerLogin}>
           <div className=" sm:w-[70%] w-[100%] flex flex-col gap-5">
             <Input
               label={"Email or Username"}
