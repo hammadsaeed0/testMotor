@@ -127,7 +127,7 @@ const Login = () => {
 
         if (res.data.success === true) {
           setLoader(false);
-          localStorage.setItem("user_data", res?.data?.data?.token);
+          localStorage.setItem("userToken", res?.data?.data?.userId);
           toast.success("User Login Successfully!");
           navigate("/");
         } else {

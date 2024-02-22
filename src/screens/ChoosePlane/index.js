@@ -8,12 +8,14 @@ import Footer from "../../components/footer";
 import { useFetchPlanQuery } from "../../store/services/planService";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserPlan } from "../../store/reducers/planReducer";
+import Loader from "../../components/Loader";
 const ChoosePlane = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data, isFetching } = useFetchPlanQuery();
-
+ 
   const userId = localStorage.getItem("userToken");
+
   console.log(userId);
   const selectPackage = (item) => {
     if (!userId) {
@@ -29,12 +31,13 @@ const ChoosePlane = () => {
   return (
     <>
       <Header />
+      
       <div className=" py-10 container mx-auto">
         <h2 className="  text-4xl  font-semibold text-textColor pb-7 text-center">
           Choose a Plan
         </h2>
         <div className=" flex gap-4 justify-center">
-          {  data?.plans?.map((item, index) => {
+          { !isFetching? data?.plans?.map((item, index) => {
             return (
               <>
                 <div className=" rounded-3xl relative  w-96 h-[650px] py-8 bg-gray-100">
@@ -84,7 +87,7 @@ const ChoosePlane = () => {
                 </div>
               </>
             );
-          })}
+          }):<Loader/>}
         </div>
       </div>
       <Footer />
