@@ -3,8 +3,8 @@ import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth, provider, providerFacebook } from "../../../utils/config";
-import { signInWithPopup, signOut } from "firebase/auth";
+// import { auth, provider, providerFacebook } from "../../../utils/config";
+// import { signInWithPopup, signOut } from "firebase/auth";
 import { Base_url } from "../../../utils/Base_url";
 import Login from "../login";
 import Header from "../../../components/header";
@@ -143,7 +143,7 @@ const Register = () => {
       .post(`${Base_url}/auth/user-register`, params)
       .then((res) => {
         console.log(res);
-        if (res.data.success === true) {
+        if (res?.data?.success === true) {
           setLoader(false);
           toast.success(res?.data?.message);
         } else {
@@ -155,7 +155,7 @@ const Register = () => {
         console.log(error);
 
         setLoader(false);
-        toast(error.response.data.error);
+        toast(error?.response?.data?.error);
       });
   };
 
