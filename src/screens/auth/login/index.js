@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,9 @@ import { Base_url } from "../../../utils/Base_url";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { useAuthLoginMutation } from "../../../store/services/authService";
+import { setUserToken } from "../../../store/reducers/authReducer";
 
 const Login = () => {
   const [value, setValue] = useState({});
@@ -113,19 +116,19 @@ const Login = () => {
     setLoader(true);
 
     const params = {
-      emailOrPhone: state.email,
+      email: state.email,
       password: state.password,
     };
 
     axios
-      .post(`${Base_url}/loginUser`, params)
+      .post(`${Base_url}/auth/login`, params)
       .then((res) => {
         console.log(res);
 
         if (res.data.success === true) {
           setLoader(false);
-          localStorage.setItem("user_data", res?.data?.user?._id);
-          toast.success(res?.data?.message);
+          localStorage.setItem("user_data", res?.data?.data?.token);
+          toast.success("User Login Successfully!");
           navigate("/");
         } else {
           toast.error(res?.data?.message);
@@ -139,6 +142,29 @@ const Login = () => {
         }
       });
   };
+
+  const [login, response] = useAuthLoginMutation();
+  console.log("my response", response);
+  const errors = response?.error?.data?.errors
+    ? response?.error?.data?.errors
+    : [];
+  const adminLoginFunction = (e) => {
+    e.preventDefault();
+    login(state);
+    setLoader(true);
+  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (response.isSuccess) {
+      localStorage.setItem("userToken", response?.data?.userId);
+      dispatch(setUserToken(response?.data?.userId));
+      navigate("/");
+       toast.success('User login Successfully!')
+
+       setLoader(false)
+      
+    }
+  }, [response.isSuccess]);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
@@ -188,7 +214,7 @@ const Login = () => {
         </div>
         <h3 className="   font-semibold  text-black  py-7 text-xl">OR</h3>
 
-        <form onSubmit={handlerLogin}>
+        <form onSubmit={adminLoginFunction}>
           <div className=" sm:w-[70%] w-[100%] flex flex-col gap-5">
             <Input
               label={"Email or Username"}
@@ -234,7 +260,10 @@ const Login = () => {
                 <p className="text-gray-400  font-semibold">Reminder</p>
               </div>
               <div className="">
-                <Link to="/forgotten_email" className="text-gray-400   border-b border-gray-400">
+                <Link
+                  to="/forgotten_email"
+                  className="text-gray-400   border-b border-gray-400"
+                >
                   Forgotten password?
                 </Link>
               </div>

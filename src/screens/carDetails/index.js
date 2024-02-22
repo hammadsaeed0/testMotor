@@ -36,7 +36,7 @@ const CarDetails = () => {
     lat: 31.5204,
     lng: 74.3587,
   });
-const [report,setReport] = useState("")
+  const [report, setReport] = useState("");
   const [state, setState] = useState({
     title: "",
     type_of_ad: "",
@@ -65,7 +65,7 @@ const [report,setReport] = useState("")
     vehicle_location: "Car Location",
     longitude: selectedLocation.lng,
     latitude: selectedLocation.lat,
-    inspection_report:report,
+    inspection_report: report,
     engine_oil: "",
     engine_oil_filter: "",
     gearbox_oil: "",
@@ -84,50 +84,47 @@ const [report,setReport] = useState("")
     rear_tire_price: "",
   });
 
+
+  console.log(state);
+
   const handleInputs = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
   const navigate = useNavigate();
 
-  const handlerSubmit = async(e) => {
+  const handlerSubmit = async (e) => {
     e.preventDefault();
 
-    if(!selectedImage){
-
-      toast.error('Please choose your inspection report!')
-
-    }else{
-
+    if (!selectedImage) {
+      toast.error("Please choose your inspection report!");
+    } else {
       let profilephoto = " ";
 
       try {
         let param = new FormData();
-        param.append("avatars",selectedImage);
+        param.append("avatars", selectedImage);
 
-        profilephoto = await axios.post(`${Base_url}/uploadImage`, param);
-  
+        profilephoto = await axios.post(
+          `http://18.133.248.196:8000/v1/uploadImage`,
+          param
+        );
+
         console.log(profilephoto, "=====profile photo===");
-        setReport(profilephoto.data.url)
-        
-        if(profilephoto.status===200){
-  
-          navigate(`/car_photos`)
-          
+        setReport(profilephoto.data.url);
+
+        if (profilephoto.status === 200) {
+          navigate(`/car_photos`,{state:state});
         }
       } catch (error) {
         console.log(error);
       }
-  
-
     }
-
-   
   };
 
   return (
     <div>
-      <Header/>
+      <Header />
       <div className=" py-8 text-center">
         <h2 className=" h2  text-center">Sell Your Car</h2>
         <p className=" pt-2 text-gray-400">
@@ -159,10 +156,7 @@ const [report,setReport] = useState("")
             <FaAngleRight className=" text-gray-500" />
           </li>
           <li className=" flex items-center gap-2">
-            <span
-            
-              className=" w-8 h-8 bg-white border-textColor border items-center  rounded-full flex justify-center"
-            >
+            <span className=" w-8 h-8 bg-white border-textColor border items-center  rounded-full flex justify-center">
               <p className=" text-textColor">3</p>
             </span>
             <div>
@@ -849,9 +843,7 @@ const [report,setReport] = useState("")
           </div>
         </div>
         <div className=" container flex justify-between items-center mx-auto mt-10 mb-20">
-          <div className="  flex items-center gap-3">
-          
-          </div>
+          <div className="  flex items-center gap-3"></div>
 
           <Button
             type={"submit"}
@@ -861,7 +853,7 @@ const [report,setReport] = useState("")
           />
         </div>
       </form>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

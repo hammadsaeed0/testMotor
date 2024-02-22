@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import Footer from "../../../components/footer";
 import axios from "axios";
 import transition from "../../../transition";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Register = () => {
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
+  const user = useSelector((state) => state.planReducer);
 
   console.log(value);
   // const handleClick = () => {
@@ -132,10 +134,13 @@ const Register = () => {
       email: state.email,
       phone: state.phone,
       password: state.password,
+      receiveReminder: "true",
+      provider: "local",
+      plan: user.userPlan._id,
     };
 
     axios
-      .post(`${Base_url}/registerUser`, params)
+      .post(`${Base_url}/auth/user-register`, params)
       .then((res) => {
         console.log(res);
         if (res.data.success === true) {
@@ -143,13 +148,14 @@ const Register = () => {
           toast.success(res?.data?.message);
         } else {
           toast.error(res?.data?.message);
+          setLoader(false);
         }
       })
       .catch((error) => {
         console.log(error);
 
         setLoader(false);
-        toast(error.response.data.message);
+        toast(error.response.data.error);
       });
   };
 
@@ -182,10 +188,10 @@ const Register = () => {
                 // onClick={handleClick}
                 Icons={
                   <img
-                  src={require("../../../assets/images/google.png")}
-                  alt=""
-                  className=" sm:w-7 w-5"
-                />
+                    src={require("../../../assets/images/google.png")}
+                    alt=""
+                    className=" sm:w-7 w-5"
+                  />
                 }
                 className={
                   "  bg-white border-gray-200  font-semibold border-2 justify-between rounded-lg text-lg py-2.5   w-40 text-black"

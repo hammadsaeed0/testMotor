@@ -5,10 +5,10 @@ import { LiaLongArrowAltLeftSolid } from "react-icons/lia";
 import { LiaLongArrowAltRightSolid } from "react-icons/lia";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Base_url } from "../../utils/Base_url";
 import { toast } from "react-toastify";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import { useSelector } from "react-redux";
 const CarPhotos = () => {
   const location = useLocation();
   const receivedData = location.state;
@@ -16,22 +16,7 @@ const CarPhotos = () => {
   console.log(receivedData);
 
   const navigate = useNavigate();
-
-  const [choose, setChoose] = useState([]);
-
-  console.log(choose, "choose");
-
-  const userId = localStorage.getItem("plane_id");
-
-  useEffect(() => {
-    axios
-      .get(`${Base_url}/plans/${userId}`)
-      .then((res) => {
-        console.log(res);
-        setChoose(res.data.plan);
-      })
-      .catch((error) => {});
-  }, []);
+  const user = useSelector((state) => state.planReducer);
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState([]);
@@ -40,10 +25,10 @@ const CarPhotos = () => {
   console.log(selectedImage);
 
   useEffect(() => {
-    if (choose && choose.photoLimit) {
-      setSelectedImages(Array(choose.photoLimit).fill(null));
+    if (user?.userPlan && user?.userPlan?.photoLimit) {
+      setSelectedImages(Array(user?.userPlan?.photoLimit).fill(null));
     }
-  }, [choose]);
+  }, [user]);
 
   const handleFileChange = (index) => (e) => {
     const file = e.target.files[0];
@@ -82,7 +67,10 @@ const CarPhotos = () => {
           param.append("avatars", item);
         });
 
-        profilephoto = await axios.post(`${Base_url}/uploadImage`, param);
+        profilephoto = await axios.post(
+          `http://18.133.248.196:8000/v1/uploadImage`,
+          param
+        );
 
         console.log(profilephoto, "=====profile photo===");
 
@@ -172,7 +160,7 @@ const CarPhotos = () => {
                 className={
                   image
                     ? "rounded-md border overflow-hidden flex w-32 h-24"
-                    : "bg-[#FEFBFB] border rounded-md p-1 w-32 flex justify-center items-center"
+                    : "bg-[#FEFBFB] border rounded-md p-1 w-32 h-24 flex justify-center items-center"
                 }
               >
                 {image ? (
@@ -188,9 +176,9 @@ const CarPhotos = () => {
                       className="mx-auto mb-2 w-16"
                       alt=""
                     />
-                    <span className="text-secondary font-semibold mt-2">
+                    {/* <span className="text-secondary font-semibold mt-2">
                       Upload
-                    </span>
+                    </span> */}
                   </div>
                 )}
                 <input

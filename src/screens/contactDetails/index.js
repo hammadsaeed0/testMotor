@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { FaAngleRight} from "react-icons/fa6";
+import { FaAngleRight } from "react-icons/fa6";
 import Input from "../../components/Input";
-import {
-  LiaLongArrowAltLeftSolid,
-} from "react-icons/lia";
+import { LiaLongArrowAltLeftSolid } from "react-icons/lia";
 import Button from "../../components/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,7 +14,9 @@ const ContactDetails = () => {
   const { receivedData, upload } = location.state || {};
 
   console.log(receivedData);
-  console.log(upload);
+  console.log(upload.data);
+
+  const [loading,setLoader] = useState(false);
 
   const [state, setState] = useState({
     name: "",
@@ -33,8 +33,10 @@ const ContactDetails = () => {
   };
 
   const navigate = useNavigate();
-  const userId = localStorage.getItem("user_data");
+  const userId = localStorage.getItem("userToken");
   const handlerSubmit = (e) => {
+
+
     e.preventDefault();
     const params = {
       user_id: userId,
@@ -88,11 +90,11 @@ const ContactDetails = () => {
       mobile_no: state.mobile_no,
       whatsapp_no: state.whatsapp_no,
       email_address: state.email_address,
-      car_images: upload.map((item) => item.url),
+      car_images: upload?.data?.map((item) => item.url),
     };
 
     axios
-      .post(`${Base_url}/createCar`, params)
+      .post(`${Base_url}/users/create-listings`, params)
       .then((res) => {
         console.log(res);
         if (res.data.success === true) {
@@ -110,136 +112,138 @@ const ContactDetails = () => {
 
   return (
     <>
-    <Header/>
-    <form onSubmit={handlerSubmit}>
-      <div className=" py-8 text-center">
-        <h2 className=" h2  text-center">Sell Your Car</h2>
-        <p className=" pt-2 text-gray-400">
-          Sell your car in seconds with just a few clicks
-        </p>
-      </div>
-      <div className=" py-8">
-        <ul className=" flex flex-wrap gap-8 justify-center items-center">
-          <li className=" flex items-center gap-2">
-            <div className=" w-8 h-8 bg-secondary items-center  rounded-full flex justify-center">
-              <p className=" text-white">1</p>
+      <Header />
+      <form onSubmit={handlerSubmit}>
+        <div className=" py-8 text-center">
+          <h2 className=" h2  text-center">Sell Your Car</h2>
+          <p className=" pt-2 text-gray-400">
+            Sell your car in seconds with just a few clicks
+          </p>
+        </div>
+        <div className=" py-8">
+          <ul className=" flex flex-wrap gap-8 justify-center items-center">
+            <li className=" flex items-center gap-2">
+              <div className=" w-8 h-8 bg-secondary items-center  rounded-full flex justify-center">
+                <p className=" text-white">1</p>
+              </div>
+              <div>
+                <span className=" text-secondary font-bold">
+                  Type Of Package
+                </span>
+              </div>
+            </li>
+            <li>
+              <FaAngleRight className=" text-gray-500" />
+            </li>
+            <li className=" flex items-center gap-2">
+              <div className=" w-8 h-8 bg-white border-textColor border items-center  rounded-full flex justify-center">
+                <p className=" text-textColor">2</p>
+              </div>
+              <Link>
+                <span className=" text-textColor font-semibold ">
+                  Car Details
+                </span>
+              </Link>
+            </li>
+            <li>
+              <FaAngleRight className=" text-gray-500" />
+            </li>
+            <li className=" flex items-center gap-2">
+              <div className=" w-8 h-8 bg-white border-textColor border items-center  rounded-full flex justify-center">
+                <p className=" text-textColor">3</p>
+              </div>
+              <Link to={"/car_photos"}>
+                <span className=" text-textColor font-semibold">Photo</span>
+              </Link>
+            </li>
+            <li>
+              <FaAngleRight className=" text-gray-500" />
+            </li>
+            <li className=" flex items-center gap-2">
+              <div className="w-8 h-8 bg-primary items-center  rounded-full flex justify-center">
+                <p className=" text-white">4</p>
+              </div>
+              <Link>
+                <span className=" text-primary font-bold">Contact Details</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className=" pb-12 shadow-md rounded-xl mt-8 py-5 sm:px-12 px-6 mx-auto  w-[80%]">
+          <div className="">
+            <h2 className=" h3  text-center">Contact Details</h2>
+          </div>
+
+          <div className=" flex flex-col gap-6">
+            <div>
+              <Input
+                type="text"
+                onChange={handleInputs}
+                value={state.name}
+                name={"name"}
+                className={"  border w-full p-2  bg-[#FEFBFB]"}
+                placeholder={"Enter Your Name"}
+                label={"Name"}
+                required={"required"}
+              />
             </div>
             <div>
-              <span className=" text-secondary font-bold">Type Of Package</span>
+              <Input
+                type="number"
+                onChange={handleInputs}
+                value={state.mobile_no}
+                name={"mobile_no"}
+                className={"  border w-full p-2  bg-[#FEFBFB]"}
+                placeholder={"Mobile No."}
+                label={"Enter Mobile No"}
+                required={"required"}
+              />
             </div>
-          </li>
-          <li>
-            <FaAngleRight className=" text-gray-500" />
-          </li>
-          <li className=" flex items-center gap-2">
-            <div className=" w-8 h-8 bg-white border-textColor border items-center  rounded-full flex justify-center">
-              <p className=" text-textColor">2</p>
+            <div>
+              <Input
+                type="number"
+                onChange={handleInputs}
+                value={state.whatsapp_no}
+                name={"whatsapp_no"}
+                className={"  border w-full p-2  bg-[#FEFBFB]"}
+                placeholder={"Whatsapp No."}
+                label={"Enter Whatsapp No"}
+                required={"required"}
+              />
             </div>
-            <Link >
-              <span className=" text-textColor font-semibold ">
-                Car Details
-              </span>
-            </Link>
-          </li>
-          <li>
-            <FaAngleRight className=" text-gray-500" />
-          </li>
-          <li className=" flex items-center gap-2">
-            <div className=" w-8 h-8 bg-white border-textColor border items-center  rounded-full flex justify-center">
-              <p className=" text-textColor">3</p>
+            <div>
+              <Input
+                type="email"
+                onChange={handleInputs}
+                value={state.email_address}
+                name={"email_address"}
+                className={"  border w-full p-2  bg-[#FEFBFB]"}
+                placeholder={"Email Address"}
+                label={"Enter Email Address"}
+                required={"required"}
+              />
             </div>
-            <Link to={"/car_photos"}>
-              <span className=" text-textColor font-semibold">Photo</span>
-            </Link>
-          </li>
-          <li>
-            <FaAngleRight className=" text-gray-500" />
-          </li>
-          <li className=" flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary items-center  rounded-full flex justify-center">
-              <p className=" text-white">4</p>
-            </div>
-            <Link >
-              <span className=" text-primary font-bold">Contact Details</span>
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      <div className=" pb-12 shadow-md rounded-xl mt-8 py-5 sm:px-12 px-6 mx-auto  w-[80%]">
-        <div className="">
-          <h2 className=" h3  text-center">Contact Details</h2>
+          </div>
         </div>
 
-        <div className=" flex flex-col gap-6">
-          <div>
-            <Input
-              type="text"
-              onChange={handleInputs}
-              value={state.name}
-              name={"name"}
-              className={"  border w-full p-2  bg-[#FEFBFB]"}
-              placeholder={"Enter Your Name"}
-              label={"Name"}
-              required={"required"}
-            />
+        <div className=" container flex justify-between items-center mx-auto mt-10 mb-20  w-[80%]">
+          <div className="  flex items-center gap-3">
+            <LiaLongArrowAltLeftSolid />
+            <span className=" text-textColor font-semibold">Back</span>
           </div>
           <div>
-            <Input
-              type="number"
-              onChange={handleInputs}
-              value={state.mobile_no}
-              name={"mobile_no"}
-              className={"  border w-full p-2  bg-[#FEFBFB]"}
-              placeholder={"Mobile No."}
-              label={"Enter Mobile No"}
-              required={"required"}
-            />
-          </div>
-          <div>
-            <Input
-              type="number"
-              onChange={handleInputs}
-              value={state.whatsapp_no}
-              name={"whatsapp_no"}
-              className={"  border w-full p-2  bg-[#FEFBFB]"}
-              placeholder={"Whatsapp No."}
-              label={"Enter Whatsapp No"}
-              required={"required"}
-            />
-          </div>
-          <div>
-            <Input
-              type="email"
-              onChange={handleInputs}
-              value={state.email_address}
-              name={"email_address"}
-              className={"  border w-full p-2  bg-[#FEFBFB]"}
-              placeholder={"Email Address"}
-              label={"Enter Email Address"}
-              required={"required"}
+            <Button
+              type={"submit"}
+              label={"Submit"}
+              className={
+                " bg-primary font-bold rounded-3xl text-white w-44 py-1.5"
+              }
             />
           </div>
         </div>
-      </div>
-
-      <div className=" container flex justify-between items-center mx-auto mt-10 mb-20  w-[80%]">
-        <div className="  flex items-center gap-3">
-          <LiaLongArrowAltLeftSolid />
-          <span className=" text-textColor font-semibold">Back</span>
-        </div>
-        <div>
-          <Button
-            type={"submit"}
-            label={"Submit"}
-            className={
-              " bg-primary font-bold rounded-3xl text-white w-44 py-1.5"
-            }
-          />
-        </div>
-      </div>
-    </form>
-    <Footer/>
+      </form>
+      <Footer />
     </>
   );
 };
