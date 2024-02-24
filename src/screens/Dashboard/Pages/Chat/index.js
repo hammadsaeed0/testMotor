@@ -5,6 +5,9 @@ import {inbox,senderimg} from '../.././../../assets/images/images'
 import Dropdown from './optionModal'; 
 import ChartCards from './chartCards';
 import Input from '../../../../components/Input';
+import Header from '../../../../components/header';
+import Footer from '../../../../components/footer';
+import DashboardNavbar from '../../NavBAr/DashboardNavbar';
 
 const Inbox = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -14,6 +17,9 @@ const Inbox = () => {
   };
 
   return (
+    <>
+    <Header/>
+    <DashboardNavbar/>
     <div className="flex flex-col items-center  mb-4">
       <div className="mt-16 flex items-center justify-between w-[90%]">
         <h1 className="font-inter text-3xl font-semibold pb-5 text-left">
@@ -131,6 +137,8 @@ const Inbox = () => {
    
     
     </div>
+    <Footer/>
+    </>
   );
 };
 

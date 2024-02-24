@@ -61,6 +61,7 @@ const CarPhotos = () => {
     if (!selectedImage.length > 0) {
       toast.success("Please upload your image");
     } else {
+      setLoader(true)
       let profilephoto = " ";
 
       try {
@@ -77,6 +78,7 @@ const CarPhotos = () => {
         console.log(profilephoto, "=====profile photo===");
 
         if (profilephoto.status === 200) {
+          setLoader(false)
           setMultiple(profilephoto.data);
           navigate(`/contact_details`, {
             state: {

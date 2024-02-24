@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { RiSortAsc } from 'react-icons/ri';
 import list  from "../../../../assets/images/list.png"
@@ -7,6 +7,11 @@ import announcement from '../../../../assets/images/announcement.png'
 import group  from  '../../../../assets/images/group.png';
 import Pagination from '../../../../components/Pagination/pagination';
 import {favouritCArd,cardcar,uparrow,stats,refresh, edit, remove, feature,sold,lowmilage,Featured,newcar,can,cylinder,road,call,whatsapp,chat} from '../.././../../assets/images/images'
+import { Base_url } from '../../../../utils/Base_url';
+import axios from 'axios';
+import Header from '../../../../components/header';
+import Footer from '../../../../components/footer';
+import DashboardNavbar from '../../NavBAr/DashboardNavbar';
 // import {lowmilage,features,newcar} from 
 
 const Input = ({ Icon, ...props }) => {
@@ -163,9 +168,29 @@ const ProductData=[
 ];
 
 
+
+
+
 const FavouritCars = () => {
+
+  const [cars,setCars] = useState([])
+
+  useEffect(() => {
+    axios
+      .get(`${Base_url}/users/users-all-cars`)
+      .then((res) => {
+        console.log(res);
+        setCars(res.data.cars);
+      })
+      .catch((error) => {});
+  }, []);
+
+
   return (
-    <div className="flex flex-col items-center justify-center  mb-4">
+    <>
+     <Header/>
+       <DashboardNavbar/>
+     <div className="flex flex-col items-center justify-center  mb-4">
       <div className="mt-16 flex items-center justify-between w-[90%] container">
         <h1 className="font-inter text-3xl font-semibold leading-10 tracking-normal text-left">
         My Favourite Cars
@@ -259,6 +284,9 @@ const FavouritCars = () => {
    
     
     </div>
+     <Footer/>
+
+    </>
   );
 };
 

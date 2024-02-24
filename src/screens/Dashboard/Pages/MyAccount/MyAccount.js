@@ -16,6 +16,9 @@ import devices from  "../../../../assets/icons/devices.png"
 import desktop from  "../../../../assets/icons/desktop.png"
 import mobile from  "../../../../assets/icons/mobile.png"
 import LineChart from "./graph"
+import Header from '../../../../components/header';
+import Footer from '../../../../components/footer';
+import DashboardNavbar from '../../NavBAr/DashboardNavbar';
 const Input = ({ Icon, ...props }) => {
   return (
     <div className="relative flex items-center">
@@ -29,6 +32,9 @@ const Input = ({ Icon, ...props }) => {
 
 const MyAccount = () => {
   return (
+   <>
+    <Header/>
+    <DashboardNavbar/>
     <div className="flex flex-col items-center  mb-4">
       <div className="mt-16 flex items-center justify-between w-[90%]">
         <h1 className="font-inter text-3xl font-semibold leading-10 tracking-normal text-left">
@@ -79,7 +85,7 @@ const MyAccount = () => {
       </div>
           {/* --------------------------------------------------------------------------- */}
              
-          <div className='flex justify-between w-[90%] mt-24' >
+          <div className='md:flex block justify-between w-[90%] mt-24' >
              {/* ----------Left box------------ */}
 
              <div className='flex flex-col gap-3'>
@@ -174,6 +180,8 @@ const MyAccount = () => {
            </div>
       </div>
     </div>
+    <Footer/>
+   </>
   );
 };
 

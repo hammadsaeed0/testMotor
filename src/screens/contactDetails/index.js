@@ -32,6 +32,8 @@ const ContactDetails = () => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
+  const report =  localStorage.getItem('reacts')
+
   const navigate = useNavigate();
   const userId = localStorage.getItem("userToken");
   const handlerSubmit = (e) => {
@@ -61,7 +63,7 @@ const ContactDetails = () => {
       warranty: receivedData.warranty,
       warranty_date: receivedData.warranty_date,
       inspected: receivedData.inspected,
-      inspection_report: "inspection_report_image_url",
+      inspection_report:report,
       price_QR: receivedData.price_QR,
       price_range: receivedData.price_range,
       negotiable: receivedData.negotiable,
@@ -98,7 +100,7 @@ const ContactDetails = () => {
       .then((res) => {
         console.log(res);
         if (res.data.success === true) {
-          navigate("/new_lists");
+          navigate("/dashboard/my-account");
           setLoader(false)
 
           toast.success(res?.data?.message);
@@ -108,6 +110,8 @@ const ContactDetails = () => {
       })
       .catch((error) => {
         console.log(error);
+        toast.error(error?.response?.data?.message)
+        setLoader(false)
       });
   };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { RiSortAsc } from 'react-icons/ri';
 import list  from "../../../../assets/images/list.png"
@@ -9,6 +9,9 @@ import Pagination from '../../../../components/Pagination/pagination';
 import {cardcar,uparrow,stats,refresh, edit, remove, feature,sold} from '../.././../../assets/images/images'
 import Header from '../../../../components/header';
 import Footer from '../../../../components/footer';
+import { Base_url } from '../../../../utils/Base_url';
+import axios from 'axios';
+import DashboardNavbar from '../../NavBAr/DashboardNavbar';
 // import CarDetails from '../../../../carDetails';
 
 
@@ -77,10 +80,27 @@ const ProductData=[
 ];
 
 
+
+
+
+
+
 const MyGarage = () => {
+  const [garage,setGrage] = useState([])
+
+  useEffect(() => {
+    axios
+      .get(`http://34.216.84.212/api/users/users-all-cars/65d763f3cae2202f0cc86716`)
+      .then((res) => {
+        console.log(res);
+        setGrage(res.data.cars);
+      })
+      .catch((error) => {});
+  }, []);
   return (
     <>
     <Header/>
+    <DashboardNavbar/>
     <div className="flex flex-col items-center  mb-4">
       <div className="mt-16 flex items-center justify-between w-[90%]">
         <h1 className="font-inter text-3xl font-semibold leading-10 tracking-normal text-left">
@@ -171,7 +191,7 @@ const MyGarage = () => {
   </div>
   <div className="flex justify-between justify-end">
     {/* Use map to create cards */}
-    {ProductData?.map((product, index) => (
+    {  garage?.map((product, index) => (
       <div
         key={index}
         className={`p-4 bg-[#F3F3F5] h-[460px] w-[350px] rounded-[20px] mt-2 ${product.featured === 'Yes' ? ' border-sky-800' : 'border-blue-500'}`}
@@ -179,16 +199,16 @@ const MyGarage = () => {
       > 
         {/* Display card content */}
         <div className="flex-col w-[350px]">
-          <img src={product.img} alt={product?.carName} className="h-[160px] w-[320px]" />
-          <h2 className="text-xl font-bold p-2 text-center">{product?.carName}</h2>
-          <p className="text-center">{product?.planName}</p>
+          <img src={product.car_images[0]}  className="h-[160px] w-[320px]" />
+          <h2 className="text-xl font-bold p-2 text-center">{product?.title}</h2>
+          <p className="text-center">{product?.title}</p>
         </div>
 
         {/* Display actions - Row 1 */}
         <div className="flex justify-center gap-3 mt-1 w-[320px]">
-          {product?.row1.map((action, actionIndex) => (
+          {ProductData?.row1.map((action, actionIndex) => (
             <div
-              key={actionIndex}
+           
               className="w-[100px] h-[50px] bg-[#0C53AB] rounded-[5px] text-white text-center"
             >
               <div className="w-full text-center mt-2">
@@ -201,7 +221,7 @@ const MyGarage = () => {
 
         {/* Display actions - Row 2 */}
         <div className="flex gap-3 mt-4 justify-center w-[320px]">
-          {product?.row2.map((action, actionIndex) => (
+          {ProductData?.row2.map((action, actionIndex) => (
             <div
               key={actionIndex}
               className="w-[100px] h-[50px] bg-[#0C53AB] rounded-[5px] text-white text-center"
@@ -222,7 +242,7 @@ const MyGarage = () => {
 
         {/* Featured Ad information */}
         <div className='flex gap-x-3 flex-wrap font-bold text-[#666564] text-center'>
-          {product?.featured && (
+          {garage?.featured && (
             <div>
               <div className='flex gap-3 '>
                 <p>Created: {product?.createdAt}</p>
@@ -231,7 +251,7 @@ const MyGarage = () => {
               <div> Featured Ad Days Remaining: {product?.remainingdays}</div>
              
             </div>
-          )}{console.log(product?.featured)}
+          )}{console.log(garage?.featured)}
         </div>
       </div>
     ))}

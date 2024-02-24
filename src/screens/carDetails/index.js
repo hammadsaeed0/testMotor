@@ -19,16 +19,15 @@ import Footer from "../../components/footer";
 const CarDetails = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-
   const [loading, setLoader] = useState(false);
 
   console.log(selectedImage);
 
-  const [selectImages,setSelectedImages] = useState([])
+  const [selectImages, setSelectedImages] = useState([]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setSelectedImages(file)
+    setSelectedImages(file);
 
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
@@ -46,7 +45,7 @@ const CarDetails = () => {
   const [report, setReport] = useState(" ");
 
   console.log(report);
-  
+
   const [state, setState] = useState({
     title: "",
     type_of_ad: "",
@@ -75,7 +74,7 @@ const CarDetails = () => {
     vehicle_location: "Car Location",
     longitude: selectedLocation.lng,
     latitude: selectedLocation.lat,
-    inspection_report:report,
+    inspection_report: report,
     engine_oil: "",
     engine_oil_filter: "",
     gearbox_oil: "",
@@ -124,9 +123,11 @@ const CarDetails = () => {
         console.log(profilephoto, "=====profile photo===");
         setReport(profilephoto?.data?.data[0]?.url);
 
+        localStorage.setItem("reacts", profilephoto?.data?.data[0]?.url);
+
         if (profilephoto.status === 200) {
           setLoader(false);
-          // navigate(`/car_photos`, { state: state });
+          navigate(`/car_photos`, { state: state });
         }
       } catch (error) {
         console.log(error);

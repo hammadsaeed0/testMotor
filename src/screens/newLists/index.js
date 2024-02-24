@@ -32,7 +32,7 @@ const NewLists = () => {
 
   useEffect(()=>{
     axios
-      .get(`${Base_url}/carListings`)
+      .get(`${Base_url}/users/users-all-cars`)
       .then((res) => {
         console.log(res);
         setNewListings(res.data.carListings);

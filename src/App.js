@@ -39,15 +39,8 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
-          <Route path="/choose_plane" element={<ChoosePlane />} />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <Register />
-              </PublicRoute>
-            }
-          />
+          <Route path="/choose_plane" element={<PublicRoute><ChoosePlane /></PublicRoute>} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/forgotten_email"
             element={
@@ -58,9 +51,10 @@ function App() {
           />
           <Route path="/forgotten_password" element={<ForgottenPassword />} />
           <Route path="/car_details_page/:id" element={<CarDetailPage />} />
+          <Route path="/new_lists" element={<NewLists />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/new_lists" element={<NewLists />} />
-
+          
+            <Route path="/car_details" element={<CarDetails />} />
             <Route path="/car_photos" element={<CarPhotos />} />
             <Route path="/contact_details" element={<ContactDetails />} />
             <Route path="/car_inspection" element={<CarInspection />} />
@@ -72,10 +66,6 @@ function App() {
             <Route path="/news" element={<News />} />
           </Route>
 
-          <Route path="/car_details" element={<CarDetails />} />
-          <Route path="/contactus" element={<ContactUs />} />
-
-          <Route path="/dealar" element={<Dealar />} />
           {/* Dashboard */}
           <Route path="/dashboard/my-account" element={<MyAccount />} />
           <Route path="/dashboard/my-garage" element={<MyGarage />} />
@@ -85,6 +75,9 @@ function App() {
             element={<GarageBooking />}
           ></Route>
           <Route path="/dashboard/my-inbox" element={<Inbox />} />
+        
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/dealar" element={<Dealar />} />
         </Routes>
       </AnimatePresence>
     </div>
