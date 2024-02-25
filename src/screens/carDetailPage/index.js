@@ -53,8 +53,7 @@ const CarDetailPage = ({
   const { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`${Base_url}/users/carListings/${id}`)
+    axios.get(`${Base_url}/users/carListings/${id}`)
       .then((res) => {
         console.log(res);
         setNewListings(res.data.carListing);
