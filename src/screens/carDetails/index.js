@@ -1,22 +1,95 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleRight, FaLocationDot } from "react-icons/fa6";
 import Input from "../../components/Input";
-import Option from "../../components/Option";
-import { FaCalendarAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import {
   LiaLongArrowAltLeftSolid,
   LiaLongArrowAltRightSolid,
 } from "react-icons/lia";
 import Button from "../../components/Button";
-import SearchLocationInput from "../../components/SearchLocationInput";
-import MapComponent from "../../components/Map";
-import { Base_url } from "../../utils/Base_url";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import {
+  Autocomplete,
+  GoogleMap,
+  LoadScript,
+  MarkerF,
+} from "@react-google-maps/api";
+import { MdLocationPin } from "react-icons/md";
+import { REACT_APP_GOOGLE_MAPS_KEY } from "../../utils/Google_map_key";
+
+const containerStyle = {
+  width: "100%",
+  height: "400px",
+  paddingTop: "80px",
+};
+
 const CarDetails = () => {
+  const [currentLocation, setCurrentLocation] = useState({
+    lat: 31.5204,
+    lng: 74.3587,
+  });
+
+  const libraries = ["places"];
+
+  const [map, setMap] = useState(null);
+  const [autocomplete, setAutocomplete] = useState(null);
+  // State variables for address, latitude, and longitude
+  const [address, setAddress] = useState("");
+  const [lat, setLat] = useState(currentLocation.lat);
+  const [lng, setLng] = useState(currentLocation.lng);
+
+  useEffect(() => {
+    const getCurrentLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            setCurrentLocation(pos);
+            setLat(pos.lat);
+            setLng(pos.lng);
+            map?.panTo(pos);
+          },
+          () => {
+            console.error("The Geolocation service failed.");
+          }
+        );
+      } else {
+        console.error("Your browser doesn't support geolocation.");
+      }
+    };
+
+    getCurrentLocation();
+  }, [map]);
+
+  const onLoad = (autocomplete) => {
+    console.log("autocomplete: ", autocomplete);
+    setAutocomplete(autocomplete);
+  };
+
+  const onPlaceChanged = () => {
+    if (autocomplete !== null) {
+      const place = autocomplete.getPlace();
+      console.log(place);
+      setCurrentLocation({
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
+      // Update state with the selected place's details
+      setAddress(place.formatted_address || "");
+      setLat(place.geometry.location.lat());
+      setLng(place.geometry.location.lng());
+      map.panTo(place.geometry.location);
+    } else {
+      console.log("Autocomplete is not loaded yet!");
+    }
+  };
+
   const [selectedImage, setSelectedImage] = useState(null);
 
   const [loading, setLoader] = useState(false);
@@ -38,14 +111,9 @@ const CarDetails = () => {
     }
   };
 
-  const [selectedLocation, setSelectedLocation] = useState({
-    lat: 31.5204,
-    lng: 74.3587,
-  });
   const [report, setReport] = useState(" ");
 
   console.log(report);
-
   const [state, setState] = useState({
     title: "",
     type_of_ad: "",
@@ -71,9 +139,9 @@ const CarDetails = () => {
     price_range: "",
     negotiable: "",
     description: "",
-    vehicle_location: "Car Location",
-    longitude: selectedLocation.lng,
-    latitude: selectedLocation.lat,
+    vehicle_location: address,
+    longitude: currentLocation.lng,
+    latitude: currentLocation.lat,
     inspection_report: report,
     engine_oil: "",
     engine_oil_filter: "",
@@ -337,7 +405,11 @@ const CarDetails = () => {
             >
               <option>Select Vehicle Category</option>
 
-              <option>2019</option>
+              
+              <option value={'bus'}>Bus</option>
+              <option value={"car"}>Car</option>
+              <option  value={'bicycle'}>Bicycle</option>
+              <option  value={'motorcycle'}>Motorcycle</option>
             </select>
           </div>
           <div>
@@ -440,9 +512,13 @@ const CarDetails = () => {
               className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-md w-full"
               required="required"
             >
-              <option>SelectExterior Colour</option>
+              <option>Select Exterior Colour</option>
 
-              <option>2019</option>
+              <option>orange</option>
+              <option>white</option>
+              <option>black</option>
+              <option>green</option>
+              <option>gray</option>
             </select>
           </div>
           <div>
@@ -458,7 +534,11 @@ const CarDetails = () => {
             >
               <option>Select Interior Colour</option>
 
-              <option>2019</option>
+              <option>orange</option>
+              <option>white</option>
+              <option>black</option>
+              <option>green</option>
+              <option>gray</option>
             </select>
           </div>
           <div>
@@ -474,7 +554,9 @@ const CarDetails = () => {
             >
               <option>Select Fuel Type</option>
 
-              <option>2019</option>
+              <option>petroleum	</option>
+              <option>natural gas	</option>
+              <option>cng	</option>
             </select>
           </div>
           <div>
@@ -601,7 +683,9 @@ const CarDetails = () => {
             >
               <option>Select Price (QR)</option>
 
-              <option>2019</option>
+              <option>1000-30000</option>
+              <option>30000-50000</option>
+              <option>50000-70000</option>
             </select>
           </div>
           <div>
@@ -617,7 +701,10 @@ const CarDetails = () => {
             >
               <option>Select Price Range</option>
 
-              <option>2019</option>
+             
+              <option>1000-30000</option>
+              <option>30000-50000</option>
+              <option>50000-70000</option>
             </select>
           </div>
           <div>
@@ -651,8 +738,50 @@ const CarDetails = () => {
             />
           </div>
           <div>
-            <SearchLocationInput setSelectedLocation={setSelectedLocation} />
-            <MapComponent selectedLocation={selectedLocation} />
+            <div className=" relative">
+              <div className=" ">
+                <LoadScript
+                  googleMapsApiKey={REACT_APP_GOOGLE_MAPS_KEY}
+                  libraries={libraries}
+                >
+                  <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={currentLocation}
+                    zoom={10}
+                    onLoad={(map) => setMap(map)}
+                  >
+                    <MarkerF
+                      position={currentLocation}
+                      icon={
+                        "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                      }
+                    />
+                    <div className="search-location-input   bg-white   absolute top-0  w-full">
+                      <label className="block text-sm font-medium text-textColor">
+                        Vehicle Location
+                      </label>
+
+                      <Autocomplete
+                        onLoad={onLoad}
+                        onPlaceChanged={onPlaceChanged}
+                        options={{
+                          componentRestrictions: { country: "PK" },
+                        }}
+                      >
+                        <input
+                          className="outline-none bg-lightGray border w-full p-2  bg-[#FEFBFB] text-textColor placeholder:text-gray-500 rounded-md"
+                          type="text"
+                          placeholder="Search Location"
+                        />
+                      </Autocomplete>
+                      <div className="absolute right-3 top-8">
+                        <MdLocationPin className="text-textColor" size={20} />
+                      </div>
+                    </div>
+                  </GoogleMap>
+                </LoadScript>
+              </div>
+            </div>
           </div>
         </div>
 

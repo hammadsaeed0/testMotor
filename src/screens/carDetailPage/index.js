@@ -18,7 +18,6 @@ import { MdOutlineWatchLater } from "react-icons/md";
 import Input from "../../components/Input";
 import { Base_url } from "../../utils/Base_url";
 import axios from "axios";
-import MapComponent from "../../components/Map";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 const CarDetailPage = ({
@@ -296,7 +295,7 @@ const CarDetailPage = ({
               </div>
             </div>
             <div className="relative px-2">
-              <MapComponent selectedLocation={selectedLocation} />
+              {/* <MapComponent selectedLocation={selectedLocation} /> */}
               {/* <img src={require('../../assets/images/location.png')}  className=' w-full h-full' alt=''  /> */}
             </div>
           </div>

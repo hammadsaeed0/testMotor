@@ -31,11 +31,10 @@ const NewLists = () => {
 
 
   useEffect(()=>{
-    axios
-      .get(`${Base_url}/users/users-all-cars`)
+    axios.get(`${Base_url}/users/users-all-cars`)
       .then((res) => {
         console.log(res);
-        setNewListings(res.data.carListings);
+        setNewListings(res.data.car);
       })
       .catch((error) => {});
 

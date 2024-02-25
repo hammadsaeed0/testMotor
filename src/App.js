@@ -54,7 +54,7 @@ function App() {
           <Route path="/new_lists" element={<NewLists />} />
           <Route element={<PrivateRoute />}>
           
-            <Route path="/car_details" element={<CarDetails />} />
+      
             <Route path="/car_photos" element={<CarPhotos />} />
             <Route path="/contact_details" element={<ContactDetails />} />
             <Route path="/car_inspection" element={<CarInspection />} />
@@ -65,7 +65,7 @@ function App() {
 
             <Route path="/news" element={<News />} />
           </Route>
-
+          <Route path="/car_details" element={<CarDetails />} />
           {/* Dashboard */}
           <Route path="/dashboard/my-account" element={<MyAccount />} />
           <Route path="/dashboard/my-garage" element={<MyGarage />} />
