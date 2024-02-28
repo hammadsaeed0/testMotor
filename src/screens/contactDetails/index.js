@@ -9,6 +9,7 @@ import { Base_url } from "../../utils/Base_url";
 import axios from "axios";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import { useSelector } from "react-redux";
 const ContactDetails = () => {
   const location = useLocation();
   const { receivedData, upload } = location.state || {};
@@ -35,23 +36,26 @@ const ContactDetails = () => {
   const report = localStorage.getItem("reacts");
 
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userToken");
+  const user = useSelector((state) => state.authReducer);
+
+  console.log(user);
+
   const handlerSubmit = (e) => {
     setLoader(true);
     e.preventDefault();
     const params = {
-      user_id: userId,
+      user_id: user?.userToken?._id,
       title: receivedData.title,
       type_of_ad: receivedData.type_of_ad,
       make: receivedData.make,
       model: receivedData.model,
       contact_name: "hammad",
-      year: receivedData.year,
+      year: receivedData?.year,
       vehicle_condition: receivedData.vehicle_condition,
       mileage: receivedData.mileage,
       vehicle_category: receivedData.vehicle_category,
       specifications: receivedData.specifications,
-      cylinder: receivedData.cylinder,
+      cylinder: Number(receivedData.cylinder),
       engine_size: receivedData.engine_size,
       wheel_drive: receivedData.wheel_drive,
       gear_box: receivedData.gear_box,
@@ -63,19 +67,19 @@ const ContactDetails = () => {
       warranty_date: receivedData.warranty_date,
       inspected: receivedData.inspected,
       inspection_report: report,
-      price_QR: receivedData.price_QR,
+      price_QR: Number(receivedData.price_QR),
       price_range: receivedData.price_range,
       negotiable: receivedData.negotiable,
       description: receivedData.description,
       vehicle_location: "Car Location",
-      longitude: 123.456,
-      latitude: 78.91,
-      engine_oil: receivedData.engine_oil,
-      engine_oil_filter: receivedData.engine_oil_filter,
-      gearbox_oil: receivedData.gearbox_oil,
-      ac_filter: receivedData.ac_filter,
-      air_filter: receivedData.air_filter,
-      fuel_filter: receivedData.fuel_filter,
+      longitude:receivedData.longitude,
+      latitude:receivedData.latitude,
+      engine_oil:receivedData.engine_oil,
+      engine_oil_filter:receivedData.engine_oil_filter,
+      gearbox_oil:receivedData.gearbox_oil,
+      ac_filter:receivedData.ac_filter,
+      air_filter:receivedData.air_filter,
+      fuel_filter:receivedData.fuel_filter,
       spark_plugs: receivedData.spark_plugs,
       front_brake_pads: receivedData.front_brake_pads,
       rear_brake_pads: receivedData.rear_brake_pads,

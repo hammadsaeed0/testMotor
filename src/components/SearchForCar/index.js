@@ -1,7 +1,37 @@
 import React, { useState } from "react";
 import Button from "../Button";
+import { Base_url } from "../../utils/Base_url";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SearchForCar = () => {
+  const [loading, setLoader] = useState(false);
+  const navigate = useNavigate();
+  const [filteredResults, setFilteredResults] = useState([]);
+  console.log(filteredResults);
+
+  const [clickEngine, setClickEngine] = useState("");
+  const AllFilterFun = (filterValue) => {
+    setLoader(true);
+    const url = `${Base_url}/users/advance-searching`;
+    const params = {
+      make: filterValue,
+    };
+
+    axios
+      .get(url, { params })
+      .then((response) => {
+        console.log("Response data:", response.data);
+        setFilteredResults(response.data);
+
+        navigate("/new_lists", { state: { filter: response.data } });
+        setLoader(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
   const [allFilter, setFilter] = useState("body_type");
   return (
     <div className=" container mx-auto mt-16 px-10">
@@ -228,6 +258,7 @@ const SearchForCar = () => {
         <>
           <div className=" flex items-center   flex-wrap justify-center mt-14 gap-4">
             <Button
+              onClick={()=>AllFilterFun("Under 1.0L")}
               label={"Under 1.0L"}
               className={
                 "  border shadow-lg w-52 rounded-md py-1.5  font-medium  text-secondary border-secondary"
@@ -295,19 +326,39 @@ const SearchForCar = () => {
         <>
           <div className=" flex flex-wrap justify-center items-center mt-14 gap-3">
             <div className="  m-2  bg-white w-64  rounded">
-              <img src={require("../../assets/images/b1.png")} alt=""  className=" w-full  h-full object-cover" />
+              <img
+                src={require("../../assets/images/b1.png")}
+                alt=""
+                className=" w-full  h-full object-cover"
+              />
             </div>
             <div className="  scroll-item inline-block :w-64  p-2 bg-white rounded">
-              <img src={require("../../assets/images/b2.png")} alt=""   className=" w-full h-full object-cover" />
+              <img
+                src={require("../../assets/images/b2.png")}
+                alt=""
+                className=" w-full h-full object-cover"
+              />
             </div>
             <div className=" scroll-item inline-block p-2 w-64  bg-white rounded">
-              <img src={require("../../assets/images/b3.png")} alt=""  className=" w-full  h-full object-cover"   />
+              <img
+                src={require("../../assets/images/b3.png")}
+                alt=""
+                className=" w-full  h-full object-cover"
+              />
             </div>
             <div className=" scroll-item inline-block p-2 w-64   bg-white rounded">
-              <img src={require("../../assets/images/b4.png")} alt=""  className=" w-full  h-full object-cover" />
+              <img
+                src={require("../../assets/images/b4.png")}
+                alt=""
+                className=" w-full  h-full object-cover"
+              />
             </div>
             <div className=" scroll-item inline-block p-2 w-64  bg-white rounded">
-              <img src={require("../../assets/images/b4.png")} alt="" className=" w-full  h-full object-cover"    />
+              <img
+                src={require("../../assets/images/b4.png")}
+                alt=""
+                className=" w-full  h-full object-cover"
+              />
             </div>
           </div>
         </>

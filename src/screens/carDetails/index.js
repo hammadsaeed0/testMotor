@@ -40,7 +40,7 @@ const CarDetails = () => {
   const [address, setAddress] = useState("");
   const [lat, setLat] = useState(currentLocation.lat);
   const [lng, setLng] = useState(currentLocation.lng);
-
+    
   useEffect(() => {
     const getCurrentLocation = () => {
       if (navigator.geolocation) {
@@ -172,7 +172,7 @@ const CarDetails = () => {
   const handlerSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedImage) {
+    if (!selectImages) {
       toast.error("Please choose your inspection report!");
     } else {
       setLoader(true);
@@ -425,7 +425,9 @@ const CarDetails = () => {
             >
               <option>Select Specifications</option>
 
-              <option>2019</option>
+              <option>specifications</option>
+              <option>specifications</option>
+              <option>specifications</option>
             </select>
           </div>
           <div>
@@ -466,7 +468,9 @@ const CarDetails = () => {
             >
               <option>Select Engine Size</option>
 
-              <option>2019</option>
+              <option>Under 1.0L</option>
+              <option>1.1L-1.6L</option>
+              <option>1.7L-2.0L</option>
             </select>
           </div>
           <div>
@@ -482,7 +486,9 @@ const CarDetails = () => {
             >
               <option>Select Wheel Drive</option>
 
-              <option>2019</option>
+              <option>pegasis</option>
+              <option>bow of sagittario</option>
+              <option>rim</option>
             </select>
           </div>
           <div>
@@ -498,7 +504,9 @@ const CarDetails = () => {
             >
               <option>Select Gear Box</option>
 
-              <option>2019</option>
+              <option>pegasis</option>
+              <option>bow of sagittario</option>
+              <option>rim</option>
             </select>
           </div>
           <div>
@@ -683,9 +691,9 @@ const CarDetails = () => {
             >
               <option>Select Price (QR)</option>
 
-              <option>1000-30000</option>
-              <option>30000-50000</option>
-              <option>50000-70000</option>
+              <option>30000</option>
+              <option>50000</option>
+              <option>70000</option>
             </select>
           </div>
           <div>

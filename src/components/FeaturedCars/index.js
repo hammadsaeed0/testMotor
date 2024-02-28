@@ -34,7 +34,6 @@ const FeaturedCars = ({
         className=" flex     transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
-        
         <div className="flex-none   w-full h-full">
           <div className="mt-14 w-[90%]  mx-auto md:flex block gap-6">
             <div className="border-4   md:w-[48%]   bg-cards  sm:block md:hidden  xl:block w-[100%] border-primary  rounded-2xl overflow-hidden">
@@ -56,7 +55,9 @@ const FeaturedCars = ({
                       className=" w-4"
                       alt=""
                     />
-                    <span className=" text-textColor font-bold sm:text-base text-sm">2021</span>
+                    <span className=" text-textColor font-bold sm:text-base text-sm">
+                      2021
+                    </span>
                   </div>
                   <div className="flex justify-between gap-2 items-center">
                     <img
@@ -335,7 +336,9 @@ const FeaturedCars = ({
                       className=" w-4"
                       alt=""
                     />
-                    <span className=" text-textColor font-bold sm:text-base text-sm">2021</span>
+                    <span className=" text-textColor font-bold sm:text-base text-sm">
+                      2021
+                    </span>
                   </div>
                   <div className="flex justify-between gap-2 items-center">
                     <img
@@ -593,16 +596,16 @@ const FeaturedCars = ({
             </div>
           </div>
         </div>
-        
       </div>
 
       <div className="">
         <button
-           className={`arrow arrow-left absolute md:left-6 left-1 flex pr-1 justify-center items-center top-80  rounded-full bg-secondary sm:w-16 sm:h-16 w-12 h-12 ${isAtStart ? 'opacity-50 pointer-events-none' : ''}`}
+          className={`arrow arrow-left absolute md:left-6 left-1 flex pr-1 justify-center items-center top-80  rounded-full bg-secondary sm:w-16 sm:h-16 w-12 h-12 ${
+            isAtStart ? "opacity-50 pointer-events-none" : ""
+          }`}
           onClick={prev}
           disabled={isAtStart}
         >
-        
           <img
             src={require("../../assets/images/leftarrow.png")}
             className=" sm:w-6 w-4"
@@ -610,11 +613,12 @@ const FeaturedCars = ({
           />
         </button>
         <button
-          className={`arrow arrow-right absolute md:right-6 right-1 flex justify-center pl-1 items-center top-80  rounded-full bg-secondary sm:w-16 sm:h-16 w-12 h-12 ${isAtEnd ? 'opacity-50 pointer-events-none' : ''}`}
+          className={`arrow arrow-right absolute md:right-6 right-1 flex justify-center pl-1 items-center top-80  rounded-full bg-secondary sm:w-16 sm:h-16 w-12 h-12 ${
+            isAtEnd ? "opacity-50 pointer-events-none" : ""
+          }`}
           onClick={next}
           disabled={isAtEnd}
         >
-        
           <img
             src={require("../../assets/images/rightarrow.png")}
             className=" sm:w-6 w-4"

@@ -14,9 +14,9 @@ const Header = () => {
 
   const [language, setLanguage] = useState(false);
 
-  const openLanguage = ()=>{
-    setLanguage(!language)
-  }
+  const openLanguage = () => {
+    setLanguage(!language);
+  };
 
   return (
     <nav className="bg-white sticky z-40 top-0">
@@ -29,13 +29,14 @@ const Header = () => {
               alt=""
             />
             <div className=" xl:block hidden">
-            <Input
-              Icon={<IoSearch size={20} className="  text-textColor" />}
-              placeholder={"Search cars..."}
-              className={"border-[#0C53AB] border-2 py-2.5  font-normal  text-sm md:w-96 w-60 bg-white"}
-            />
+              <Input
+                Icon={<IoSearch size={20} className="  text-textColor" />}
+                placeholder={"Search cars..."}
+                className={
+                  "border-[#0C53AB] border-2 py-2.5  font-normal  text-sm md:w-96 w-60 bg-white"
+                }
+              />
             </div>
-          
           </div>
         </div>
         <div

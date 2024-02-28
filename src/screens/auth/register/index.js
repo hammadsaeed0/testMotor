@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 // import { auth, provider, providerFacebook } from "../../../utils/config";
 // import { signInWithPopup, signOut } from "firebase/auth";
@@ -13,12 +13,31 @@ import axios from "axios";
 import transition from "../../../transition";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const navigate = useNavigate();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [loading, setLoader] = useState(false);
   const [value, setValue] = useState({});
+
+  const [success, setSuccess] = useState(false);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const verified = queryParams.get("verified");
+  const message = queryParams.get("message");
+
+  console.log("Verified:", verified);
+  console.log("Message:", message);
+
+  useEffect(() => {
+    if (verified === "true" && message === "Email verification successful") {
+      toast.success(message);
+      setSuccess(true);
+    } else {
+      setSuccess(false);
+    }
+  }, [verified, message]);
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -146,8 +165,10 @@ const Register = () => {
         if (res?.data?.success === true) {
           setLoader(false);
           toast.success(res?.data?.message);
+        
         } else {
           toast.error(res?.data?.message);
+          Swal.fire(res?.data?.message);
           setLoader(false);
         }
       })

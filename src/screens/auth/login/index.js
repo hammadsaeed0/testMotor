@@ -14,6 +14,7 @@ import { setUserToken } from "../../../store/reducers/authReducer";
 
 const Login = () => {
   const [value, setValue] = useState({});
+  const dispatch = useDispatch();
   const [loading, setLoader] = useState(false);
   console.log(value);
   // const handleClick = () => {
@@ -123,11 +124,11 @@ const Login = () => {
     axios
       .post(`${Base_url}/auth/login`, params)
       .then((res) => {
-        console.log(res);
+        console.log(res?.data);
 
-        if (res.data.success === true) {
+        if (res?.data?.success === true) {
           setLoader(false);
-          localStorage.setItem("userToken", res?.data?.userId);
+          dispatch(setUserToken(res?.data?.existingUser));
           toast.success("User Login Successfully!");
           navigate("/");
         } else {
@@ -136,9 +137,9 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
-        if (error.response.data.success === false) {
+        if (error?.response?.data?.success === false) {
           setLoader(false);
-          toast(error.response.data.message);
+          toast(error?.response?.data?.message);
         }
       });
   };

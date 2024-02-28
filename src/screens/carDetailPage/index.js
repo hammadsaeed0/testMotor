@@ -14,12 +14,15 @@ import {
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import { FaLocationDot, FaRegCircleCheck } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
-import { MdOutlineWatchLater } from "react-icons/md";
+import { MdLocationPin, MdOutlineWatchLater } from "react-icons/md";
 import Input from "../../components/Input";
 import { Base_url } from "../../utils/Base_url";
 import axios from "axios";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import { REACT_APP_GOOGLE_MAPS_KEY } from "../../utils/Google_map_key";
+import moment from "moment";
 const CarDetailPage = ({
   children: slides,
   autoSlide = false,
@@ -33,11 +36,33 @@ const CarDetailPage = ({
     require("../../assets/images/home.png"),
   ];
 
+  const [newListings, setNewListings] = useState({});
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`${Base_url}/users/get-single-car/${id}`)
+      .then((res) => {
+        console.log(res);
+        setNewListings(res?.data?.message);
+        const pos = {
+          lat:res?.data?.messag?.latitude,
+          lng: res?.data?.messag?.longitude,
+        };
+        setSelectedLocation(pos);
+      })
+      .catch((error) => {});
+  }, [id]);
+
   const [curr, setCurr] = useState(0);
   const prev = () =>
-    setCurr((curr) => (curr === 0 ? sliders.length - 1 : curr - 1));
+    setCurr((curr) =>
+      curr === 0 ? newListings?.car_images?.length - 1 : curr - 1
+    );
   const next = () =>
-    setCurr((curr) => (curr === sliders.length - 1 ? 0 : curr + 1));
+    setCurr((curr) =>
+      curr === newListings?.car_images?.length - 1 ? 0 : curr + 1
+    );
 
   useEffect(() => {
     if (!autoSlide) return;
@@ -49,22 +74,41 @@ const CarDetailPage = ({
     setCurr(index);
   };
 
-  const [newListings, setNewListings] = useState({});
-  const { id } = useParams();
+  const containerStyle = {
+    width: "100%",
+    height: "490px",
+    paddingTop: "80px",
+  };
 
-  useEffect(() => {
-    axios.get(`${Base_url}/users/carListings/${id}`)
-      .then((res) => {
-        console.log(res);
-        setNewListings(res.data.carListing);
-      })
-      .catch((error) => {});
-  }, []);
+  const libraries = ["places"];
+
+  const [map, setMap] = useState(null);
 
   const [selectedLocation, setSelectedLocation] = useState({
-    lat: 31.5204,
-    lng: 74.3587,
+    lat: 51.520067,
+    lng: 25.276987,
   });
+   
+  const [filteredResults, setFilteredResults] = useState([]);
+  useEffect(() => {
+    const url = `${Base_url}/users/advance-searching`;
+    const params = {
+      make: newListings.make,
+      model: newListings.model,
+      exterior_colour: newListings.exterior_colour,
+      interior_colour: newListings.interior_colour,
+    };
+
+    axios
+      .get(url, { params })
+      .then((response) => {
+        console.log("Response data:", response.data);
+        setFilteredResults(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <>
@@ -126,7 +170,7 @@ const CarDetailPage = ({
             </div>
             <div className=" mt-2  md:block hidden">
               <div className="flex items-center justify-center gap-2">
-                {sliders?.map((_, i) => (
+                {newListings?.car_images?.map((_, i) => (
                   <div
                     key={i}
                     onClick={() => goToSlide(i)}
@@ -207,19 +251,8 @@ const CarDetailPage = ({
 
             <div className=" md:px-0 px-6">
               <h1 className=" h2 pb-8">Description:</h1>
-              <p className=" text-textColor">
-                How the adventure ended will be seen anon. Aouda was anxious,
-                though she said nothing. As for Passepartout, he thought Mr.
-                Fogg’s manoeuvre simply glorious. The captain had said “between
-                eleven and twelve knots,” and the Henrietta confirmed his
-                prediction.
-              </p>
-              <p className=" text-textColor pt-4">
-                If, then—for there were “ifs” still—the sea did not become too
-                boisterous, if the wind did not veer round to the east, if no
-                accident happened to the boat or its machinery, the Henrietta
-                might cross the three…
-              </p>
+              <p className=" text-textColor">{newListings?.description}</p>
+
               <button className=" pt-4 pb-12">
                 <Link
                   to={""}
@@ -294,14 +327,32 @@ const CarDetailPage = ({
               </div>
             </div>
             <div className="relative px-2">
-              {/* <MapComponent selectedLocation={selectedLocation} /> */}
-              {/* <img src={require('../../assets/images/location.png')}  className=' w-full h-full' alt=''  /> */}
+              <LoadScript
+                googleMapsApiKey={REACT_APP_GOOGLE_MAPS_KEY}
+                libraries={libraries}
+              >
+                <GoogleMap
+                  mapContainerStyle={containerStyle}
+                  center={selectedLocation}
+                  zoom={10}
+                  onLoad={(map) => setMap(map)}
+                >
+                  <MarkerF
+                    position={selectedLocation}
+                    icon={
+                      "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                    }
+                  />
+
+                  <MdLocationPin className="text-textColor" size={20} />
+                </GoogleMap>
+              </LoadScript>
             </div>
           </div>
           <div className=" md:px-0 px-5">
             {/* <h2 className=' text-textColor font-bold text-2xl'>{newListings.title}</h2> */}
             <h2 className=" text-textColor font-bold md:text-2xl sm:text-xl text-lg">
-              BMW 8-serie 2 -door coupe greye
+              {newListings?.title}
             </h2>
             <ul className=" flex gap-2 items-center py-2">
               <li>
@@ -338,7 +389,7 @@ const CarDetailPage = ({
               <li className=" flex justify-between items-center">
                 <h4 className="h5">Type of Ad:</h4>
                 <span className=" text-textColor font-bold md:text-xl text-lg">
-                  For Sale
+                  {newListings?.type_of_ad}
                 </span>
               </li>
               <li className=" flex justify-between items-center">
@@ -362,7 +413,7 @@ const CarDetailPage = ({
               <li className=" flex justify-between items-center">
                 <h4 className="h5">Car Type:</h4>
                 <span className=" text-textColor font-bold md:text-xl text-lg">
-                  Coupe
+                  {newListings?.vehicle_category}
                 </span>
               </li>
               <li className=" flex justify-between items-center">
@@ -380,13 +431,13 @@ const CarDetailPage = ({
               <li className=" flex justify-between items-center">
                 <h4 className="h5">Engine Size:</h4>
                 <span className=" text-textColor font-bold md:text-xl text-lg">
-                  5.0+
+                  {newListings?.engine_size}
                 </span>
               </li>
               <li className=" flex justify-between items-center">
                 <h4 className="h5">Cylinders:</h4>
                 <span className=" text-textColor font-bold md:text-xl text-lg">
-                  V8
+                  V{newListings?.cylinder}
                 </span>
               </li>
               <li className=" flex justify-between items-center">
@@ -416,7 +467,7 @@ const CarDetailPage = ({
               <li className=" flex justify-between items-center">
                 <h4 className="h5">Warranty Date:</h4>
                 <span className=" text-textColor font-bold md:text-xl text-lg">
-                  25-06-2026
+                  {moment(newListings?.warranty_date).format("l")}
                 </span>
               </li>
               <li className=" flex justify-between items-center">
@@ -428,10 +479,10 @@ const CarDetailPage = ({
               <li className=" flex justify-between items-center">
                 <h4 className="h5">Specifications:</h4>
                 <span className=" text-textColor font-bold md:text-xl text-lg">
-                  GCC
+                  {newListings?.specifications}
                 </span>
               </li>
-              <li className=" flex justify-between items-center">
+              {/* <li className=" flex justify-between items-center">
                 <h4 className="h5">Tinted:</h4>
                 <span className=" text-textColor font-bold md:text-xl text-lg">
                   Yes
@@ -442,11 +493,11 @@ const CarDetailPage = ({
                 <span className=" text-textColor font-bold md:text-xl text-lg">
                   1st Ownwer
                 </span>
-              </li>
+              </li> */}
               <li className=" flex justify-between items-center">
                 <h4 className="h5">Date Posted:</h4>
                 <span className=" text-textColor font-bold md:text-xl text-lg">
-                  19-07-2023
+                  {moment(newListings?.warranty_date).format("l")}
                 </span>
               </li>
             </ul>
@@ -968,185 +1019,59 @@ const CarDetailPage = ({
         <div className=" md:px-0 px-6 ">
           <h1 className=" h2 mt-7">Similar Cars </h1>
           <div className=" my-4 flex flex-wrap gap-6">
-            <div className="  rounded-xl overflow-hidden">
-              <div className=" h-40 relative">
-                <img
-                  src={require("../../assets/images/image 7.png")}
-                  className=" object-cover  h-full w-full"
-                  alt=""
-                />
-                <div className=" absolute top-0 left-0">
-                  <img
-                    src={require("../../assets/images/newstaps.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
+            {filteredResults?.carListings?.map((item, index) => {
+              return (
+                <Link
+                  to={`/car_details_page/${item._id}`}
+                  className="  rounded-xl overflow-hidden"
+                >
+                  <div className=" h-40 relative">
+                    <img
+                      src={require("../../assets/images/image 7.png")}
+                      className=" object-cover  h-full w-full"
+                      alt=""
+                    />
+                    <div className=" absolute top-0 left-0">
+                      <img src={item?.car_images[0]} alt="" />
+                    </div>
+                  </div>
 
-              <div className=" bg-[#0C53AB] py-2 px-4">
-                <h1 className=" text-white uppercase font-semibold">
-                  Audi A8 4-door sedan blue
-                </h1>
-                <div className="  mt-3 flex justify-between items-center">
-                  <div className=" flex gap-2 items-center">
-                    <FaCalendarAlt size={12} className=" text-white" />
-                    <span className=" text-white text-xs font-bold">2021</span>
+                  <div className=" bg-[#0C53AB] py-2 px-4">
+                    <h1 className=" text-white uppercase font-semibold">
+                      Audi A8 4-door sedan blue
+                    </h1>
+                    <div className="  mt-3 flex justify-between items-center">
+                      <div className=" flex gap-2 items-center">
+                        <FaCalendarAlt size={12} className=" text-white" />
+                        <span className=" text-white text-xs font-bold">
+                          2021
+                        </span>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <img
+                          src={require("../../assets/images/layer6.png")}
+                          className=" w-4"
+                          alt=""
+                        />
+                        <span className=" text-white text-xs font-bold">
+                          4 Cylinder
+                        </span>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <img
+                          src={require("../../assets/images/road-icon 1.png")}
+                          className=" w-3"
+                          alt=""
+                        />
+                        <span className=" text-white text-xs font-bold">
+                          44, 882 KM
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={require("../../assets/images/layer6.png")}
-                      className=" w-4"
-                      alt=""
-                    />
-                    <span className=" text-white text-xs font-bold">
-                      4 Cylinder
-                    </span>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={require("../../assets/images/road-icon 1.png")}
-                      className=" w-3"
-                      alt=""
-                    />
-                    <span className=" text-white text-xs font-bold">
-                      44, 882 KM
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="  rounded-xl overflow-hidden">
-              <div className=" h-40 relative">
-                <img
-                  src={require("../../assets/images/image 7.png")}
-                  className=" object-cover  h-full w-full"
-                  alt=""
-                />
-                <div className=" absolute top-0 left-0">
-                  {/* <img src={require('../../assets/images/newstaps.png')} alt='' /> */}
-                </div>
-              </div>
-
-              <div className=" bg-[#0C53AB] py-2 px-4">
-                <h1 className=" text-white uppercase font-semibold">
-                  Audi A8 4-door sedan blue
-                </h1>
-                <div className="  mt-3 flex justify-between items-center">
-                  <div className=" flex gap-2 items-center">
-                    <FaCalendarAlt size={12} className=" text-white" />
-                    <span className=" text-white text-xs font-bold">2021</span>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={require("../../assets/images/layer6.png")}
-                      className=" w-4"
-                      alt=""
-                    />
-                    <span className=" text-white text-xs font-bold">
-                      4 Cylinder
-                    </span>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={require("../../assets/images/road-icon 1.png")}
-                      className=" w-3"
-                      alt=""
-                    />
-                    <span className=" text-white text-xs font-bold">
-                      44, 882 KM
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="  rounded-xl overflow-hidden">
-              <div className=" h-40 relative">
-                <img
-                  src={require("../../assets/images/image 7.png")}
-                  className=" object-cover  h-full w-full"
-                  alt=""
-                />
-                <div className=" absolute top-0 left-0">
-                  {/* <img src={require('../../assets/images/newstaps.png')} alt='' /> */}
-                </div>
-              </div>
-
-              <div className=" bg-[#0C53AB] py-2 px-4">
-                <h1 className=" text-white uppercase font-semibold">
-                  Audi A8 4-door sedan blue
-                </h1>
-                <div className="  mt-3 flex justify-between items-center">
-                  <div className=" flex gap-2 items-center">
-                    <FaCalendarAlt size={12} className=" text-white" />
-                    <span className=" text-white text-xs font-bold">2021</span>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={require("../../assets/images/layer6.png")}
-                      className=" w-4"
-                      alt=""
-                    />
-                    <span className=" text-white text-xs font-bold">
-                      4 Cylinder
-                    </span>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={require("../../assets/images/road-icon 1.png")}
-                      className=" w-3"
-                      alt=""
-                    />
-                    <span className=" text-white text-xs font-bold">
-                      44, 882 KM
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="  rounded-xl overflow-hidden">
-              <div className=" h-40 relative">
-                <img
-                  src={require("../../assets/images/image 7.png")}
-                  className=" object-cover  h-full w-full"
-                  alt=""
-                />
-                <div className=" absolute top-0 left-0">
-                  {/* <img src={require('../../assets/images/newstaps.png')} alt='' /> */}
-                </div>
-              </div>
-
-              <div className=" bg-[#0C53AB] py-2 px-4">
-                <h1 className=" text-white uppercase font-semibold">
-                  Audi A8 4-door sedan blue
-                </h1>
-                <div className="  mt-3 flex justify-between items-center">
-                  <div className=" flex gap-2 items-center">
-                    <FaCalendarAlt size={12} className=" text-white" />
-                    <span className=" text-white text-xs font-bold">2021</span>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={require("../../assets/images/layer6.png")}
-                      className=" w-4"
-                      alt=""
-                    />
-                    <span className=" text-white text-xs font-bold">
-                      4 Cylinder
-                    </span>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={require("../../assets/images/road-icon 1.png")}
-                      className=" w-3"
-                      alt=""
-                    />
-                    <span className=" text-white text-xs font-bold">
-                      44, 882 KM
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

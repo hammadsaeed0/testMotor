@@ -2,11 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const authReducer = createSlice({
   name: "authReducer",
   initialState: {
-    userToken: localStorage.getItem("userToken") || null,
+    userToken: localStorage.getItem("userToken")  ||  {},
   },
   reducers: {
     setUserToken: (state, action) => {
       state.userToken = action.payload;
+      localStorage.setItem("userToken", JSON.stringify(action.payload));
     },
     logout: (state, { payload }) => {
       localStorage.removeItem(payload);

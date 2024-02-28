@@ -36,12 +36,12 @@ const Input = ({ Icon, ...props }) => {
 };
 
 const MyGarage = () => {
-  const userId = localStorage.getItem("userToken");
+  const userId = JSON.parse(localStorage.getItem("userToken"));
   const [garage, setGrage] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${Base_url}/users/users-all-cars/${userId}`)
+      .get(`${Base_url}/users/users-all-cars/${userId?._id}`)
       .then((res) => {
         console.log(res);
         setGrage(res.data.cars);

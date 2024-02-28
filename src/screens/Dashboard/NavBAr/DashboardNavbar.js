@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../../store/reducers/authReducer";
+import { toast } from "react-toastify";
 const DashboardNavbar = () => {
   const [menuItems] = useState([
     { label: "My Account", path: "/dashboard/my-account" },
@@ -12,11 +13,15 @@ const DashboardNavbar = () => {
     { label: "Account Details", path: "/dashboard/account-details" },
   ]);
 
+
+  const navigate = useNavigate()
   const location = useLocation();
 
   const dispatch = useDispatch();
   const Logout = () => {
     dispatch(logout("userToken"));
+    toast.success('User logout successfully!')
+      navigate('/')
   };
 
   return (

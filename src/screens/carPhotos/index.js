@@ -16,7 +16,9 @@ const CarPhotos = () => {
   console.log(receivedData);
 
   const navigate = useNavigate();
-  const user = useSelector((state) => state.planReducer);
+  const user = useSelector((state) => state.authReducer);
+
+  console.log(user);
 
   const [loading,setLoader] = useState(false)
 
@@ -27,8 +29,8 @@ const CarPhotos = () => {
   console.log(selectedImage);
 
   useEffect(() => {
-    if (user?.userPlan && user?.userPlan?.photoLimit) {
-      setSelectedImages(Array(user?.userPlan?.photoLimit).fill(null));
+    if (user?.userToken?.plan      && user?.userToken?.plan?.photoLimit) {
+      setSelectedImages(Array(user?.userToken?.plan?.photoLimit).fill(null));
     }
   }, [user]);
 
