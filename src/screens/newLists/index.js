@@ -145,13 +145,14 @@ const NewLists = () => {
                         />
 
                         <div className=" absolute top-2 right-2">
-                          {item?.featured===true?<Button
-                            label={"featured"}
-                            className={
-                              " uppercase py-1 bg-lightBlue  text-sm  text-white font-semibold rounded-3xl"
-                            }
-                          />:null}
-                          
+                          {item?.featured === true ? (
+                            <Button
+                              label={"featured"}
+                              className={
+                                " uppercase py-1 bg-lightBlue  text-sm  text-white font-semibold rounded-3xl"
+                              }
+                            />
+                          ) : null}
                         </div>
 
                         <div className=" absolute bottom-0 flex justify-between w-full items-center px-2">
@@ -199,7 +200,7 @@ const NewLists = () => {
                               alt=""
                             />
                             <span className=" text-textColor font-bold sm:text-base text-sm">
-                              2021
+                              {item?.year}
                             </span>
                           </div>
                           <div className="flex gap-2 items-center">
