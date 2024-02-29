@@ -168,7 +168,7 @@ const Register = () => {
         
         } else {
           toast.error(res?.data?.message);
-          Swal.fire(res?.data?.message);
+          // Swal.fire(res?.data?.message);
           setLoader(false);
         }
       })

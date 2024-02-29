@@ -133,9 +133,9 @@ const SearchComponents = () => {
                   >
                     <option selected>Select Make</option>
                     <option value={"honda"}>Honda</option>
-                    <option value={"toyota"}>Toyota</option>
-                    <option value={"honda"}>Volkswagen</option>
-                    <option value={"honda"}>BMW</option>
+                    <option value={"Toyota"}>Toyota</option>
+                    <option value={"Volkswagen"}>Volkswagen</option>
+                    <option value={"BMW"}>BMW</option>
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
