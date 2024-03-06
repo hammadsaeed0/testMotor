@@ -20,6 +20,8 @@ const CarPhotos = () => {
 
   console.log(user);
 
+
+
   const [loading,setLoader] = useState(false)
 
   const [selectedImages, setSelectedImages] = useState([]);

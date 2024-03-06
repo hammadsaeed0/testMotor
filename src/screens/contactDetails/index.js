@@ -40,6 +40,8 @@ const ContactDetails = () => {
 
   console.log(user);
 
+ 
+
   const handlerSubmit = (e) => {
     setLoader(true);
     e.preventDefault();
@@ -50,12 +52,12 @@ const ContactDetails = () => {
       make: receivedData.make,
       model: receivedData.model,
       contact_name: "hammad",
-      year: receivedData?.year,
+      year:2024,
       vehicle_condition: receivedData.vehicle_condition,
-      mileage: receivedData.mileage,
+      mileage:Number( receivedData.mileage),
       vehicle_category: receivedData.vehicle_category,
       specifications: receivedData.specifications,
-      cylinder: Number(receivedData.cylinder),
+      cylinder:Number(receivedData.cylinder),
       engine_size: receivedData.engine_size,
       wheel_drive: receivedData.wheel_drive,
       gear_box: receivedData.gear_box,
@@ -87,9 +89,9 @@ const ContactDetails = () => {
       rear_brake_discs: receivedData.rear_brake_discs,
       battery: receivedData.battery,
       front_tire_size: receivedData.front_tire_size,
-      front_tire_price: receivedData.front_tire_price,
+      front_tire_price: Number(receivedData.front_tire_price),
       rear_tire_size: receivedData.rear_tire_size,
-      rear_tire_price: receivedData.rear_tire_price,
+      rear_tire_price: Number(receivedData.rear_tire_price),
       name: state.name,
       contact_details: "email234@gmail.com",
       mobile_no: state.mobile_no,

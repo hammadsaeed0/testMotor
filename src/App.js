@@ -26,6 +26,7 @@ import PublicRoute from "./routes/PublicRoute";
 import { useEffect } from "react";
 import ForgottenEmail from "./screens/auth/Forgotten/ForgottenEmail";
 import ForgottenPassword from "./screens/auth/Forgotten/ForgottenPassword";
+import GarageDetailsUpload from "./screens/Dashboard/Pages/garageDetailsUpload";
 function App() {
   const location = useLocation();
 
@@ -39,7 +40,14 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
-          <Route path="/choose_plane" element={<PublicRoute><ChoosePlane /></PublicRoute>} />
+          <Route
+            path="/choose_plane"
+            element={
+              <PublicRoute>
+                <ChoosePlane />
+              </PublicRoute>
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route
             path="/forgotten_email"
@@ -53,8 +61,6 @@ function App() {
           <Route path="/car_details_page/:id" element={<CarDetailPage />} />
           <Route path="/new_lists" element={<NewLists />} />
           <Route element={<PrivateRoute />}>
-          
-      
             <Route path="/car_photos" element={<CarPhotos />} />
             <Route path="/contact_details" element={<ContactDetails />} />
             <Route path="/car_inspection" element={<CarInspection />} />
@@ -74,8 +80,35 @@ function App() {
             path="/dashboard/garage-bookings"
             element={<GarageBooking />}
           ></Route>
+          <Route
+            path="/GarageDetails-upload"
+            element={<GarageDetailsUpload />}
+          ></Route>
           <Route path="/dashboard/my-inbox" element={<Inbox />} />
-        
+
+          {/* /garage-dashboard */}
+          <Route path="/garage-dashboard/my-account" element={<MyAccount />} />
+          <Route
+            path="/garage-dashboard/dashboard/my-garage"
+            element={<MyGarage />}
+          />
+          <Route
+            path="/garage-dashboard/dashboard/favourite-cars"
+            element={<FavouritCars />}
+          />
+          <Route
+            path="/garage-dashboard/garage-bookings"
+            element={<GarageBooking />}
+          ></Route>
+          <Route
+            path="/garage-dashboard/GarageDetails-upload"
+            element={<GarageDetailsUpload />}
+          ></Route>
+          <Route
+            path="/garage-dashboard/dashboard/my-inbox"
+            element={<Inbox />}
+          />
+
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/dealar" element={<Dealar />} />
         </Routes>

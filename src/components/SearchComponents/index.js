@@ -3,6 +3,8 @@ import Button from "../Button";
 import axios from "axios";
 import { Base_url } from "../../utils/Base_url";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import moment from "moment";
 const SearchComponents = () => {
   const [filter, setFilter] = useState("all");
 
@@ -76,6 +78,30 @@ const SearchComponents = () => {
       });
   };
 
+
+
+
+
+  const [allData, setAllData] = useState([]);
+
+  const user = useSelector((state) => state.authReducer);
+
+  console.log(user);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${Base_url}/admin/car-info/get-added-data/${user?.userToken?._id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setAllData(res.data);
+      })
+      .catch((error) => {});
+  }, []);
+
+
+
   return (
     <div>
       <div className="bg-[#ECECEC] py-9 rounded-2xl  border border-primary">
@@ -132,10 +158,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option selected>Select Make</option>
-                    <option value={"honda"}>Honda</option>
-                    <option value={"Toyota"}>Toyota</option>
-                    <option value={"Volkswagen"}>Volkswagen</option>
-                    <option value={"BMW"}>BMW</option>
+                    {allData?.fieldArrays?.make?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -148,15 +175,12 @@ const SearchComponents = () => {
                     value={state.model}
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
-                    <option>Select Model</option>
-                    <option value={"Jeep Gladiator"}>Jeep Gladiator</option>
-                    <option value={"Toyota Camry"}>Toyota Camry</option>
-                    <option value={"Chevorlet Corvette"}>
-                      Chevorlet Corvette
-                    </option>
-                    <option value={"Chevrolet"}>Chevrolet</option>
-                    <option value={"Dodge"}>Dodge</option>
-                    <option value={"Ford"}>Ford</option>
+                    <option selected>Select Model</option>
+                    {allData?.fieldArrays?.model?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -170,12 +194,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Select Year</option>
-                    <option value={"2019"}>2019</option>
-                    <option value={"2020"}>2020</option>
-                    <option value={"2021"}>2021</option>
-                    <option value={"2022"}>2022</option>
-                    <option value={"2023"}>2023</option>
-                    <option value={"2024"}>2024</option>
+                    {allData?.fieldArrays?.year?.map((item, index) => (
+                <option key={index} value={item}>
+                  {moment(item).format("l")}
+                </option>
+              ))}
                   </select>
                 </div>
 
@@ -190,12 +213,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Select Year</option>
-                    <option value={"2019"}>2019</option>
-                    <option value={"2020"}>2020</option>
-                    <option value={"2021"}>2021</option>
-                    <option value={"2022"}>2022</option>
-                    <option value={"2023"}>2023</option>
-                    <option value={"2024"}>2024</option>
+                    {allData?.fieldArrays?.year?.map((item, index) => (
+                <option key={index} value={item}>
+                  {moment(item).format("l")}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className=" md:w-48 w-full">
@@ -209,8 +231,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Select Condition</option>
-                    <option value={"New"}>New</option>
-                    <option value={"Old"}>Old</option>
+                    {allData?.fieldArrays?.vehicle_condition?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -224,12 +249,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Price Form</option>
-                    <option value={"200"}>200</option>
-                    <option value={"12000"}>12000</option>
-                    <option value={"30000"}>30000</option>
-                    <option value={"3000"}>3000</option>
-                    <option value={"2023"}>2023</option>
-                    <option value={"2024"}>2024</option>
+                    {allData?.fieldArrays?.price_QR?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -243,12 +267,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Price To</option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.price_QR?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -311,12 +334,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.cylinder} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Cylinder</option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.cylinder?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -327,12 +349,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.engine_size} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Engine Size</option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.engine_size?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -359,12 +380,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.warranty} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select</option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.warranty?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -375,12 +395,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.exterior_colour} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select </option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.exterior_colour?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -391,12 +410,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.interior_colour} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select </option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.interior_colour?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -407,12 +425,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.specifications} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Specifications </option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.specifications?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
             
@@ -424,12 +441,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.type_of_ad} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select </option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.type_of_ad?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
               </div>
@@ -490,10 +506,11 @@ const SearchComponents = () => {
                   </label>
                   <select className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Make</option>
-                    <option value={"honda"}>Honda</option>
-                    <option value={"honda"}>Toyota</option>
-                    <option value={"honda"}>Volkswagen</option>
-                    <option value={"honda"}>BMW</option>
+                    {allData?.fieldArrays?.make?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-60 w-full">
@@ -502,12 +519,11 @@ const SearchComponents = () => {
                   </label>
                   <select className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Model</option>
-                    <option value={"honda"}>Jeep Gladiator</option>
-                    <option value={"honda"}>Toyota Camry</option>
-                    <option value={"honda"}>Chevorlet Corvette</option>
-                    <option value={"honda"}>Chevrolet</option>
-                    <option value={"honda"}>Dodge</option>
-                    <option value={"honda"}>Ford</option>
+                    {allData?.fieldArrays?.model?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-60 w-full">
@@ -516,12 +532,11 @@ const SearchComponents = () => {
                   </label>
                   <select className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Year</option>
-                    <option value={"honda"}>2019</option>
-                    <option value={"honda"}>2020</option>
-                    <option value={"honda"}>2021</option>
-                    <option value={"honda"}>2022</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.year?.map((item, index) => (
+                <option key={index} value={item}>
+                  {moment(item).format("l")}
+                </option>
+              ))}
                   </select>
                 </div>
               </div>
@@ -583,11 +598,12 @@ const SearchComponents = () => {
                     value={state.make}
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
-                    <option selected>Select Make</option>
-                    <option value={"honda"}>Honda</option>
-                    <option value={"toyota"}>Toyota</option>
-                    <option value={"honda"}>Volkswagen</option>
-                    <option value={"honda"}>BMW</option>
+                    <option>Select Make</option>
+                      {allData?.fieldArrays?.make?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -601,14 +617,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Select Model</option>
-                    <option value={"Jeep Gladiator"}>Jeep Gladiator</option>
-                    <option value={"Toyota Camry"}>Toyota Camry</option>
-                    <option value={"Chevorlet Corvette"}>
-                      Chevorlet Corvette
-                    </option>
-                    <option value={"Chevrolet"}>Chevrolet</option>
-                    <option value={"Dodge"}>Dodge</option>
-                    <option value={"Ford"}>Ford</option>
+                    {allData?.fieldArrays?.model?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -622,12 +635,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Select Year</option>
-                    <option value={"2019"}>2019</option>
-                    <option value={"2020"}>2020</option>
-                    <option value={"2021"}>2021</option>
-                    <option value={"2022"}>2022</option>
-                    <option value={"2023"}>2023</option>
-                    <option value={"2024"}>2024</option>
+                    {allData?.fieldArrays?.year?.map((item, index) => (
+                <option key={index} value={item}>
+                  {moment(item).format("l")}
+                </option>
+              ))}
                   </select>
                 </div>
 
@@ -642,12 +654,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Select Year</option>
-                    <option value={"2019"}>2019</option>
-                    <option value={"2020"}>2020</option>
-                    <option value={"2021"}>2021</option>
-                    <option value={"2022"}>2022</option>
-                    <option value={"2023"}>2023</option>
-                    <option value={"2024"}>2024</option>
+                    {allData?.fieldArrays?.year?.map((item, index) => (
+                <option key={index} value={item}>
+                  {moment(item).format("l")}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className=" md:w-48 w-full">
@@ -661,8 +672,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Select Condition</option>
-                    <option value={"New"}>New</option>
-                    <option value={"Old"}>Old</option>
+                    {allData?.fieldArrays?.vehicle_condition?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -676,12 +690,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Price Form</option>
-                    <option value={"200"}>200</option>
-                    <option value={"12000"}>12000</option>
-                    <option value={"30000"}>30000</option>
-                    <option value={"3000"}>3000</option>
-                    <option value={"2023"}>2023</option>
-                    <option value={"2024"}>2024</option>
+                    {allData?.fieldArrays?.price_QR?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -695,12 +708,11 @@ const SearchComponents = () => {
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]"
                   >
                     <option>Price To</option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.price_QR?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 
@@ -726,12 +738,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.cylinder} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Cylinder</option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.cylinder?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
               
@@ -759,12 +770,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.warranty} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select</option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.warranty?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -775,12 +785,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.exterior_colour} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select </option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.exterior_colour?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -791,12 +800,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.interior_colour} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select </option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.interior_colour?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-48 w-full">
@@ -807,12 +815,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.specifications} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Specifications </option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.specifications?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
             
@@ -824,12 +831,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.type_of_ad} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select </option>
-                    <option value={"honda"}>200</option>
-                    <option value={"honda"}>12000</option>
-                    <option value={"honda"}>30000</option>
-                    <option value={"honda"}>3000</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.type_of_ad?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
               </div>
@@ -892,10 +898,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.make} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Make</option>
-                    <option value={"honda"}>Honda</option>
-                    <option value={"honda"}>Toyota</option>
-                    <option value={"honda"}>Volkswagen</option>
-                    <option value={"honda"}>BMW</option>
+                    {allData?.fieldArrays?.make?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-60 w-full">
@@ -907,12 +914,11 @@ const SearchComponents = () => {
                     value={state.model}
                     className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Model</option>
-                    <option value={"honda"}>Jeep Gladiator</option>
-                    <option value={"honda"}>Toyota Camry</option>
-                    <option value={"honda"}>Chevorlet Corvette</option>
-                    <option value={"honda"}>Chevrolet</option>
-                    <option value={"honda"}>Dodge</option>
-                    <option value={"honda"}>Ford</option>
+                    {allData?.fieldArrays?.model?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
                 <div className="  md:w-60 w-full">
@@ -923,12 +929,11 @@ const SearchComponents = () => {
                     onChange={handleInputs}
                     value={state.yearFrom} className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-lg w-full border-[#E9DBDB]">
                     <option>Select Year</option>
-                    <option value={"honda"}>2019</option>
-                    <option value={"honda"}>2020</option>
-                    <option value={"honda"}>2021</option>
-                    <option value={"honda"}>2022</option>
-                    <option value={"honda"}>2023</option>
-                    <option value={"honda"}>2024</option>
+                    {allData?.fieldArrays?.year?.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
                   </select>
                 </div>
 

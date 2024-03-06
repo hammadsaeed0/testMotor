@@ -23,6 +23,7 @@ import Footer from "../../components/footer";
 import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 import { REACT_APP_GOOGLE_MAPS_KEY } from "../../utils/Google_map_key";
 import moment from "moment";
+import { useSelector } from "react-redux";
 const CarDetailPage = ({
   children: slides,
   autoSlide = false,
@@ -39,6 +40,10 @@ const CarDetailPage = ({
   const [newListings, setNewListings] = useState({});
   const { id } = useParams();
 
+  const user = useSelector((state) => state.authReducer);
+
+  console.log(user);
+
   useEffect(() => {
     axios
       .get(`${Base_url}/users/get-single-car/${id}`)
@@ -46,10 +51,17 @@ const CarDetailPage = ({
         console.log(res);
         setNewListings(res?.data?.message);
         const pos = {
-          lat:res?.data?.messag?.latitude,
+          lat: res?.data?.messag?.latitude,
           lng: res?.data?.messag?.longitude,
         };
         setSelectedLocation(pos);
+      })
+      .catch((error) => {});
+
+    axios
+      .post(`${Base_url}/dashboard/click-counter/${id}`)
+      .then((res) => {
+        console.log(res, "dashboard/click-counter");
       })
       .catch((error) => {});
   }, [id]);
@@ -88,7 +100,7 @@ const CarDetailPage = ({
     lat: 51.520067,
     lng: 25.276987,
   });
-   
+
   const [filteredResults, setFilteredResults] = useState([]);
   useEffect(() => {
     const url = `${Base_url}/users/advance-searching`;
