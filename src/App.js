@@ -26,7 +26,7 @@ import PublicRoute from "./routes/PublicRoute";
 import { useEffect } from "react";
 import ForgottenEmail from "./screens/auth/Forgotten/ForgottenEmail";
 import ForgottenPassword from "./screens/auth/Forgotten/ForgottenPassword";
-import GarageDetailsUpload from "./screens/Dashboard/Pages/garageDetailsUpload";
+import GarageDetailsUpload from "./screens/GarageDashboard/Pages/garageDetailsUpload";
 function App() {
   const location = useLocation();
 

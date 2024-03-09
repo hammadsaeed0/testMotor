@@ -45,6 +45,30 @@ const GarageDetailsUpload = () => {
   const [lat, setLat] = useState(currentLocation.lat);
   const [lng, setLng] = useState(currentLocation.lng);
 
+
+
+  
+  const [services, setServices] = useState([]);
+
+
+  console.log(services);
+
+  // Handles input changes for service details
+  const handleInputChange = (index, event) => {
+    const updatedServices = services.map((service, i) => {
+      if (i === index) {
+        return { ...service, [event.target.name]: event.target.value };
+      }
+      return service;
+    });
+    setServices(updatedServices);
+  };
+
+  // Adds a new service input
+  const addService = () => {
+    setServices([...services, { name: '', price: '' }]);
+  };
+
   useEffect(() => {
     const getCurrentLocation = () => {
       if (navigator.geolocation) {
@@ -119,23 +143,25 @@ const GarageDetailsUpload = () => {
 
   console.log(report);
   const [state, setState] = useState({
-    title: "",
-    type_of_ad: "",
-    make: "",
-    model: "",
-    year: "",
-    vehicle_condition: "",
-    mileage: "",
-    vehicle_category: "",
-    specifications: "",
-    cylinder: "",
-    engine_size: "",
-    wheel_drive: "",
-    gear_box: "",
-    exterior_colour: "",
-    interior_colour: "",
-    fuel_type: "",
-    registration_date: "",
+    garageOwnerId: "",
+    userId: "",
+    typeofListing: "",
+    carId: "",
+    garageName: "",
+    address: "",
+    workingDays: "",
+    workingHours: "",
+    mobileGarage: "",
+    pickupDelivery: "",
+    availableDays: "",
+    availableDatesFrom: "",
+    services:services,
+    name: "",
+    number: "",
+    whatsapp: "",
+    email: "",
+    status: "",
+    about: "",
     warranty: "",
     warranty_date: "",
     inspected: "",
@@ -147,22 +173,6 @@ const GarageDetailsUpload = () => {
     longitude: currentLocation.lng,
     latitude: currentLocation.lat,
     inspection_report: report,
-    engine_oil: "",
-    engine_oil_filter: "",
-    gearbox_oil: "",
-    ac_filter: "",
-    air_filter: "",
-    fuel_filter: "",
-    spark_plugs: "",
-    front_brake_pads: "",
-    rear_brake_pads: "",
-    front_brake_discs: "",
-    rear_brake_discs: "",
-    battery: "",
-    front_tire_size: "",
-    front_tire_price: "",
-    rear_tire_size: "",
-    rear_tire_price: "",
   });
 
   console.log(state);
@@ -215,9 +225,7 @@ const GarageDetailsUpload = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `${Base_url}/admin/car-info/get-added-data/${user?.userToken?._id}`
-      )
+      .get(`${Base_url}/admin/car-info/get-added-data/${user?.userToken?._id}`)
       .then((res) => {
         console.log(res.data);
         setAllData(res.data);
@@ -225,16 +233,24 @@ const GarageDetailsUpload = () => {
       .catch((error) => {});
   }, []);
 
+
+
+
+
+
+
+
+
   return (
     <div>
       <Header />
       <div className=" py-8 text-center">
         <h2 className=" h2  text-center">Garage Listings</h2>
         <p className=" pt-2 text-gray-400">
-        Create  Vehicles Service Providers & Garages
+          Create Vehicles Service Providers & Garages
         </p>
       </div>
-     
+
       <div className="   pb-4 md:px-12 px-6">
         <ul className=" flex gap-8 justify-center items-center">
           <li className=" flex items-center gap-2">
@@ -256,8 +272,6 @@ const GarageDetailsUpload = () => {
               <span className=" text-primary font-bold">Confirmation</span>
             </div>
           </li>
-          
-        
         </ul>
       </div>
       <form
@@ -282,7 +296,6 @@ const GarageDetailsUpload = () => {
             />
           </div>
 
-
           <div>
             <Input
               type="text"
@@ -297,17 +310,17 @@ const GarageDetailsUpload = () => {
           </div>
           <div>
             <label className="block text-sm text-left  font-medium  text-textColor">
-            Address
+              Address
             </label>
             <select
               onChange={handleInputs}
-              value={state.year}
-              name={"year"}
+              value={state.address}
+              name={"address"}
               className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-md w-full"
               required
             >
               <option value={""} selected>
-              Select type
+                Select type
               </option>
 
               {allData?.fieldArrays?.year?.map((item, index) => (
@@ -362,50 +375,65 @@ const GarageDetailsUpload = () => {
           </div>
           <div>
             <label className="block text-sm text-left  font-medium  text-textColor">
-            Working Days
+              Working Days
             </label>
             <select
               onChange={handleInputs}
-              value={state.year}
-              name={"year"}
+              value={state.workingDays}
+              name={"workingDays"}
               className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-md w-full"
               required
             >
               <option value={""} selected>
-                Select Vehicle Category
+                Select  working Days
               </option>
 
-              {allData?.fieldArrays?.year?.map((item, index) => (
-                <option key={index} value={item}>
-                  {moment(item).format("l")}
+             
+                <option  value={'Monday'}>
+                    Monday
                 </option>
-              ))}
+                <option  value={'Tuesday'}>
+                    Tuesday
+                </option>
+                <option  value={'Wednesday'}>
+                    Wednesday
+                </option>
+                <option  value={'Thursday'}>
+                Thursday
+                </option>
+                <option  value={'Friday'}>
+                Friday
+                </option>
+           
             </select>
           </div>
           <div>
             <label className="block text-sm text-left  font-medium  text-textColor">
-            Working Hours
+              Working Hours
             </label>
             <select
               onChange={handleInputs}
-              value={state.vehicle_condition}
-              name={"vehicle_condition"}
+              value={state.workingHours}
+              name={"workingHours"}
               className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-md w-full"
               required
             >
               <option value={""} selected>
-              Select Specifications
+                Select Working Hours
               </option>
-              {allData?.fieldArrays?.vehicle_condition?.map((item, index) => (
-                <option key={index} value={item}>
-                  {item}
+             
+                <option >
+                9:00 AM - 5:00 PM
                 </option>
-              ))}
+                <option   >
+                9:00 AM - 5:00 PM
+                </option>
+            
             </select>
           </div>
           <div>
             <label className="block text-sm text-left  font-medium  text-textColor">
-            Mobile Garage
+              Mobile Garage
             </label>
             <select
               onChange={handleInputs}
@@ -414,7 +442,7 @@ const GarageDetailsUpload = () => {
               className="mt-1 bg-[#FEFBFB] text-gray-600 p-2 border rounded-md w-full"
               required="required"
             >
-              <option>Enter Engine  Size</option>
+              <option>Enter Engine Size</option>
 
               {allData?.fieldArrays?.vehicle_category?.map((item, index) => (
                 <option key={index} value={item}>
@@ -425,7 +453,7 @@ const GarageDetailsUpload = () => {
           </div>
           <div>
             <label className="block text-sm text-left  font-medium  text-textColor">
-            Pickup & Deliver Service
+              Pickup & Deliver Service
             </label>
             <select
               onChange={handleInputs}
@@ -483,7 +511,7 @@ const GarageDetailsUpload = () => {
               ))}
             </select>
           </div>
-        
+
           <div>
             <Input
               type={"date"}
@@ -497,7 +525,7 @@ const GarageDetailsUpload = () => {
               required="required"
             />
           </div>
-        
+
           <div>
             <Input
               type={"date"}
@@ -511,7 +539,7 @@ const GarageDetailsUpload = () => {
               // Icon={<FaCalendarAlt className=" text-textColor" size={20} />}
             />
           </div>
-        
+
           <div>
             <p className=" text-textColor font-semibold">Garage Logo</p>
             {selectedImage ? (
@@ -553,7 +581,7 @@ const GarageDetailsUpload = () => {
                     className="hidden"
                   />
                   <span className=" text-secondary font-semibold ">
-                  Garage Logo
+                    Garage Logo
                   </span>
                 </div>
               </label>
@@ -563,14 +591,13 @@ const GarageDetailsUpload = () => {
               Maximum File Size 1Mb
             </p>
           </div>
-          
 
           <div>
             <Input
               type={"text"}
               onChange={handleInputs}
-              value={state.description}
-              name={"description"}
+              value={state.about}
+              name={"about"}
               className={"  border w-full h-24   p-2 bg-[#FEFBFB]"}
               placeholder={"Enter Description"}
               label={"About"}
@@ -598,7 +625,7 @@ const GarageDetailsUpload = () => {
                     />
                     <div className="search-location-input   bg-white   absolute top-0  w-full">
                       <label className="block text-sm font-medium text-textColor">
-                      Garage  Location
+                        Garage Location
                       </label>
 
                       <Autocomplete
@@ -627,9 +654,9 @@ const GarageDetailsUpload = () => {
 
         <h2 className=" h4  text-center mt-10 pb-7"> Services & Prices</h2>
         <div className=" flex flex-wrap gap-6">
-        <div className=" w-full">
+          <div className=" w-full">
             <label className="block text-sm text-left  font-medium  text-textColor">
-            Categories
+              Categories
             </label>
             <select
               onChange={handleInputs}
@@ -647,99 +674,109 @@ const GarageDetailsUpload = () => {
               ))}
             </select>
           </div>
-       
-          <div className="   md:w-[48%] w-[100%]">
-            <Input
-              type={"text"}
-              onChange={handleInputs}
-              value={state.rear_brake_discs}
-              name={"rear_brake_discs"}
-              className={"  border w-full p-2  bg-[#FEFBFB]"}
-              placeholder={"Enter price"}
-              label={"Service 1"}
-              required="required"
-            />
-          </div>
-          <div className="   md:w-[48%] w-[100%]">
-            <Input
-              type={"text"}
-              onChange={handleInputs}
-              value={state.battery}
-              name={"battery"}
-              className={"  border w-full p-2  bg-[#FEFBFB]"}
-              placeholder={"Enter Price"}
-              label={"Price"}
-              required="required"
-            />
-          </div>
 
-         <div className="  mx-auto">
-        <div>
-        <button
-                
+          {services.map((service, index) => (
+            <div key={index} className=" flex w-full gap-8">
+<div  className="md:w-[48%] w-[100%]">
+          <Input
+            type="text"
+            onChange={(e) => handleInputChange(index, e)}
+            value={service.name}
+            name="name"
+            className="border w-full p-2 bg-[#FEFBFB]"
+            placeholder="Enter service name"
+            label="Service Name"
+            required="required"
+          />
+         
+        </div>
+        <div   className="md:w-[48%] w-[100%]">
+           <Input
+            type="text"
+            onChange={(e) => handleInputChange(index, e)}
+            value={service.price}
+            name="price"
+            className="border w-full p-2 bg-[#FEFBFB]"
+            placeholder="Enter price"
+            label="Price"
+            required="required"
+          />
+        </div>
+            </div>
+        
+      ))}
+
+       
+        </div>
+
+
+        <div className="  mx-auto pt-6">
+            <div>
+              <button
+               onClick={addService}
                 type="button"
                 class=" font-bold w-44 uppercase text-[#0C53AB]  border-primary border-2 rounded-full py-2 flex  justify-center gap-2 items-center"
               >
-                <MdAddCircleOutline color="#0C53AB" size={25}  />
+                <MdAddCircleOutline color="#0C53AB" size={25} />
                 <span>Add Service</span>
               </button>
-        </div>
-             
-             <span className=" text-secondary text-sm text-center pt-4 pl-8">Clear search</span>
-             
-         </div>
-        </div>
+            </div>
+
+            <span className=" text-secondary text-sm text-center pt-4 pl-8">
+              Clear search
+            </span>
+          </div>
 
         <h2 className=" h4  text-center mt-10 pb-7"> Contact Details</h2>
         <div className=" flex flex-wrap gap-6">
           <div className=" w-[100%]">
-              <Input
-                type="text"
-                onChange={handleInputs}
-                value={state.name}
-                name={"name"}
-                className={"  border w-full p-2  bg-[#FEFBFB]"}
-                placeholder={"Enter Your Name"}
-                label={"Name"}
-                required={"required"}
-              />
-            </div>
-            <div className="  w-[100%]">
-              <Input
-                type="number"
-                onChange={handleInputs}
-                value={state.mobile_no}
-                name={"mobile_no"}
-                className={"  border w-full p-2  bg-[#FEFBFB]"}
-                placeholder={"Mobile No."}
-                label={"Enter Mobile No"}
-                required={"required"}
-              />
-            </div>
-            <div className="  w-[100%]">
-              <Input
-                type="number"
-                onChange={handleInputs}
-                value={state.whatsapp_no}
-                name={"whatsapp_no"}
-                className={"  border w-full p-2  bg-[#FEFBFB]"}
-                placeholder={"Whatsapp No."}
-                label={"Enter Whatsapp No"}
-                required={"required"}
-              />
-            </div>
-            <div className="   w-[100%]">
-              <Input
-                type="email"
-                onChange={handleInputs}
-                value={state.email_address}
-                name={"email_address"}
-                className={"  border w-full p-2  bg-[#FEFBFB]"}
-                placeholder={"Email Address"}
-                label={"Enter Email Address"}
-                required={"required"}
-              />
-            </div>
+            <Input
+              type="text"
+              onChange={handleInputs}
+              value={state.name}
+              name={"name"}
+              className={"  border w-full p-2  bg-[#FEFBFB]"}
+              placeholder={"Enter Your Name"}
+              label={"Name"}
+              required={"required"}
+            />
+          </div>
+          <div className="  w-[100%]">
+            <Input
+              type="number"
+              onChange={handleInputs}
+              value={state.whatsapp}
+              name={"whatsapp"}
+              className={"  border w-full p-2  bg-[#FEFBFB]"}
+              placeholder={"Mobile No."}
+              label={"Enter Mobile No"}
+              required={"required"}
+            />
+          </div>
+          <div className="  w-[100%]">
+            <Input
+              type="number"
+              onChange={handleInputs}
+              value={state.number}
+              name={"number"}
+              className={"  border w-full p-2  bg-[#FEFBFB]"}
+              placeholder={"Whatsapp No."}
+              label={"Enter Whatsapp No"}
+              required={"required"}
+            />
+          </div>
+          <div className="   w-[100%]">
+            <Input
+              type="email"
+              onChange={handleInputs}
+              value={state.email}
+              name={"email"}
+              className={"  border w-full p-2  bg-[#FEFBFB]"}
+              placeholder={"Email Address"}
+              label={"Enter Email Address"}
+              required={"required"}
+            />
+          </div>
         </div>
         <div className=" container flex justify-between items-center mx-auto mt-10 mb-20">
           <div className="  flex items-center gap-3"></div>
