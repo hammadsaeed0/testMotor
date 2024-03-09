@@ -10,7 +10,7 @@ import CarDetails from "./screens/carDetails";
 import CarPhotos from "./screens/carPhotos";
 import ContactDetails from "./screens/contactDetails";
 import CarInspection from "./screens/carInspection";
-import GarageBookingConfirmation from "./screens/garageBookingConfirmation";
+// import GarageBookingConfirmation from "./screens/garageBookingConfirmation";
 import CarDetailPage from "./screens/carDetailPage";
 import MyAccount from "./screens/Dashboard/Pages/MyAccount/MyAccount";
 import MyGarage from "./screens/Dashboard/Pages/MyGarage/MyGarage";
@@ -27,6 +27,7 @@ import { useEffect } from "react";
 import ForgottenEmail from "./screens/auth/Forgotten/ForgottenEmail";
 import ForgottenPassword from "./screens/auth/Forgotten/ForgottenPassword";
 import GarageDetailsUpload from "./screens/GarageDashboard/Pages/garageDetailsUpload";
+import GarageBookingConfirmation from "./screens/GarageDashboard/Pages/garageBookingConfirmation";
 function App() {
   const location = useLocation();
 
@@ -78,11 +79,7 @@ function App() {
           <Route path="/dashboard/favourite-cars" element={<FavouritCars />} />
           <Route
             path="/dashboard/garage-bookings"
-            element={<GarageBooking />}
-          ></Route>
-          <Route
-            path="/GarageDetails-upload"
-            element={<GarageDetailsUpload />}
+            element={<GarageBooking/>}
           ></Route>
           <Route path="/dashboard/my-inbox" element={<Inbox />} />
 

@@ -1,17 +1,15 @@
 import React from "react";
 import { FaAngleRight, FaLocationDot, FaWhatsapp } from "react-icons/fa6";
-import Input from "../../components/Input";
-import Option from "../../components/Option";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaLocationCrosshairs } from "react-icons/fa6";
 import {
   LiaLongArrowAltLeftSolid,
   LiaLongArrowAltRightSolid,
 } from "react-icons/lia";
-import Button from "../../components/Button";
+import Button from "../../../../components/Button";
 import { IoCall, IoClose } from "react-icons/io5";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
+import Header from "../../../../components/header";
+import Footer from "../../../../components/footer";
 const GarageBookingConfirmation = () => {
   const options = ["select Type", "Gently Used"];
   const fuel = ["select Fuel Type", "Gently Used"];
