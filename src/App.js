@@ -28,6 +28,7 @@ import ForgottenEmail from "./screens/auth/Forgotten/ForgottenEmail";
 import ForgottenPassword from "./screens/auth/Forgotten/ForgottenPassword";
 import GarageDetailsUpload from "./screens/GarageDashboard/Pages/garageDetailsUpload";
 import GarageBookingConfirmation from "./screens/GarageDashboard/Pages/garageBookingConfirmation";
+import GaragePageWhite from "./screens/GarageDashboard/Pages/GaragePageWhite";
 function App() {
   const location = useLocation();
 
@@ -105,6 +106,13 @@ function App() {
             path="/garage-dashboard/dashboard/my-inbox"
             element={<Inbox />}
           />
+
+
+<Route
+            path="/garage-dashboard/garagePageWhite"
+            element={<GaragePageWhite />}
+          />
+
 
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/dealar" element={<Dealar />} />
