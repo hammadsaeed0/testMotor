@@ -10,6 +10,10 @@ import Button from "../../../../components/Button";
 import { IoCall, IoClose } from "react-icons/io5";
 import Header from "../../../../components/header";
 import Footer from "../../../../components/footer";
+import { Base_url } from "../../../../utils/Base_url";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 const GarageBookingConfirmation = () => {
   const options = ["select Type", "Gently Used"];
   const fuel = ["select Fuel Type", "Gently Used"];
@@ -18,6 +22,38 @@ const GarageBookingConfirmation = () => {
     console.log("Selected options:", selectedOptions);
     // You can perform any other actions with the selected options
   };
+
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+  var base_origin = window.location.origin;
+
+  const userId = JSON.parse(localStorage.getItem("userToken"));
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    const params = {
+      "userId":'65e8922abb0ebf844052c695',
+    };
+
+    axios
+      .post(`${Base_url}/users/garages/book-garage/${id}`, params)
+      .then((res) => {
+        console.log(res);
+        if (res.data.success === true) {
+          toast.success("Garage booking successfully!");
+          navigate(`${base_origin}`);
+          
+        } else {
+          toast.error(res?.data?.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error?.response?.data?.message);
+      });
+  };
+
   return (
     <div>
       <Header />
@@ -141,13 +177,15 @@ const GarageBookingConfirmation = () => {
         </div>
       </div>
 
-      <div className=" container flex justify-between items-center mx-auto mt-10 mb-20">
+      <div className=" container px-12 flex justify-between items-center mx-auto mt-10 mb-20">
         <div className="  flex items-center gap-3">
           <LiaLongArrowAltLeftSolid />
           <span className=" text-textColor font-semibold">Back</span>
         </div>
         <div>
           <Button
+
+            onClick={handlerSubmit}
             label={"Submit"}
             className={
               " bg-primary font-bold rounded-3xl text-white w-44 py-1.5"

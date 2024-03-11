@@ -66,10 +66,7 @@ function App() {
             <Route path="/car_photos" element={<CarPhotos />} />
             <Route path="/contact_details" element={<ContactDetails />} />
             <Route path="/car_inspection" element={<CarInspection />} />
-            <Route
-              path="/garage_booking_confirmation"
-              element={<GarageBookingConfirmation />}
-            />
+           
 
             <Route path="/news" element={<News />} />
           </Route>
@@ -113,7 +110,10 @@ function App() {
             element={<GaragePageWhite />}
           />
 
-
+<Route
+              path="/garage_booking_confirmation/:id"
+              element={<GarageBookingConfirmation />}
+            />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/dealar" element={<Dealar />} />
         </Routes>
