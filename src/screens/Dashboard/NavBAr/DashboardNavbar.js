@@ -30,7 +30,7 @@ const DashboardNavbar = () => {
         <div className=" mx-auto flex justify-between items-center">
           {/* Menu items */}
           <div className="w-full h-[105px] top-[187px] px-[40px] pb-[40px] border-t border-solid  justify-between border-b-4 border-[#F3EDED]">
-            <ul className="w-full mt-6 block md:flex items-center text-indigo-800 justify-between h-[104px]">
+            <ul className="w-full mt-6 flex items-center text-indigo-800 justify-between h-[104px]">
               {menuItems.map((item, index) => (
                 <li
                   key={index}

@@ -33,7 +33,7 @@ const GarageBookingConfirmation = () => {
   const handlerSubmit = (e) => {
     e.preventDefault();
     const params = {
-      "userId":'65e8922abb0ebf844052c695',
+      userId: "65e8922abb0ebf844052c695",
     };
 
     axios
@@ -42,8 +42,7 @@ const GarageBookingConfirmation = () => {
         console.log(res);
         if (res.data.success === true) {
           toast.success("Garage booking successfully!");
-          navigate(`${base_origin}`);
-          
+          navigate(`/`);
         } else {
           toast.error(res?.data?.message);
         }
@@ -184,7 +183,6 @@ const GarageBookingConfirmation = () => {
         </div>
         <div>
           <Button
-
             onClick={handlerSubmit}
             label={"Submit"}
             className={

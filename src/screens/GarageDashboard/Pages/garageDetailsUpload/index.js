@@ -230,7 +230,7 @@ const GarageDetailsUpload = () => {
           .then((res) => {
             console.log(res);
             if (res.data.success === true) {
-              navigate(`http://localhost:3001/garage`);
+              navigate(`/`);
               setLoader(false);
 
               toast.success("Garage  add successfully!");

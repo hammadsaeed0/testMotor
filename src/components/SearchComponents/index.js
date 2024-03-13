@@ -80,6 +80,12 @@ const SearchComponents = () => {
 
 
 
+  const AllFilterFunSecond = ()=>{
+     navigate('/garage-dashboard/garagePageWhite')
+  }
+
+
+
 
 
   const [allData, setAllData] = useState([]);
@@ -978,7 +984,7 @@ const SearchComponents = () => {
                  </button>
                 ):(
 <Button
-                  onClick={AllFilterFun}
+                  onClick={AllFilterFunSecond}
                   label={"Search"}
                   className={
                     " bg-primary py-2 w-48 mx-auto text-white rounded-3xl"

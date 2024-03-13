@@ -3,6 +3,7 @@ import Input from "../Input";
 import { FaCar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
+import { useSelector } from "react-redux";
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -17,6 +18,10 @@ const Header = () => {
   const openLanguage = () => {
     setLanguage(!language);
   };
+
+  const user = useSelector((state) => state.authReducer);
+
+  console.log(user);
 
   return (
     <nav className="bg-white sticky z-40 top-0">
@@ -33,7 +38,7 @@ const Header = () => {
                 Icon={<IoSearch size={20} className="  text-textColor" />}
                 placeholder={"Search cars..."}
                 className={
-                  "border-[#0C53AB] border-2 py-2.5  font-normal  text-sm md:w-96 w-60 bg-white"
+                  "border-[#0C53AB] border-2 py-2.5  font-normal  text-sm md:w-72 w-60 bg-white"
                 }
               />
             </div>
@@ -51,11 +56,25 @@ const Header = () => {
               Home
             </Link>
           </li>
+          {user?.userToken?._id ? (
+            <li>
+              <Link className="uppercase" to={"/garage-dashboard/my-account"}>
+                Dashboard
+              </Link>
+            </li>
+          ) : null}
+
           <li>
             <Link className="uppercase" to={"/car_inspection"}>
               About Us
             </Link>
           </li>
+          <li>
+            <Link className="uppercase" to={"/new_lists"}>
+              Car
+            </Link>
+          </li>
+
           <li>
             <Link className="uppercase" to={"/new_lists"}>
               Car
@@ -75,7 +94,8 @@ const Header = () => {
               Sell My Car
             </Link>
           </li>
-          <li className=" relative">
+
+          {/* <li className=" relative">
             <button
               onClick={openLanguage}
               id="dropdownDefaultButton"
@@ -101,7 +121,7 @@ const Header = () => {
               </svg>
             </button>
 
-            {/* <!-- Dropdown menu --> */}
+            <!-- Dropdown menu -->
             {language === true ? (
               <div
                 id="dropdown"
@@ -140,7 +160,7 @@ const Header = () => {
                 </ul>
               </div>
             ) : null}
-          </li>
+          </li> */}
           {/* <NavLinks /> */}
         </ul>
 

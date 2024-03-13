@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Tabs = ({ tabs, defaultTab, className,Icons}) => {
+const Tabs = ({ tabs, defaultTab, className, Icons }) => {
   const [activeTab, setActiveTab] = useState(defaultTab);
 
   return (
@@ -9,14 +9,15 @@ const Tabs = ({ tabs, defaultTab, className,Icons}) => {
         {tabs.map((tab) => (
           <button
             key={tab.title}
-            className={`px-4 py-1.5 ${className} ${
+            className={`px-4 flex justify-center items-center gap-2 py-2 ${className} ${
               activeTab === tab.title
-                ? "  w-full text-black  bg-[#DCD9D9] "
+                ? "  w-full text-black   bg-[#BAB9B9] "
                 : "bg-[#DCD9D9]  text-black  flex gap-3 justify-center w-full"
             }`}
             onClick={() => setActiveTab(tab.title)}
           >
-          {<span>{Icons}</span>}  <span>{tab.title}</span>
+            
+            {tab.Icons} <span>{tab.title}</span>
           </button>
         ))}
       </div>

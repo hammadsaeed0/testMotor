@@ -66,20 +66,24 @@ function App() {
             <Route path="/car_photos" element={<CarPhotos />} />
             <Route path="/contact_details" element={<ContactDetails />} />
             <Route path="/car_inspection" element={<CarInspection />} />
-           
 
             <Route path="/news" element={<News />} />
+
+            {/* seller Dashboard */}
+
+            <Route path="/dashboard/my-account" element={<MyAccount />} />
+            <Route path="/dashboard/my-garage" element={<MyGarage />} />
+            <Route
+              path="/dashboard/favourite-cars"
+              element={<FavouritCars />}
+            />
+            <Route
+              path="/dashboard/garage-bookings"
+              element={<GarageBooking />}
+            ></Route>
+            <Route path="/dashboard/my-inbox" element={<Inbox />} />
           </Route>
           <Route path="/car_details" element={<CarDetails />} />
-          {/* Dashboard */}
-          <Route path="/dashboard/my-account" element={<MyAccount />} />
-          <Route path="/dashboard/my-garage" element={<MyGarage />} />
-          <Route path="/dashboard/favourite-cars" element={<FavouritCars />} />
-          <Route
-            path="/dashboard/garage-bookings"
-            element={<GarageBooking/>}
-          ></Route>
-          <Route path="/dashboard/my-inbox" element={<Inbox />} />
 
           {/* /garage-dashboard */}
           <Route path="/garage-dashboard/my-account" element={<MyAccount />} />
@@ -104,16 +108,15 @@ function App() {
             element={<Inbox />}
           />
 
-
-<Route
+          <Route
             path="/garage-dashboard/garagePageWhite"
             element={<GaragePageWhite />}
           />
 
-<Route
-              path="/garage_booking_confirmation/:id"
-              element={<GarageBookingConfirmation />}
-            />
+          <Route
+            path="/garage_booking_confirmation/:id"
+            element={<GarageBookingConfirmation />}
+          />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/dealar" element={<Dealar />} />
         </Routes>

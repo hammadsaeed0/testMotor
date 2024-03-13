@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.6",
+    "@material-tailwind/react": "^2.1.9",
     "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^2.2.1",
     "@testing-library/jest-dom": "^5.17.0",
