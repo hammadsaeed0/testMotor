@@ -184,7 +184,7 @@ const Register = () => {
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    if (event.target.value === "seller") {
+    if (event.target.value === "seller" || event.target.value === "garage") {
       navigate("/register");
     } else {
       navigate("/dealar");
@@ -257,6 +257,17 @@ const Register = () => {
                 onChange={handleOptionChange}
               />
               <p className=" text-gray-400  font-semibold">Dealar</p>
+            </div>
+            <div className=" gap-2 flex items-center">
+              <input
+                type="radio"
+                className="accent-primary"
+                name="gender"
+                value="garage"
+                checked={selectedOption === "garage"}
+                onChange={handleOptionChange}
+              />
+              <p className=" text-gray-400  font-semibold">Garage</p>
             </div>
           </div>
 
